@@ -1,0 +1,115 @@
+library(shiny)
+library(tidyverse)
+library(shinydashboard)
+
+# library(fresh)
+# my_theme = create_theme(
+#   adminlte_color(
+#     light_blue = "#4898a8"
+#   )
+# )
+
+header <- dashboardHeader(title="epiworldR")
+
+sidebar <- dashboardSidebar(
+                width = 273,
+                tags$style(
+                    "#sidebarItemExpanded {
+                        overflow: auto;
+                        max-height: 100vh;
+                    }"
+                ),
+                selectInput("model",
+                            label = h3("Model"),
+                            choices = c("SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED", "SEIRD", "SIRD", "SISD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"),
+                            ),
+                
+                # Only show this panel is Model is SEIR
+                conditionalPanel(
+                            condition = "input.model == 'SEIR'",
+                            textInput("seir_disease_name",
+                                      label = "Disease",
+                                      value = "",
+                                      placeholder = "Please enter a disease name"),
+                            sliderInput("seir_prevalence",
+                                         label = "Disease Prevalence",
+                                         value = "0.5",
+                                         min = 0, 
+                                         max = 1,
+                                         step = 0.01,
+                                         ticks = FALSE),
+                            sliderInput("seir_transmission_rate",
+                                         label = "Transmission Rate",
+                                         value = "0.5",
+                                         min = 0, 
+                                         max = 1,
+                                         step = 0.01,
+                                         ticks = FALSE),
+                            sliderInput("seir_recovery_rate",
+                                         label = "Recovery Rate",
+                                         value = "0.5",
+                                         min = 0, 
+                                         max = 1,
+                                         step = 0.01,
+                                         ticks = FALSE),
+                            numericInput("seir_incubation_days",
+                                         label = "Incubation Days",
+                                         value = "0",
+                                         min = 0, 
+                                         max = NA,
+                                         step = 1),
+                            numericInput("seir_n_days",
+                                         label = "Simulation Time (Days)",
+                                         value = "0",
+                                         min = 0, 
+                                         max = NA,
+                                         step = 1),
+                            headerPanel(h3("Small World Population")),
+                            sliderInput(inputId = "seir_population_size",
+                                        label = "Population Size",
+                                        min = 0, 
+                                        max = 100000, 
+                                        value = 50000, 
+                                        step = 1000,
+                                        ticks = FALSE),
+                            numericInput("seir_k",
+                                         label = "Number of Ties", 
+                                         min = 0, 
+                                         max = NA, 
+                                         step = 1,
+                                         value = 5),
+                            selectInput("seir_directed",
+                                         label = "Directed",
+                                         choices = c("TRUE", "FALSE"),
+                                         selected = "FALSE"), 
+                            sliderInput("seir_prob_rewiring",
+                                         label = "Probability of Rewiring",
+                                         value = "0.01",
+                                         min = 0, 
+                                         max = 1,
+                                         step = 0.01,
+                                         ticks = FALSE),
+                            numericInput("seir_seed",
+                                         label = "Seed (Optional)", 
+                                         min = 0, 
+                                         max = NA, 
+                                         step = 1,
+                                         value = NULL)
+                ),
+                actionButton("simulate", "Run Simulation")
+           )
+
+body <- dashboardBody(
+                plotOutput("model_plot"),
+                verbatimTextOutput("model_summary")
+              
+        )
+
+ui <- dashboardPage(
+  header = header,
+  sidebar = sidebar,
+  body = body,
+  skin = "black",
+)
+
+
