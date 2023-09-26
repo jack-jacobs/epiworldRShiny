@@ -61,7 +61,7 @@ slider_input_rate <- function(
 network_and_seed_input <- function(model_name) {
 
   c(
-    headerPanel(h3("Small World Population")),
+    headerPanel(h3("Small World Population")) |> as.character(),
     sliderInput(
       inputId = paste0(model_name, "_population_size"),
       label   = "Population Size",
@@ -70,7 +70,7 @@ network_and_seed_input <- function(model_name) {
       value   = 50000, 
       step    = 1000,
       ticks   = FALSE
-      ),
+      ) |> as.character(),
     numericInput(
       inputId = paste0(model_name, "_k"),
       label   = "Number of Ties", 
@@ -78,13 +78,13 @@ network_and_seed_input <- function(model_name) {
       max     = NA, 
       step    = 1,
       value   = 5
-      ),
+      ) |> as.character(),
     selectInput(
       inputId  = paste0(model_name, "_directed"),
       label    = "Directed",
       choices  = c("TRUE", "FALSE"),
       selected = "FALSE"
-      ), 
+      ) |> as.character(), 
     sliderInput(
       inputId = paste0(model_name, "_prob_rewiring"),
       label   = "Probability of Rewiring",
@@ -93,7 +93,7 @@ network_and_seed_input <- function(model_name) {
       max     = 1,
       step    = 0.01,
       ticks   = FALSE
-      ),
+      ) |> as.character(),
     numericInput(
       inputId = paste0(model_name, "_seed"),
       label   = "Seed (Optional)", 
@@ -101,9 +101,8 @@ network_and_seed_input <- function(model_name) {
       max     = NA, 
       step    = 1,
       value   = 2023
-      )
-      )
-
+      ) |> as.character()
+      ) |> paste(collapse = "\n") |> HTML()
 }
 
 header <- dashboardHeader(title="epiworldR")
