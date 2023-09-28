@@ -1,6 +1,7 @@
 library(shiny)
 library(tidyverse)
 library(shinydashboard)
+library(DT)
 
 # library(fresh)
 # my_theme = create_theme(
@@ -160,19 +161,46 @@ sidebar <- dashboardSidebar(
     numeric_input_ndays("sis"),
     network_and_seed_input("sis")
   ),
+  # SEIRCONN panel
+  conditionalPanel(
+    condition = "input.model == 'SEIRCONNECTED'",
+    text_input_disease_name("seirconn"),
+    slider_prevalence("seirconn"),
+    slider_input_rate("seirconn", "Transmission Rate", "0.5"),
+    slider_input_rate("seirconn", "Recovery Rate", "0.14"),
+    slider_input_rate("seirconn", "Contact Rate", "0.2"),
+    numericInput(
+      inputId = "seirconn_incubation_days",
+      label   = "Incubation Days",
+      value   = "7",
+      min     = 0, 
+      max     = NA,
+      step    = 1
+      ),
+    numeric_input_ndays("seirconn"),
+    network_and_seed_input("seirconn")
+  ),
   actionButton("simulate", "Run Simulation")
 )
 
 body <- dashboardBody(
-  plotOutput("model_plot"),
-  verbatimTextOutput("model_summary") 
+  fluidRow(
+    column(6, plotOutput("model_plot")),
+    column(6, plotOutput("model_reproductive_plot"))
+  ),
+  HTML("<br>"),
+  fluidRow(
+    column(6, verbatimTextOutput("model_summary")) #,
+    #column(6, dataTableOutput("model_data_table"))
+  )
+
 )
 
 ui <- dashboardPage(
   header = header,
   sidebar = sidebar,
   body = body,
-  skin = "black",
+  skin = "black"
 )
 
 
