@@ -58,6 +58,7 @@ function(input, output) {
             return(plot(model_sis, main = "SIS Model"))          
         }
         if(input$model == "SEIRCONNECTED"){
+
             model_seirconn <- ModelSEIRCONN(name = input$seirconn_disease_name, 
                                   prevalence = input$seirconn_prevalence,
                                   transmission_rate = input$seirconn_transmission_rate, 
@@ -66,7 +67,6 @@ function(input, output) {
                                   n = input$seirconn_population_size,
                                   incubation_days = input$seirconn_incubation_days
                                   )
-            run(model_seirconn, ndays = input$seir_n_days, seed = input$seir_seed)
             # Running and printing
             verbose_off(model_seirconn)
             run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
@@ -102,7 +102,6 @@ function(input, output) {
                                   n = input$seirconn_population_size,
                                   incubation_days = input$seirconn_incubation_days
                                   )
-            run(model_seirconn, ndays = input$seir_n_days, seed = input$seir_seed)
             # Running and printing
             verbose_off(model_seirconn)
             run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
@@ -172,7 +171,7 @@ function(input, output) {
                                   n = input$seirconn_population_size,
                                   incubation_days = input$seirconn_incubation_days
                                   )
-            run(model_seirconn, ndays = input$seir_n_days, seed = input$seir_seed)
+            
             # Running and printing
             verbose_off(model_seirconn)
             run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)

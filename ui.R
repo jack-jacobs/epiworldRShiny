@@ -43,7 +43,7 @@ numeric_input_ndays <- function(model_name) {
 }
 
 slider_input_rate <- function(
-  model_name, rate_name, value
+  model_name, rate_name, value, maxval = 1
   ) {
   sliderInput(
     inputId = paste(
@@ -53,13 +53,13 @@ slider_input_rate <- function(
     label = rate_name,
     value = value,
     min   = 0, 
-    max   = 1,
+    max   = maxval,
     step  = 0.01,
     ticks = FALSE
   )
 }
 
-network_and_seed_input <- function(model_name) {
+network_input <- function(model_name) {
 
   c(
     headerPanel(h3("Small World Population")) |> as.character(),
@@ -94,16 +94,19 @@ network_and_seed_input <- function(model_name) {
       max     = 1,
       step    = 0.01,
       ticks   = FALSE
-      ) |> as.character(),
-    numericInput(
+      ) |> as.character()
+      ) |> paste(collapse = "\n") |> HTML()
+}
+
+seed_input <- function(model_name) {
+  numericInput(
       inputId = paste0(model_name, "_seed"),
       label   = "Seed (Optional)", 
       min     = 0, 
       max     = NA, 
       step    = 1,
       value   = 2023
-      ) |> as.character()
-      ) |> paste(collapse = "\n") |> HTML()
+      )
 }
 
 header <- dashboardHeader(title="epiworldR")
@@ -139,7 +142,8 @@ sidebar <- dashboardSidebar(
       step    = 1
       ),
     numeric_input_ndays("seir"),
-    network_and_seed_input("seir")
+    network_input("seir"),
+    seed_input("seir")
   ),
   # Only show this panel is Model is SIR
   conditionalPanel(
@@ -149,7 +153,8 @@ sidebar <- dashboardSidebar(
     slider_input_rate("sir", "Transmission Rate", "0.5"),
     slider_input_rate("sir", "Recovery Rate", "0.14"),
     numeric_input_ndays("sir"),
-    network_and_seed_input("sir")
+    network_input("seir"),
+    seed_input("seir")
   ),
   # Only show this panel is Model is SIS
   conditionalPanel(
@@ -159,7 +164,8 @@ sidebar <- dashboardSidebar(
     slider_input_rate("sis", "Transmission Rate", "0.5"),
     slider_input_rate("sis", "Recovery Rate", "0.14"),
     numeric_input_ndays("sis"),
-    network_and_seed_input("sis")
+    network_input("seir"),
+    seed_input("seir")
   ),
   # SEIRCONN panel
   conditionalPanel(
@@ -168,7 +174,7 @@ sidebar <- dashboardSidebar(
     slider_prevalence("seirconn"),
     slider_input_rate("seirconn", "Transmission Rate", "0.5"),
     slider_input_rate("seirconn", "Recovery Rate", "0.14"),
-    slider_input_rate("seirconn", "Contact Rate", "0.2"),
+    slider_input_rate("seirconn", "Contact Rate", "2", maxval = 20),
     numericInput(
       inputId = "seirconn_incubation_days",
       label   = "Incubation Days",
@@ -177,8 +183,17 @@ sidebar <- dashboardSidebar(
       max     = NA,
       step    = 1
       ),
+    sliderInput(
+      inputId = "seirconn_population_size",
+      label   = "Population Size",
+      min     = 0, 
+      max     = 100000, 
+      value   = 50000, 
+      step    = 1000,
+      ticks   = FALSE
+    ),
     numeric_input_ndays("seirconn"),
-    network_and_seed_input("seirconn")
+    seed_input("seirconn")
   ),
   actionButton("simulate", "Run Simulation")
 )
