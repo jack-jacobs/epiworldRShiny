@@ -1,3 +1,4 @@
+
 library(shiny)
 library(tidyverse)
 library(shinydashboard)
@@ -206,7 +207,7 @@ body <- dashboardBody(
   HTML("<br>"),
   fluidRow(
     column(6, verbatimTextOutput("model_summary")) #,
-    #column(6, dataTableOutput("model_data_table"))
+    #column(6, dataTableOutput("model_table"))
   )
 
 )
@@ -217,5 +218,3 @@ ui <- dashboardPage(
   body = body,
   skin = "black"
 )
-
-
