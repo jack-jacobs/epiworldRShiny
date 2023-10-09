@@ -31,13 +31,15 @@ function(input, output) {
               plot_reproductive_number(
                 model_seir,
                 main = "SEIR Model Reproductive Number"
-                )
+              )
             # Output list
             return(list(
-              plot_epicurves         = plot_seir,
-              plot_reproductive = reproductive_seir,
-              print_summary      = summary_seir
-              ))
+              epicurves_plot     = plot_seir,
+              reproductive_plot  = reproductive_seir,
+              model_summary      = summary_seir
+              )
+            )
+            
          }
         if(input$model == "SIR"){
             model_sir <- ModelSIR(name = input$sir_disease_name,
@@ -63,88 +65,89 @@ function(input, output) {
               plot_reproductive_number(
                 model_sir,
                 main = "SIR Model Reproductive Number"
-                )
+              )
             # Output list
             return(list(
-              plot_epicurves         = plot_sir,
-              plot_reproductive = reproductive_sir,
-              print_summary      = summary_sir
-              ))
+              epicurves_plot     = plot_sir,
+              reproductive_plot  = reproductive_sir,
+              model_summary      = summary_sir
+              )
+            )
         }
-        # if(input$model == "SIS"){
-        #     model_sis <- ModelSIS(name = input$sis_disease_name,
-        #                           prevalence = input$sis_prevalence,
-        #                           transmission_rate = input$sis_transmission_rate,
-        #                           recovery_rate = input$sis_recovery_rate)
-        #     agents_smallworld(
-        #         model_sis,
-        #         n = input$sis_population_size,
-        #         k = input$sis_k,
-        #         d = as.logical(input$sis_directed),
-        #         p = input$sis_prob_rewiring
-        #     )
-        #     # Running and printing
-        #     verbose_off(model_sis)
-        #     run(model_sis, ndays = input$sis_n_days, seed = input$sis_seed)
-        #     # Plot
-        #     plot_sis <- function() plot(model_sis, main = "SIS Model")
-        #     # Summary
-        #     summary_sis <- function() summary(model_sis)
-        #     # Reproductive Number
-        #     reproductive_sis <- function()
-        #       plot_reproductive_number(
-        #         model_sis,
-        #         main = "SIS Model Reproductive Number"
-        #         )
-        #     # Output list
-        #     list(
-        #       plot_sis         = plot_sis,
-        #       reproductive_sis = reproductive_sis,
-        #       summary_sis      = summary_sis
-        #      
-        #       )
-        # }
-        # if(input$model == "SEIRCONNECTED"){
-        # 
-        #     model_seirconn <- ModelSEIRCONN(name = input$seirconn_disease_name,
-        #                           prevalence = input$seirconn_prevalence,
-        #                           transmission_rate = input$seirconn_transmission_rate,
-        #                           recovery_rate = input$seirconn_recovery_rate,
-        #                           contact_rate = input$seirconn_contact_rate,
-        #                           n = input$seirconn_population_size,
-        #                           incubation_days = input$seirconn_incubation_days
-        #                           )
-        #     # Running and printing
-        #     verbose_off(model_seirconn)
-        #     run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
-        #     # Plot
-        #     plot_seirconn <- function() plot(model_seirconn, main = "SEIRCONNECTED Model")
-        #     # Summary
-        #     summary_seirconn <- function() summary(model_seirconn)
-        #     # Reproductive Number
-        #     reproductive_seirconn <- function()
-        #       plot_reproductive_number(
-        #         model_seirconn,
-        #         main = "SEIRCONN Model Reproductive Number"
-        #         )
-        #     # Output list
-        #     list(
-        #       plot_seirconn         = plot_seirconn,
-        #       reproductive_seirconn = reproductive_seirconn,
-        #       summary_seirconn      = summary_seirconn
-        #       )
-        # }
+        if(input$model == "SIS"){
+            model_sis <- ModelSIS(name = input$sis_disease_name,
+                                  prevalence = input$sis_prevalence,
+                                  transmission_rate = input$sis_transmission_rate,
+                                  recovery_rate = input$sis_recovery_rate)
+            agents_smallworld(
+                model_sis,
+                n = input$sis_population_size,
+                k = input$sis_k,
+                d = as.logical(input$sis_directed),
+                p = input$sis_prob_rewiring
+            )
+            # Running and printing
+            verbose_off(model_sis)
+            run(model_sis, ndays = input$sis_n_days, seed = input$sis_seed)
+            # Plot
+            plot_sis <- function() plot(model_sis, main = "SIS Model")
+            # Summary
+            summary_sis <- function() summary(model_sis)
+            # Reproductive Number
+            reproductive_sis <- function()
+              plot_reproductive_number(
+                model_sis,
+                main = "SIS Model Reproductive Number"
+                )
+            # Output list
+            list(
+              epicurves_plot     = plot_sis,
+              reproductive_plot  = reproductive_sis,
+              model_summary      = summary_sis
+
+              )
+        }
+        if(input$model == "SEIRCONNECTED"){
+
+            model_seirconn <- ModelSEIRCONN(name = input$seirconn_disease_name,
+                                  prevalence = input$seirconn_prevalence,
+                                  transmission_rate = input$seirconn_transmission_rate,
+                                  recovery_rate = input$seirconn_recovery_rate,
+                                  contact_rate = input$seirconn_contact_rate,
+                                  n = input$seirconn_population_size,
+                                  incubation_days = input$seirconn_incubation_days
+                                  )
+            # Running and printing
+            verbose_off(model_seirconn)
+            run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
+            # Plot
+            plot_seirconn <- function() plot(model_seirconn, main = "SEIRCONNECTED Model")
+            # Summary
+            summary_seirconn <- function() summary(model_seirconn)
+            # Reproductive Number
+            reproductive_seirconn <- function()
+              plot_reproductive_number(
+                model_seirconn,
+                main = "SEIRCONN Model Reproductive Number"
+                )
+            # Output list
+            list(
+              epicurves_plot    = plot_seirconn,
+              reproductive_plot = reproductive_seirconn,
+              model_summary     = summary_seirconn
+              )
+        }
     })
 
     # Displaying Plots and Model Summary
     output$model_plot <- renderPlot({
-            model_output()$plot_epicurves()
+            model_output()$epicurves_plot()
     })
     output$model_reproductive_plot <- renderPlot({
-            model_output()$plot_reproductive()
+            model_output()$reproductive_plot()
     })
     output$model_summary <- renderPrint({
-            model_output()$print_summary()
+            model_output()$model_summary()
     })
     # output$model_table <- renderPrint({
     #       model_output()$data_table_seir()
