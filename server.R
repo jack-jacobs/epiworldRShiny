@@ -100,12 +100,12 @@ function(input, output) {
                 main = "SIS Model Reproductive Number"
                 )
             # Output list
-            list(
+            return(list(
               epicurves_plot     = plot_sis,
               reproductive_plot  = reproductive_sis,
               model_summary      = summary_sis
-
               )
+           )
         }
         if(input$model == "SEIRCONNECTED"){
 
@@ -131,11 +131,12 @@ function(input, output) {
                 main = "SEIRCONN Model Reproductive Number"
                 )
             # Output list
-            list(
+            return(list(
               epicurves_plot    = plot_seirconn,
               reproductive_plot = reproductive_seirconn,
               model_summary     = summary_seirconn
               )
+            )
         }
     })
 
