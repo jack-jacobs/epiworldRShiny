@@ -1,4 +1,5 @@
 shiny_sir <- function(input) {
+  
   # Creating model
   model_sir <- ModelSIR(
     name              = input$sir_disease_name,

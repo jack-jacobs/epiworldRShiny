@@ -1,5 +1,6 @@
 shiny_sis <- function(input) {
   
+  # Creating model
   model_sis <- ModelSIS(
     name              = input$sis_disease_name,
     prevalence        = input$sis_prevalence,
@@ -7,6 +8,7 @@ shiny_sis <- function(input) {
     recovery_rate     = input$sis_recovery_rate
     )
 
+  # Creating network
   agents_smallworld(
       model_sis,
       n = input$sis_population_size,
@@ -18,16 +20,18 @@ shiny_sis <- function(input) {
   # Running and printing
   verbose_off(model_sis)
   run(model_sis, ndays = input$sis_n_days, seed = input$sis_seed)
-  # Plot
+  
+  # Plot, summary, and reproductive number
   plot_sis <- function() plot(model_sis, main = "SIS Model")
-  # Summary
+  
   summary_sis <- function() summary(model_sis)
-  # Reproductive Number
+  
   reproductive_sis <- function()
     plot_reproductive_number(
       model_sis,
       main = "SIS Model Reproductive Number"
       )
+
   # Output list
   return(list(
     epicurves_plot     = plot_sis,

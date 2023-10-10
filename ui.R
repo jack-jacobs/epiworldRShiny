@@ -13,7 +13,9 @@ library(DT)
 
 source("R/dashboard-helpers.R")
 
-header <- dashboardHeader(title="epiworldR")
+header <- dashboardHeader(
+  title="epiworldR"
+  )
 
 sidebar <- dashboardSidebar(
   width = 273,
@@ -28,11 +30,11 @@ sidebar <- dashboardSidebar(
   selectInput(
     inputId = "model",
     label   = h3("Model"),
-    choices = c("SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED",
-      "SEIRD", "SIRD", "SISD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"
+    choices = c(
+      "SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED" #,
+      # "SEIRD", "SIRD", "SISD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"
       )
     ),
-  
   # Only show this panel is Model is SEIR
   conditionalPanel(
     condition = "input.model == 'SEIR'",
@@ -102,6 +104,26 @@ sidebar <- dashboardSidebar(
     numeric_input_ndays("seirconn"),
     seed_input("seirconn")
   ),
+  # SIRCONN panel
+  conditionalPanel(
+    condition = "input.model == 'SIRCONNECTED'",
+    text_input_disease_name("sirconn"),
+    slider_prevalence("sirconn"),
+    slider_input_rate("sirconn", "Transmission Rate", "0.1"),
+    slider_input_rate("sirconn", "Recovery Rate", "0.14"),
+    slider_input_rate("sirconn", "Contact Rate", "4", maxval = 20),
+    sliderInput(
+      inputId = "sirconn_population_size",
+      label   = "Population Size",
+      min     = 0, 
+      max     = 100000, 
+      value   = 50000, 
+      step    = 1000,
+      ticks   = FALSE
+    ),
+    numeric_input_ndays("sirconn"),
+    seed_input("sirconn")
+  ),
   actionButton("simulate", "Run Simulation")
 )
 
@@ -119,8 +141,8 @@ body <- dashboardBody(
 )
 
 ui <- dashboardPage(
-  header = header,
+  header  = header,
   sidebar = sidebar,
-  body = body,
-  skin = "black"
+  body    = body,
+  skin    = "black"
 )

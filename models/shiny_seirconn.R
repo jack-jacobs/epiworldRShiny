@@ -1,4 +1,5 @@
 shiny_seirconn <- function(input) {
+
   model_seirconn <- ModelSEIRCONN(
     name              = input$seirconn_disease_name,
     prevalence        = input$seirconn_prevalence,
@@ -12,21 +13,24 @@ shiny_seirconn <- function(input) {
   # Running and printing
   verbose_off(model_seirconn)
   run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
-  # Plot
+  
+  # Plot, summary, and reproductive number
   plot_seirconn <- function() plot(model_seirconn, main = "SEIRCONNECTED Model")
-  # Summary
+  
   summary_seirconn <- function() summary(model_seirconn)
-  # Reproductive Number
+  
   reproductive_seirconn <- function()
     plot_reproductive_number(
       model_seirconn,
       main = "SEIRCONN Model Reproductive Number"
       )
+
   # Output list
-  return(list(
-    epicurves_plot    = plot_seirconn,
-    reproductive_plot = reproductive_seirconn,
-    model_summary     = summary_seirconn
+  return(
+    list(
+      epicurves_plot    = plot_seirconn,
+      reproductive_plot = reproductive_seirconn,
+      model_summary     = summary_seirconn
     )
   )
 }
