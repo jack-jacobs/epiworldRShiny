@@ -1,4 +1,3 @@
-
 library(shiny)
 library(epiworldR)
 
@@ -33,7 +32,11 @@ function(input, output) {
 
         return(shiny_sirconn(input))
 
-      } else {
+      } else if (input$model == "SIRD") {
+        
+        return(shiny_sird(input))
+      }
+        else {
         stop("No model selected")
       }
   })

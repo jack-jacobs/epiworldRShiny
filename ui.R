@@ -31,11 +31,11 @@ sidebar <- dashboardSidebar(
     inputId = "model",
     label   = h3("Model"),
     choices = c(
-      "SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED" #,
-      # "SEIRD", "SIRD", "SISD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"
+      "SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED", "SIRD" #,
+      # "SEIRD", "SISD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"
       )
     ),
-  # Only show this panel is Model is SEIR
+  # SEIR Panel
   conditionalPanel(
     condition = "input.model == 'SEIR'",
     text_input_disease_name("seir"),
@@ -54,7 +54,7 @@ sidebar <- dashboardSidebar(
     network_input("seir"),
     seed_input("seir")
   ),
-  # Only show this panel is Model is SIR
+  # SIR Panel
   conditionalPanel(
     condition = "input.model == 'SIR'",
     text_input_disease_name("sir"),
@@ -65,7 +65,7 @@ sidebar <- dashboardSidebar(
     network_input("sir"),
     seed_input("sir")
   ),
-  # Only show this panel is Model is SIS
+  # SIS Panel
   conditionalPanel(
     condition = "input.model == 'SIS'",
     text_input_disease_name("sis"),
@@ -123,6 +123,18 @@ sidebar <- dashboardSidebar(
     ),
     numeric_input_ndays("sirconn"),
     seed_input("sirconn")
+  ),
+  # SIR Panel
+  conditionalPanel(
+    condition = "input.model == 'SIRD'",
+    text_input_disease_name("sird"),
+    slider_prevalence("sird"),
+    slider_input_rate("sird", "Transmission Rate", "0.05"),
+    slider_input_rate("sird", "Recovery Rate", "0.14"),
+    slider_input_rate("sird", "Death Rate", "0.01"),
+    numeric_input_ndays("sird"),
+    network_input("sird"),
+    seed_input("sird")
   ),
   actionButton("simulate", "Run Simulation")
 )
