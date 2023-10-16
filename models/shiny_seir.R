@@ -32,12 +32,15 @@ shiny_seir <- function(input) {
       model_seir,
       main = "SEIR Model Reproductive Number"
     )
+  # Table 
+  table_seir <- function() as.data.frame(get_hist_total(model_seir))
   # Output list
   return(
     list(
       epicurves_plot     = plot_seir,
       reproductive_plot  = reproductive_seir,
-      model_summary      = summary_seir
+      model_summary      = summary_seir,
+      model_table        = table_seir
     )
   )
 

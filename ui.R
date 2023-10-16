@@ -31,8 +31,8 @@ sidebar <- dashboardSidebar(
     inputId = "model",
     label   = h3("Model"),
     choices = c(
-      "SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED", "SIRD" #,
-      # "SEIRD", "SISD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"
+      "SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED", "SIRD", "SISD" #,
+      # "SEIRD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"
       )
     ),
   # SEIR Panel
@@ -124,7 +124,7 @@ sidebar <- dashboardSidebar(
     numeric_input_ndays("sirconn"),
     seed_input("sirconn")
   ),
-  # SIR Panel
+  # SIRD Panel
   conditionalPanel(
     condition = "input.model == 'SIRD'",
     text_input_disease_name("sird"),
@@ -136,6 +136,18 @@ sidebar <- dashboardSidebar(
     network_input("sird"),
     seed_input("sird")
   ),
+  # SISD Panel
+  conditionalPanel(
+    condition = "input.model == 'SISD'",
+    text_input_disease_name("sisd"),
+    slider_prevalence("sisd"),
+    slider_input_rate("sisd", "Transmission Rate", "0.05"),
+    slider_input_rate("sisd", "Recovery Rate", "0.14"),
+    slider_input_rate("sisd", "Death Rate", "0.01"),
+    numeric_input_ndays("sisd"),
+    network_input("sisd"),
+    seed_input("sisd")
+  ),
   actionButton("simulate", "Run Simulation")
 )
 
@@ -146,8 +158,8 @@ body <- dashboardBody(
   ),
   HTML("<br>"),
   fluidRow(
-    column(6, verbatimTextOutput("model_summary")) #,
-    #column(6, dataTableOutput("model_table"))
+    column(6, verbatimTextOutput("model_summary")),
+    column(6, dataTableOutput("model_table"))
   )
 
 )

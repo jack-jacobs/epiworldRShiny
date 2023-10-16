@@ -35,6 +35,11 @@ function(input, output) {
       } else if (input$model == "SIRD") {
         
         return(shiny_sird(input))
+        
+      } else if (input$model == "SISD") {
+        
+        return(shiny_sisd(input))
+        
       }
         else {
         stop("No model selected")
@@ -51,7 +56,10 @@ function(input, output) {
   output$model_summary <- renderPrint({
     model_output()$model_summary()
   })
-  # output$model_table <- renderPrint({
-  #       model_output()$data_table_seir()
-  # })
+  output$model_table <- renderDataTable({
+    model_output()$model_table()
+  }, options = list(
+       scrollY = '600px',
+       lengthMenu = c(16, 25, 50), # Set the default value to 15
+       pageLength = 16))
 }
