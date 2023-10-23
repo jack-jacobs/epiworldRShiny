@@ -31,12 +31,15 @@ shiny_sisd <- function(input) {
       main = "SISD Model Reproductive Number"
     )
 
+  # Table 
+  table_sisd <- function() as.data.frame(get_hist_total(model_sisd))
   # Output list
   return(
     list(
       epicurves_plot     = plot_sisd,
       reproductive_plot  = reproductive_sisd,
-      model_summary      = summary_sisd
-      )
+      model_summary      = summary_sisd,
+      model_table        = table_sisd
     )
+  )
 }

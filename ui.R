@@ -160,7 +160,9 @@ body <- dashboardBody(
   fluidRow(
     column(6, verbatimTextOutput("model_summary")),
     column(6, dataTableOutput("model_table"))
-  )
+  ),
+  downloadButton("downloadData", "Download Data")
+  
 
 )
 

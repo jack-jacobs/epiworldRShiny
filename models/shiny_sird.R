@@ -31,12 +31,15 @@ shiny_sird <- function(input) {
       main = "SIRD Model Reproductive Number"
     )
 
+  # Table 
+  table_sird <- function() as.data.frame(get_hist_total(model_sird))
   # Output list
   return(
     list(
       epicurves_plot     = plot_sird,
       reproductive_plot  = reproductive_sird,
-      model_summary      = summary_sird
-      )
+      model_summary      = summary_sird,
+      model_table        = table_sird
     )
+  )
 }

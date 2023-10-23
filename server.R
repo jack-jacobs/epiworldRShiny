@@ -1,5 +1,6 @@
 library(shiny)
 library(epiworldR)
+library(shinyjs)
 
 # Models are individually defined in the models folder
 for (f in list.files("models", full.names = TRUE)) {
@@ -40,8 +41,7 @@ function(input, output) {
         
         return(shiny_sisd(input))
         
-      }
-        else {
+      } else {
         stop("No model selected")
       }
   })
@@ -62,4 +62,13 @@ function(input, output) {
        scrollY = '600px',
        lengthMenu = c(16, 25, 50), # Set the default value to 15
        pageLength = 16))
+  
+  output$downloadData <- downloadHandler(
+    filename = function(){
+      paste("data", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(model_output()$model_table(), file)
+    }
+  )
 }

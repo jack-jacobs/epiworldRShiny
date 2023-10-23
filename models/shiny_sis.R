@@ -32,11 +32,15 @@ shiny_sis <- function(input) {
       main = "SIS Model Reproductive Number"
       )
 
+  # Table 
+  table_sis <- function() as.data.frame(get_hist_total(model_sis))
   # Output list
-  return(list(
-    epicurves_plot     = plot_sis,
-    reproductive_plot  = reproductive_sis,
-    model_summary      = summary_sis
+  return(
+    list(
+      epicurves_plot     = plot_sis,
+      reproductive_plot  = reproductive_sis,
+      model_summary      = summary_sis,
+      model_table        = table_sis
     )
   )
 

@@ -24,12 +24,15 @@ shiny_sirconn <- function(input) {
       main = "SIR connected Model Reproductive Number"
       )
 
+  # Table 
+  table_sirconn <- function() as.data.frame(get_hist_total(model_sirconn))
   # Output list
   return(
     list(
-      epicurves_plot    = plot_sirconn,
-      reproductive_plot = reproductive_sirconn,
-      model_summary     = summary_sirconn
+      epicurves_plot     = plot_sirconn,
+      reproductive_plot  = reproductive_sirconn,
+      model_summary      = summary_sirconn,
+      model_table        = table_sirconn
     )
   )
 }
