@@ -59,7 +59,7 @@ function(input, output) {
   output$model_table <- renderDataTable({
     model_output()$model_table()
   }, options = list(
-       scrollY = '600px',
+       scrollY = '550px',
        lengthMenu = c(16, 25, 50), # Set the default value to 15
        pageLength = 16))
   

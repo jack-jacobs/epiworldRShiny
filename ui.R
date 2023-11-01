@@ -52,6 +52,7 @@ sidebar <- dashboardSidebar(
       ),
     numeric_input_ndays("seir"),
     network_input("seir"),
+    tools_input("seir"),
     seed_input("seir")
   ),
   # SIR Panel
@@ -161,7 +162,8 @@ body <- dashboardBody(
     column(6, verbatimTextOutput("model_summary")),
     column(6, dataTableOutput("model_table"))
   ),
-  downloadButton("downloadData", "Download Data")
+  downloadButton("downloadData", "Download Data"),
+  tags$style(type='text/css', "#downloadData { margin-bottom: 100px; float: right}")
   
 
 )

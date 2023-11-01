@@ -86,6 +86,48 @@ network_input <- function(model_name) {
     ) |> paste(collapse = "\n") |> HTML()
 }
 
+tools_input <- function(model_name) {
+  c(
+    headerPanel(h3("Tools")) |> as.character(),
+    sliderInput(
+      inputId = paste0(model_name, "_vaccine_prevalence"),
+      label   = "Vaccine Prevalence",
+      min     = 0, 
+      max     = 1, 
+      value   = 0, 
+      step    = 0.01,
+      ticks   = FALSE
+      ) |> as.character(),
+    sliderInput(
+      inputId = paste0(model_name, "_masking_prevalence"),
+      label   = "Masking Prevalence",
+      value   = "0",
+      min     = 0, 
+      max     = 1,
+      step    = 0.01,
+      ticks   = FALSE
+      ) |> as.character(),
+    headerPanel(h4("School Closure")) |> as.character(),
+    sliderInput(
+      inputId = paste0(model_name, "_school_closure_prevalence"),
+      label   = "Prevalence",
+      value   = "0",
+      min     = 0, 
+      max     = 1,
+      step    = 0.01,
+      ticks   = FALSE
+      ) |> as.character(),
+    numericInput(
+      inputId = paste0(model_name, "_school_closure_day"),
+      label   = "Day of Implementation",
+      value = "0",
+      min = 0,
+      max = 100,
+      step = 1
+    ) |> as.character()
+  ) |> paste(collapse = "\n") |> HTML()
+}
+
 seed_input <- function(model_name) {
   numericInput(
     inputId = paste0(model_name, "_seed"),

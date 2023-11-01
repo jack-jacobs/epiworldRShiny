@@ -22,7 +22,7 @@ shiny_seirconn <- function(input) {
   reproductive_seirconn <- function()
     plot_reproductive_number(
       model_seirconn,
-      main = "SEIRCONN Model Reproductive Number"
+      main = "SEIRCONNECTED Model Reproductive Number"
       )
 
   # Table 
