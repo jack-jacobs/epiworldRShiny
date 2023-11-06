@@ -16,8 +16,39 @@ shiny_sird <- function(input) {
       k = input$sird_k,
       d = as.logical(input$sird_directed),
       p = input$sird_prob_rewiring
+  ) 
+  
+  # Tools
+  sird_vaccine_tool <- tool(
+    name = "Vaccine",
+    susceptibility_reduction = .9,
+    transmission_reduction = .5,
+    recovery_enhancer = .5,
+    death_reduction = .9
   )
-
+  sird_masking_tool <- tool(
+    name = "Masking",
+    susceptibility_reduction = 0,
+    transmission_reduction = 0.5,
+    recovery_enhancer = 0,
+    death_reduction = 0
+  )
+  add_tool(model_sird, sird_vaccine_tool, input$sird_vaccine_prevalence)
+  add_tool(model_sird, sird_masking_tool, input$sird_masking_prevalence)
+  # Creating a tool
+  sird_school_closure_tool <- tool(
+    name = "School Closure",
+    susceptibility_reduction = 0,
+    transmission_reduction = 0.5,
+    recovery_enhancer = 0,
+    death_reduction = 0
+  )
+  # Adding a global action
+  sird_school_closure_ga <- 
+    globalaction_tool(sird_school_closure_tool, 
+                      input$sird_school_closure_prevalence, 
+                      day = input$sird_school_closure_day)
+  add_global_action(model_sird, sird_school_closure_ga)
   # Running and printing
   verbose_off(model_sird)
   run(model_sird, ndays = input$sird_n_days, seed = input$sir_seed)

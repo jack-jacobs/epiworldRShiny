@@ -64,6 +64,7 @@ sidebar <- dashboardSidebar(
     slider_input_rate("sir", "Recovery Rate", "0.14"),
     numeric_input_ndays("sir"),
     network_input("sir"),
+    tools_input("sir"),
     seed_input("sir")
   ),
   # SIS Panel
@@ -75,6 +76,7 @@ sidebar <- dashboardSidebar(
     slider_input_rate("sis", "Recovery Rate", "0.14"),
     numeric_input_ndays("sis"),
     network_input("sis"),
+    tools_input("sis"),
     seed_input("sis")
   ),
   # SEIRCONN panel
@@ -103,6 +105,7 @@ sidebar <- dashboardSidebar(
       ticks   = FALSE
     ),
     numeric_input_ndays("seirconn"),
+    tools_input("seirconn"),
     seed_input("seirconn")
   ),
   # SIRCONN panel
@@ -123,6 +126,7 @@ sidebar <- dashboardSidebar(
       ticks   = FALSE
     ),
     numeric_input_ndays("sirconn"),
+    tools_input("sirconn"),
     seed_input("sirconn")
   ),
   # SIRD Panel
@@ -135,6 +139,7 @@ sidebar <- dashboardSidebar(
     slider_input_rate("sird", "Death Rate", "0.01"),
     numeric_input_ndays("sird"),
     network_input("sird"),
+    tools_input("sird"),
     seed_input("sird")
   ),
   # SISD Panel
@@ -147,6 +152,7 @@ sidebar <- dashboardSidebar(
     slider_input_rate("sisd", "Death Rate", "0.01"),
     numeric_input_ndays("sisd"),
     network_input("sisd"),
+    tools_input("sisd"),
     seed_input("sisd")
   ),
   actionButton("simulate", "Run Simulation")
