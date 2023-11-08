@@ -7,43 +7,32 @@ for (f in list.files("models", full.names = TRUE)) {
   source(f)
 }
 
+# Non-pharmacological interventions are defined in the npi folder
+source("R/npi.R")
+
+# Creating an environment available for the simulation.
+# This will serve in case we need to store anything that should
+# be available globaly.
+epiworldR_env <- new.env(parent = .GlobalEnv)
+
 function(input, output) {
   
   model_output <- eventReactive(
     eventExpr = input$simulate, 
     valueExpr = {
 
-      if(input$model == "SEIR") {
-
-        return(shiny_seir(input))
-          
-      } else if(input$model == "SIR") {
-
-        return(shiny_sir(input))
-
-      } else if (input$model == "SIS") {
-
-        return(shiny_sis(input))
-          
-      } else if (input$model == "SEIRCONNECTED") {
-
-        return(shiny_seirconn(input))
-
-      } else if (input$model == "SIRCONNECTED") {
-
-        return(shiny_sirconn(input))
-
-      } else if (input$model == "SIRD") {
-        
-        return(shiny_sird(input))
-        
-      } else if (input$model == "SISD") {
-        
-        return(shiny_sisd(input))
-        
-      } else {
+      model_output <- switch(input$model,
+        "SEIR"           = shiny_seir(input),
+        "SIR"            = shiny_sir(input),
+        "SIS"            = shiny_sis(input),
+        "SEIRCONNECTED"  = shiny_seirconn(input),
+        "SIRCONNECTED"   = shiny_sirconn(input),
+        "SIRD"           = shiny_sird(input),
+        "SISD"           = shiny_sisd(input),
+        "SEIRCONNEQUITY" = shiny_seirconnequity(input),
         stop("No model selected")
-      }
+        )
+
   })
 
   # Displaying Plots and Model Summary

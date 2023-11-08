@@ -30,10 +30,7 @@ sidebar <- dashboardSidebar(
   selectInput(
     inputId = "model",
     label   = h3("Model"),
-    choices = c(
-      "SEIR", "SIR", "SIS", "SEIRCONNECTED", "SIRCONNECTED", "SIRD", "SISD" #,
-      # "SEIRD", "SEIRDCONNECTED", "SIRDCONNECTED", "SURV"
-      )
+    choices = toupper(gsub("shiny_([^.]+).R", "\\1", list.files("models")))
     ),
   # SEIR Panel
   conditionalPanel(
@@ -154,6 +151,35 @@ sidebar <- dashboardSidebar(
     network_input("sisd"),
     tools_input("sisd"),
     seed_input("sisd")
+  ),
+  # SEIRD Equity
+  conditionalPanel(
+    condition = "input.model == 'SEIRCONNEQUITY'",
+    text_input_disease_name("seirconnequity"),
+    slider_prevalence("seirconnequity"),
+    slider_input_rate("seirconnequity", "Transmission Rate", "0.05"),
+    slider_input_rate("seirconnequity", "Recovery Rate", "0.14"),
+    slider_input_rate("seirconnequity", "Contact Rate", "4", maxval = 20),
+    numericInput(
+      inputId = "seirconnequity_incubation_days",
+      label   = "Incubation Days",
+      value   = "7",
+      min     = 0, 
+      max     = NA,
+      step    = 1
+      ),
+    sliderInput(
+      inputId = "seirconnequity_population_size",
+      label   = "Population Size",
+      min     = 0, 
+      max     = 100000, 
+      value   = 50000, 
+      step    = 1000,
+      ticks   = FALSE
+    ),
+    numeric_input_ndays("seirconnequity"),
+    tools_input("seirconnequity"),
+    seed_input("seirconnequity")
   ),
   actionButton("simulate", "Run Simulation")
 )
