@@ -48,9 +48,9 @@ seirconn_panel <- function(model_alt) {
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("seirconn"),
     slider_prevalence("seirconn"),
-    slider_input_rate("seirconn", "Transmission Rate", "0.1"),
-    slider_input_rate("seirconn", "Recovery Rate", "0.14"),
-    slider_input_rate("seirconn", "Contact Rate", "4", maxval = 20),
+    slider_input_rate("seirconn", "Transmission Rate", 0.1),
+    slider_input_rate("seirconn", "Recovery Rate", 0.14),
+    slider_input_rate("seirconn", "Contact Rate", 4, maxval = 20),
     numericInput(
       inputId = "seirconn_incubation_days",
       label   = "Incubation Days",

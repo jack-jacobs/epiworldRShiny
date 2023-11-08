@@ -48,19 +48,19 @@ npi_add_school_closure <- function(model, preval, day) {
     
     # Creating a tool
     tool_ <- tool(
-      name = "School Closure",
+      name                     = "School Closure",
       susceptibility_reduction = 0,
-      transmission_reduction = 0.5,
-      recovery_enhancer = 0,
-      death_reduction = 0
+      transmission_reduction   = 0.90,
+      recovery_enhancer        = 0,
+      death_reduction          = 0
     )
 
     # Adding a global action
     action_ <- globalaction_tool(
-        tool = tool_, 
-        prob = preval, 
-        day = day
-        )
+      tool = tool_, 
+      prob = preval, 
+      day  = day
+      )
 
     add_global_action(
       model,
