@@ -1,3 +1,5 @@
+# alt-name: SIRD
+
 shiny_sird <- function(input) {
   
   # Creating model
@@ -74,3 +76,21 @@ shiny_sird <- function(input) {
     )
   )
 }
+
+sird_panel <- function(model_alt) {
+
+  conditionalPanel(
+    condition = sprintf("input.model == '%s'", model_alt),
+    text_input_disease_name("sird"),
+    slider_prevalence("sird"),
+    slider_input_rate("sird", "Transmission Rate", "0.05"),
+    slider_input_rate("sird", "Recovery Rate", "0.14"),
+    slider_input_rate("sird", "Death Rate", "0.01"),
+    numeric_input_ndays("sird"),
+    network_input("sird"),
+    tools_input("sird"),
+    seed_input("sird")
+  )
+
+}
+

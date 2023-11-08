@@ -2,36 +2,13 @@ library(shiny)
 library(epiworldR)
 library(shinyjs)
 
-# Models are individually defined in the models folder
-for (f in list.files("models", full.names = TRUE)) {
-  source(f)
-}
-
-# Non-pharmacological interventions are defined in the npi folder
-source("R/npi.R")
-
-# Creating an environment available for the simulation.
-# This will serve in case we need to store anything that should
-# be available globaly.
-epiworldR_env <- new.env(parent = .GlobalEnv)
-
 function(input, output) {
   
   model_output <- eventReactive(
     eventExpr = input$simulate, 
     valueExpr = {
 
-      model_output <- switch(input$model,
-        "SEIR"           = shiny_seir(input),
-        "SIR"            = shiny_sir(input),
-        "SIS"            = shiny_sis(input),
-        "SEIRCONNECTED"  = shiny_seirconn(input),
-        "SIRCONNECTED"   = shiny_sirconn(input),
-        "SIRD"           = shiny_sird(input),
-        "SISD"           = shiny_sisd(input),
-        "SEIRCONNEQUITY" = shiny_seirconnequity(input),
-        stop("No model selected")
-        )
+      eval(parse(text = paste0("shiny_", globalenv()$epiworldR_env$models[input$model], "(input)")))
 
   })
 

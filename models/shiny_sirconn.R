@@ -1,3 +1,4 @@
+# alt-name: SIR
 shiny_sirconn <- function(input) {
 
   model_sirconn <- ModelSIRCONN(
@@ -67,3 +68,27 @@ shiny_sirconn <- function(input) {
     )
   )
 }
+
+sirconn_panel <- function(model_alt) {
+  conditionalPanel(
+    condition = sprintf("input.model == '%s'", model_alt),
+    text_input_disease_name("sirconn"),
+    slider_prevalence("sirconn"),
+    slider_input_rate("sirconn", "Transmission Rate", "0.1"),
+    slider_input_rate("sirconn", "Recovery Rate", "0.14"),
+    slider_input_rate("sirconn", "Contact Rate", "4", maxval = 20),
+    sliderInput(
+      inputId = "sirconn_population_size",
+      label   = "Population Size",
+      min     = 0, 
+      max     = 100000, 
+      value   = 50000, 
+      step    = 1000,
+      ticks   = FALSE
+    ),
+    numeric_input_ndays("sirconn"),
+    tools_input("sirconn"),
+    seed_input("sirconn")
+  )
+}
+

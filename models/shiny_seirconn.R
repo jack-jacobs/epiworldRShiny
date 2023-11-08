@@ -1,3 +1,5 @@
+# alt-name: SEIR
+
 shiny_seirconn <- function(input) {
 
   model_seirconn <- ModelSEIRCONN(
@@ -67,3 +69,35 @@ shiny_seirconn <- function(input) {
     )
   )
 }
+
+seirconn_panel <- function(model_alt) {
+  conditionalPanel(
+    condition = sprintf("input.model == '%s'", model_alt),
+    text_input_disease_name("seirconn"),
+    slider_prevalence("seirconn"),
+    slider_input_rate("seirconn", "Transmission Rate", "0.1"),
+    slider_input_rate("seirconn", "Recovery Rate", "0.14"),
+    slider_input_rate("seirconn", "Contact Rate", "4", maxval = 20),
+    numericInput(
+      inputId = "seirconn_incubation_days",
+      label   = "Incubation Days",
+      value   = "7",
+      min     = 0, 
+      max     = NA,
+      step    = 1
+      ),
+    sliderInput(
+      inputId = "seirconn_population_size",
+      label   = "Population Size",
+      min     = 0, 
+      max     = 100000, 
+      value   = 50000, 
+      step    = 1000,
+      ticks   = FALSE
+    ),
+    numeric_input_ndays("seirconn"),
+    tools_input("seirconn"),
+    seed_input("seirconn")
+  )
+}
+

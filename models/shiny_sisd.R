@@ -1,3 +1,5 @@
+# alt-name: SISD
+
 shiny_sisd <- function(input) {
   
   # Creating model
@@ -74,4 +76,21 @@ shiny_sisd <- function(input) {
       model_table        = table_sisd
     )
   )
+}
+
+sisd_panel <- function(model_alt) {
+
+  conditionalPanel(
+    condition = sprintf("input.model == '%s'", model_alt),
+    text_input_disease_name("sisd"),
+    slider_prevalence("sisd"),
+    slider_input_rate("sisd", "Transmission Rate", "0.05"),
+    slider_input_rate("sisd", "Recovery Rate", "0.14"),
+    slider_input_rate("sisd", "Death Rate", "0.01"),
+    numeric_input_ndays("sisd"),
+    network_input("sisd"),
+    tools_input("sisd"),
+    seed_input("sisd")
+  )
+
 }

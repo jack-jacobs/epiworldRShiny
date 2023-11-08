@@ -1,3 +1,5 @@
+# alt-name: SIR Network
+
 shiny_sir <- function(input) {
   
   # Creating model
@@ -73,4 +75,20 @@ shiny_sir <- function(input) {
       model_table        = table_sir
     )
   )
+}
+
+sir_panel <- function(model_alt) {
+  
+  conditionalPanel(
+    condition = sprintf("input.model == '%s'", model_alt),
+    text_input_disease_name("sir"),
+    slider_prevalence("sir"),
+    slider_input_rate("sir", "Transmission Rate", "0.05"),
+    slider_input_rate("sir", "Recovery Rate", "0.14"),
+    numeric_input_ndays("sir"),
+    network_input("sir"),
+    tools_input("sir"),
+    seed_input("sir")
+  )
+
 }

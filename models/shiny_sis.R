@@ -1,3 +1,5 @@
+# alt-name: SIS
+
 shiny_sis <- function(input) {
   
   # Creating model
@@ -74,6 +76,22 @@ shiny_sis <- function(input) {
       model_summary      = summary_sis,
       model_table        = table_sis
     )
+  )
+
+}
+
+sis_panel <- function(model_alt) {
+
+  conditionalPanel(
+    condition = sprintf("input.model == '%s'", model_alt),
+    text_input_disease_name("sis"),
+    slider_prevalence("sis"),
+    slider_input_rate("sis", "Transmission Rate", "0.05"),
+    slider_input_rate("sis", "Recovery Rate", "0.14"),
+    numeric_input_ndays("sis"),
+    network_input("sis"),
+    tools_input("sis"),
+    seed_input("sis")
   )
 
 }

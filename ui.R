@@ -11,7 +11,56 @@ library(DT)
 #   )
 # )
 
+# Creating an environment available for the simulation.
+# This will serve in case we need to store anything that should
+# be available globaly.
+epiworldR_env <- new.env(parent = .GlobalEnv)
+assign("epiworldR_env", epiworldR_env, envir = .GlobalEnv)
+
+# Models are individually defined in the models folder
 source("R/dashboard-helpers.R")
+
+models <- list.files("models", full.names = TRUE)
+for (f in models) {
+  source(f)
+}
+
+# Capturing alt names
+models_names <- sapply(models, \(f) {
+  
+  # Only on the first line
+  altname <- readLines(f, n = 1)
+
+  # Is there any alt name?
+  altname <- gsub("^#\\s*alt-name[:]\\s*(.+)\\s*$", "\\1", altname, perl = TRUE)
+
+  # If there is no alt name, use the file name
+  if (altname == "") {
+    altname <- gsub("shiny_([^.]+).R", "\\1", basename(f))
+  }
+  altname
+
+})
+
+models <- gsub("^.+shiny_([^.]+).R$", "\\1", models)
+names(models_names) <- models
+names(models) <- models_names
+
+# Saving in the global environment
+epiworldR_env$models_names <- models_names
+epiworldR_env$models <- models
+
+# Doing some hacking
+models_panels <- mget(paste0(models, "_panel"), envir = .GlobalEnv)
+invisible({
+  Map(\(pfun, nam, id) {
+    assign(paste0(id, "_panel"), pfun(nam), envir = .GlobalEnv)
+  }, pfun = models_panels, nam = models_names, id = models
+  )
+})
+
+# Non-pharmacological interventions are defined in the npi folder
+source("R/npi.R")
 
 header <- dashboardHeader(
   title="epiworldR"
@@ -25,162 +74,21 @@ sidebar <- dashboardSidebar(
           max-height: 100vh;
       }"
   ),
-
   # Sidebar panel
   selectInput(
     inputId = "model",
     label   = h3("Model"),
-    choices = toupper(gsub("shiny_([^.]+).R", "\\1", list.files("models")))
+    choices = unname(models_names)
     ),
-  # SEIR Panel
-  conditionalPanel(
-    condition = "input.model == 'SEIR'",
-    text_input_disease_name("seir"),
-    slider_prevalence("seir"),
-    slider_input_rate("seir", "Transmission Rate", "0.05"),
-    slider_input_rate("seir", "Recovery Rate", "0.14"),
-    numericInput(
-      inputId = "seir_incubation_days",
-      label   = "Incubation Days",
-      value   = "7",
-      min     = 0, 
-      max     = NA,
-      step    = 1
-      ),
-    numeric_input_ndays("seir"),
-    network_input("seir"),
-    tools_input("seir"),
-    seed_input("seir")
-  ),
-  # SIR Panel
-  conditionalPanel(
-    condition = "input.model == 'SIR'",
-    text_input_disease_name("sir"),
-    slider_prevalence("sir"),
-    slider_input_rate("sir", "Transmission Rate", "0.05"),
-    slider_input_rate("sir", "Recovery Rate", "0.14"),
-    numeric_input_ndays("sir"),
-    network_input("sir"),
-    tools_input("sir"),
-    seed_input("sir")
-  ),
-  # SIS Panel
-  conditionalPanel(
-    condition = "input.model == 'SIS'",
-    text_input_disease_name("sis"),
-    slider_prevalence("sis"),
-    slider_input_rate("sis", "Transmission Rate", "0.05"),
-    slider_input_rate("sis", "Recovery Rate", "0.14"),
-    numeric_input_ndays("sis"),
-    network_input("sis"),
-    tools_input("sis"),
-    seed_input("sis")
-  ),
-  # SEIRCONN panel
-  conditionalPanel(
-    condition = "input.model == 'SEIRCONNECTED'",
-    text_input_disease_name("seirconn"),
-    slider_prevalence("seirconn"),
-    slider_input_rate("seirconn", "Transmission Rate", "0.1"),
-    slider_input_rate("seirconn", "Recovery Rate", "0.14"),
-    slider_input_rate("seirconn", "Contact Rate", "4", maxval = 20),
-    numericInput(
-      inputId = "seirconn_incubation_days",
-      label   = "Incubation Days",
-      value   = "7",
-      min     = 0, 
-      max     = NA,
-      step    = 1
-      ),
-    sliderInput(
-      inputId = "seirconn_population_size",
-      label   = "Population Size",
-      min     = 0, 
-      max     = 100000, 
-      value   = 50000, 
-      step    = 1000,
-      ticks   = FALSE
-    ),
-    numeric_input_ndays("seirconn"),
-    tools_input("seirconn"),
-    seed_input("seirconn")
-  ),
-  # SIRCONN panel
-  conditionalPanel(
-    condition = "input.model == 'SIRCONNECTED'",
-    text_input_disease_name("sirconn"),
-    slider_prevalence("sirconn"),
-    slider_input_rate("sirconn", "Transmission Rate", "0.1"),
-    slider_input_rate("sirconn", "Recovery Rate", "0.14"),
-    slider_input_rate("sirconn", "Contact Rate", "4", maxval = 20),
-    sliderInput(
-      inputId = "sirconn_population_size",
-      label   = "Population Size",
-      min     = 0, 
-      max     = 100000, 
-      value   = 50000, 
-      step    = 1000,
-      ticks   = FALSE
-    ),
-    numeric_input_ndays("sirconn"),
-    tools_input("sirconn"),
-    seed_input("sirconn")
-  ),
-  # SIRD Panel
-  conditionalPanel(
-    condition = "input.model == 'SIRD'",
-    text_input_disease_name("sird"),
-    slider_prevalence("sird"),
-    slider_input_rate("sird", "Transmission Rate", "0.05"),
-    slider_input_rate("sird", "Recovery Rate", "0.14"),
-    slider_input_rate("sird", "Death Rate", "0.01"),
-    numeric_input_ndays("sird"),
-    network_input("sird"),
-    tools_input("sird"),
-    seed_input("sird")
-  ),
-  # SISD Panel
-  conditionalPanel(
-    condition = "input.model == 'SISD'",
-    text_input_disease_name("sisd"),
-    slider_prevalence("sisd"),
-    slider_input_rate("sisd", "Transmission Rate", "0.05"),
-    slider_input_rate("sisd", "Recovery Rate", "0.14"),
-    slider_input_rate("sisd", "Death Rate", "0.01"),
-    numeric_input_ndays("sisd"),
-    network_input("sisd"),
-    tools_input("sisd"),
-    seed_input("sisd")
-  ),
-  # SEIRD Equity
-  conditionalPanel(
-    condition = "input.model == 'SEIRCONNEQUITY'",
-    text_input_disease_name("seirconnequity"),
-    slider_prevalence("seirconnequity"),
-    slider_input_rate("seirconnequity", "Transmission Rate", "0.05"),
-    slider_input_rate("seirconnequity", "Recovery Rate", "0.14"),
-    slider_input_rate("seirconnequity", "Contact Rate", "4", maxval = 20),
-    numericInput(
-      inputId = "seirconnequity_incubation_days",
-      label   = "Incubation Days",
-      value   = "7",
-      min     = 0, 
-      max     = NA,
-      step    = 1
-      ),
-    sliderInput(
-      inputId = "seirconnequity_population_size",
-      label   = "Population Size",
-      min     = 0, 
-      max     = 100000, 
-      value   = 50000, 
-      step    = 1000,
-      ticks   = FALSE
-    ),
-    numeric_input_ndays("seirconnequity"),
-    tools_input("seirconnequity"),
-    seed_input("seirconnequity")
-  ),
+  # Models conditional panels
+  seir_panel,
+  sir_panel,
+  sis_panel,
+  seirconn_panel,
+  sirconn_panel,
+  sird_panel,
+  sisd_panel,
+  seirconnequity_panel,
   actionButton("simulate", "Run Simulation")
 )
 
