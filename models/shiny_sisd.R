@@ -20,37 +20,8 @@ shiny_sisd <- function(input) {
       p = input$sisd_prob_rewiring
   )
    
-    # Tools
-  sisd_vaccine_tool <- tool(
-    name = "Vaccine",
-    susceptibility_reduction = .9,
-    transmission_reduction = .5,
-    recovery_enhancer = .5,
-    death_reduction = .9
-  )
-  sisd_masking_tool <- tool(
-    name = "Masking",
-    susceptibility_reduction = 0,
-    transmission_reduction = 0.5,
-    recovery_enhancer = 0,
-    death_reduction = 0
-  )
-  add_tool(model_sisd, sisd_vaccine_tool, input$sisd_vaccine_prevalence)
-  add_tool(model_sisd, sisd_masking_tool, input$sisd_masking_prevalence)
-  # Creating a tool
-  sisd_school_closure_tool <- tool(
-    name = "School Closure",
-    susceptibility_reduction = 0,
-    transmission_reduction = 0.5,
-    recovery_enhancer = 0,
-    death_reduction = 0
-  )
-  # Adding a global action
-  sisd_school_closure_ga <- 
-    globalaction_tool(sisd_school_closure_tool, 
-                      input$sisd_school_closure_prevalence, 
-                      day = input$sisd_school_closure_day)
-  add_global_action(model_sisd, sisd_school_closure_ga)
+  # NPIs -----------------------------------------------------------------------
+  npi_add_all(model_sisd, "sisd", input)
 
   # Running and printing
   verbose_off(model_sisd)

@@ -70,3 +70,24 @@ npi_add_school_closure <- function(model, preval, day) {
   }
 
 }
+
+
+npi_add_all <- function(model, modelname, input) {
+
+  npi_add_vaccine(
+    model  = model,
+    preval = input[[paste0(modelname, "_vaccine_prevalence")]]
+    )
+
+  npi_add_masking(
+    model = model,
+    preval = input[[paste0(modelname, "_masking_prevalence")]]
+    )
+
+  npi_add_school_closure(
+    model  = model,
+    preval = input[[paste0(modelname, "_school_closure_prevalence")]],
+    day    = input[[paste0(modelname, "_school_closure_day")]]
+  )
+
+}

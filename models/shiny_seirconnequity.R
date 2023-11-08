@@ -86,21 +86,7 @@ shiny_seirconnequity <- function(input) {
   )
   
   # NPIs -----------------------------------------------------------------------
-  npi_add_vaccine(
-    model  = model_seirconnequity,
-    preval = input$seirconnequity_vaccine_prevalence
-    )
-
-  npi_add_masking(
-    model = model_seirconnequity,
-    preval = input$seirconnequity_masking_prevalence
-    )
-
-  npi_add_school_closure(
-    model  = model_seirconnequity,
-    preval = input$seirconnequity_school_closure_prevalence,
-    day    = input$seirconnequity_school_closure_day
-  )
+  npi_add_all(model_seirconnequity, "seirconnequity", input)
 
   # Running and printing
   verbose_off(model_seirconnequity)

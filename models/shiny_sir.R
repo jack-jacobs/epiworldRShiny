@@ -19,37 +19,8 @@ shiny_sir <- function(input) {
       p = input$sir_prob_rewiring
   )
 
-  # Tools
-  sir_vaccine_tool <- tool(
-    name = "Vaccine",
-    susceptibility_reduction = .9,
-    transmission_reduction = .5,
-    recovery_enhancer = .5,
-    death_reduction = .9
-  )
-  sir_masking_tool <- tool(
-    name = "Masking",
-    susceptibility_reduction = 0,
-    transmission_reduction = 0.5,
-    recovery_enhancer = 0,
-    death_reduction = 0
-  )
-  add_tool(model_sir, sir_vaccine_tool, input$sir_vaccine_prevalence)
-  add_tool(model_sir, sir_masking_tool, input$sir_masking_prevalence)
-  # Creating a tool
-  sir_school_closure_tool <- tool(
-    name = "School Closure",
-    susceptibility_reduction = 0,
-    transmission_reduction = 0.5,
-    recovery_enhancer = 0,
-    death_reduction = 0
-  )
-  # Adding a global action
-  sir_school_closure_ga <- 
-    globalaction_tool(sir_school_closure_tool, 
-                      input$sir_school_closure_prevalence, 
-                      day = input$sir_school_closure_day)
-  add_global_action(model_sir, sir_school_closure_ga)
+  # NPIs -----------------------------------------------------------------------
+  npi_add_all(model_sir, "sir", input)
   
   # Running and printing
   verbose_off(model_sir)
@@ -78,7 +49,7 @@ shiny_sir <- function(input) {
 }
 
 sir_panel <- function(model_alt) {
-  
+
   conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("sir"),
