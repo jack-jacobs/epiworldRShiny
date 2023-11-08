@@ -27,7 +27,18 @@ shiny_seir <- function(input) {
   verbose_off(model_seir)
   run(model_seir, ndays = input$seir_n_days, seed = input$seir_seed)
   # Plot
-  plot_seir <- function() plot(model_seir, main = "SEIR Model")
+  plot_seir <- function() {
+    #plot(model_seir, main = "SEIR Model") 
+    df_seir <- get_hist_total(model_seir)[get_hist_total(model_seir)$state 
+                                          == "Infected",]
+    peak_time <- which.max(df_seir$counts) - 1
+
+    # Plotting  
+    plot(model_seir, main = "SEIR Model")
+    points(peak_time, max(df_seir$counts), pch = 20, col = "red")
+    segments(x0 = peak_time, y0 = 0, x1 = peak_time, 
+             y1 = max(df_seir$counts), col = "red", lty = 2)
+  }
   # Summary
   summary_seir <- function() summary(model_seir)
   # Reproductive Number
