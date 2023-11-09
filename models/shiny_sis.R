@@ -40,7 +40,10 @@ shiny_sis <- function(input) {
   # Table 
   table_sis <- function() {
     df <- as.data.frame(get_hist_total(model_sis))
-    df$counts[1] <- sprintf("<strong>%s</strong>", df$counts[1])
+    num_states <- length(unique(df$state))
+    max_infected <- (which.max(df$counts[df$state=='Infected']))*num_states
+    df[max_infected,] <- sprintf("<strong>%s</strong>", 
+                                       df[max_infected,])
     df
   }
   # Output list
