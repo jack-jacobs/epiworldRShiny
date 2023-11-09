@@ -37,7 +37,7 @@ models_names <- sapply(models, \(f) {
 
   # If there is no alt name, use the file name
   if (altname == "") {
-    altname <- gsub("shiny_([^.]+).R", "\\1", basename(f))
+    altname <- toupper(gsub("shiny_([^.]+).R", "\\1", basename(f)))
   }
   altname
 

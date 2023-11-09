@@ -71,7 +71,7 @@ shiny_seirconnequity <- function(input) {
       1.000, # 0-19
       4.000, # 20-59
       0.001, # 60+
-      4.000, # Hispanic
+      4.000, # NonHispanic
       2.000  # Female
     )),
     model = model_seirconnequity

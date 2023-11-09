@@ -27,7 +27,7 @@ function(input, output) {
   }, options = list(
        scrollY = '550px',
        lengthMenu = c(16, 25, 50), # Set the default value to 15
-       pageLength = 16))
+       pageLength = 16), escape = FALSE)
   
   output$downloadData <- downloadHandler(
     filename = function(){

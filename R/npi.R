@@ -88,6 +88,6 @@ npi_add_all <- function(model, modelname, input) {
     model  = model,
     preval = input[[paste0(modelname, "_school_closure_prevalence")]],
     day    = input[[paste0(modelname, "_school_closure_day")]]
-  )
+    )
 
 }

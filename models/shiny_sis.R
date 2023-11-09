@@ -38,7 +38,11 @@ shiny_sis <- function(input) {
       )
 
   # Table 
-  table_sis <- function() as.data.frame(get_hist_total(model_sis))
+  table_sis <- function() {
+    df <- as.data.frame(get_hist_total(model_sis))
+    df$counts[1] <- sprintf("<strong>%s</strong>", df$counts[1])
+    df
+  }
   # Output list
   return(
     list(
