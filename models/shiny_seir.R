@@ -77,8 +77,9 @@ seir_panel <- function(model_alt) {
       step    = 1
       ),
     numeric_input_ndays("seir"),
+    seed_input("seir"),
+    simulate_button,
     network_input("seir"),
-    tools_input("seir"),
-    seed_input("seir")
+    npis_input("seir")
   )
 }

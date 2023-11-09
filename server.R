@@ -1,9 +1,9 @@
-library(shiny)
-library(epiworldR)
-library(shinyjs)
-
 function(input, output) {
-  
+
+  # Function to make it easier to hide some options
+  onclick(id = "npis_header", toggle(id = "npis_inputs", anim = TRUE))
+  onclick(id = "network_header", toggle(id = "network_inputs", anim = TRUE))
+        
   model_output <- eventReactive(
     eventExpr = input$simulate, 
     valueExpr = {
