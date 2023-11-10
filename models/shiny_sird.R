@@ -60,7 +60,7 @@ sird_panel <- function(model_alt) {
     slider_input_rate("sird", "Death Rate", "0.01"),
     numeric_input_ndays("sird"),
     seed_input("sird"),
-    simulate_button,
+    simulate_button("sird"),
     network_input("sird"),
     npis_input("sird")
   )

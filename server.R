@@ -1,14 +1,29 @@
 function(input, output) {
 
   # Function to make it easier to hide some options
-  onclick(id = "npis_header", toggle(id = "npis_inputs", anim = TRUE))
-  onclick(id = "network_header", toggle(id = "network_inputs", anim = TRUE))
-        
+  # This is a workaround for the fact that a simpler for loop (without the local)
+  # was not working.
+  # See the following issue:
+  # https://github.com/daattali/shinyjs/issues/167#issuecomment-409475023
+  for (i in c("npis", "network")) {
+    for (m in epiworldR_env$models) {
+      local({
+        id0 <- paste0(i, "_header_", m)
+        id1 <- paste0(i, "_inputs_", m)
+        onclick(id = id0, toggle(id = id1, anim = TRUE))
+      })
+    }
+  }
+
+  # Get model id
+  model_id <- reactive(globalenv()$epiworldR_env$models[input$model])
+  
+  # Running the model
   model_output <- eventReactive(
-    eventExpr = input$simulate, 
+    eventExpr = input[[paste0("simulate_", model_id())]],
     valueExpr = {
 
-      eval(parse(text = paste0("shiny_", globalenv()$epiworldR_env$models[input$model], "(input)")))
+      eval(parse(text = paste0("shiny_", model_id(), "(input)")))
 
   })
 

@@ -60,7 +60,7 @@ sirconn_panel <- function(model_alt) {
     ),
     numeric_input_ndays("sirconn"),
     seed_input("sirconn"),
-    simulate_button,
+    simulate_button("sirconn"),
     npis_input("sirconn")
   )
 }

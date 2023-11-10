@@ -50,10 +50,13 @@ slider_input_rate <- function(
 network_input <- function(model_name) {
 
   tagList(
-    div(id = "network_header", headerPanel(h4("Population structure"))),
+    div(
+      id = paste0("network_header_", model_name),
+      headerPanel(h4("Population structure"))
+      ),
     hidden(
       div(
-        id = "network_inputs",
+        id = paste0("network_inputs_", model_name),
         sliderInput(
           inputId = paste0(model_name, "_population_size"),
           label   = "Population Size",
@@ -94,12 +97,12 @@ network_input <- function(model_name) {
 npis_input <- function(model_name) {
   tagList(
     div(
-      id = "npis_header",
+      id = paste0("npis_header_", model_name),
       headerPanel(h4("Non-pharmaceutical interventions"))
       ),
     # By default hidden
     hidden(
-      div(id = "npis_inputs",
+      div(id = paste0("npis_inputs_", model_name),
         sliderInput(
           inputId = paste0(model_name, "_vaccine_prevalence"),
           label   = "Vaccine Prevalence",
@@ -138,7 +141,7 @@ npis_input <- function(model_name) {
         )
       )
     )
-  ) # |> paste(collapse = "\n") |> HTML()
+  )
 }
 
 seed_input <- function(model_name) {
@@ -212,4 +215,9 @@ models_setup <- function() {
 
 }
 
-simulate_button <- div(actionButton("simulate", "Run Simulation"))
+simulate_button <- function(model_name) {
+  actionButton(
+    inputId = paste0("simulate_", model_name),
+    label   = "Run Simulation"
+    )
+}

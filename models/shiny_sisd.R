@@ -60,7 +60,7 @@ sisd_panel <- function(model_alt) {
     slider_input_rate("sisd", "Death Rate", "0.01"),
     numeric_input_ndays("sisd"),
     seed_input("sisd"),
-    simulate_button,
+    simulate_button("sisd"),
     network_input("sisd"),
     npis_input("sisd")
   )

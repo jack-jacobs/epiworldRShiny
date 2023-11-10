@@ -32,20 +32,29 @@ header <- dashboardHeader(
   title="epiworldR"
   )
 
+# Preparing CSS for cursor pointer
+cursor_header_pointer <-
+  sprintf(
+    "#npis_header_%1$s, #network_header_%1$s",
+    epiworldR_env$models
+    ) |>
+  paste0(collapse = ", ") |>
+  paste("{\n  cursor: pointer;\n}\n")
+
 sidebar <- do.call(
   "dashboardSidebar",
   c(
     list(
       width = NULL,
       tags$style(
-        "#sidebarItemExpanded {
+        paste0("#sidebarItemExpanded {
             overflow: auto;
             max-height: 100vh;
         }
-        #npis_header, #network_header {
+        /*#npis_header, #network_header {
           cursor: pointer;
-        }
-        "
+        }*/
+        ", cursor_header_pointer)
       ),
       # To activate shinyJs
       useShinyjs(),
