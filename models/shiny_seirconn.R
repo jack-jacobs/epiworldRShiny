@@ -69,8 +69,9 @@ seirconn_panel <- function(model_alt) {
       ticks   = FALSE
     ),
     numeric_input_ndays("seirconn"),
-    tools_input("seirconn"),
-    seed_input("seirconn")
+    seed_input("seirconn"),
+    simulate_button("seirconn"),
+    npis_input("seirconn")
   )
 }
 

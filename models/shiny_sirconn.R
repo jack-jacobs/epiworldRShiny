@@ -59,8 +59,9 @@ sirconn_panel <- function(model_alt) {
       ticks   = FALSE
     ),
     numeric_input_ndays("sirconn"),
-    tools_input("sirconn"),
-    seed_input("sirconn")
+    seed_input("sirconn"),
+    simulate_button("sirconn"),
+    npis_input("sirconn")
   )
 }
 
