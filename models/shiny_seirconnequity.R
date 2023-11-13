@@ -177,6 +177,7 @@ shiny_seirconnequity <- function(input) {
 }
 
 seirconnequity_panel <- function(model_alt) {
+
   conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("seirconnequity"),
@@ -202,7 +203,9 @@ seirconnequity_panel <- function(model_alt) {
       ticks   = FALSE
     ),
     numeric_input_ndays("seirconnequity"),
-    tools_input("seirconnequity"),
-    seed_input("seirconnequity")
+    seed_input("seirconnequity"),
+    simulate_button("seirconnequity"),
+    npis_input("seirconnequity")
   )
+  
 }

@@ -82,9 +82,10 @@ sis_panel <- function(model_alt) {
     slider_input_rate("sis", "Transmission Rate", "0.05"),
     slider_input_rate("sis", "Recovery Rate", "0.14"),
     numeric_input_ndays("sis"),
+    seed_input("sis"),
+    simulate_button("sis"),
     network_input("sis"),
-    tools_input("sis"),
-    seed_input("sis")
+    npis_input("sis")
   )
 
 }
