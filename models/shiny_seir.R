@@ -48,7 +48,19 @@ shiny_seir <- function(input) {
       main = "SEIR Model Reproductive Number"
     )
   # Table 
-  table_seir <- function() as.data.frame(get_hist_total(model_seir))
+  table_seir <- function() {
+    df <- as.data.frame(get_hist_total(model_seir))
+    # Subset to only include "infection" state
+    infection_data <- df[df$state == "Infected", ]
+    # Row with the maximum count
+    max_infection_row <- infection_data[which.max(infection_data$count), ]
+    # Row number of the maximum count in the original data frame
+    max_row_number <- which(df$date == max_infection_row$date & 
+                              df$state == "Infected")
+    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+                                       df[max_row_number,])
+    df
+  }
   # Output list
   return(
     list(

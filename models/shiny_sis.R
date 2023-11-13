@@ -27,7 +27,17 @@ shiny_sis <- function(input) {
   run(model_sis, ndays = input$sis_n_days, seed = input$sis_seed)
   
   # Plot, summary, and reproductive number
-  plot_sis <- function() plot(model_sis, main = "SIS Model")
+  plot_sis <- function() {
+    df_sis <- get_hist_total(model_sis)[get_hist_total(model_sis)$state 
+                                          == "Infected",]
+    peak_time <- which.max(df_sis$counts) - 1
+
+    # Plotting  
+    plot(model_sis, main = "SIS Model")
+    points(peak_time, max(df_sis$counts), pch = 20, col = "black")
+    segments(x0 = peak_time, y0 = 0, x1 = peak_time, 
+             y1 = max(df_sis$counts), col = "black", lty = 2)
+  }
   
   summary_sis <- function() summary(model_sis)
   
@@ -40,10 +50,15 @@ shiny_sis <- function(input) {
   # Table 
   table_sis <- function() {
     df <- as.data.frame(get_hist_total(model_sis))
-    num_states <- length(unique(df$state))
-    max_infected <- (which.max(df$counts[df$state=='Infected']))*num_states
-    df[max_infected,] <- sprintf("<strong>%s</strong>", 
-                                       df[max_infected,])
+    # Subset to only include "infection" state
+    infection_data <- df[df$state == "Infected", ]
+    # Row with the maximum count
+    max_infection_row <- infection_data[which.max(infection_data$count), ]
+    # Row number of the maximum count in the original data frame
+    max_row_number <- which(df$date == max_infection_row$date & 
+                              df$state == "Infected")
+    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+                                       df[max_row_number,])
     df
   }
   # Output list

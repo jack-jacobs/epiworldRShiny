@@ -18,18 +18,41 @@ shiny_sirconn <- function(input) {
   run(model_sirconn, ndays = input$sirconn_n_days, seed = input$sirconn_seed)
   
   # Plot, summary, and reproductive number
-  plot_sirconn <- function() plot(model_sirconn, main = "SIR connected Model")
+  plot_sirconn <- function() {
+    df_sirconn <- 
+      get_hist_total(model_sirconn)[get_hist_total(model_sirconn)$state 
+                                          == "Infected",]
+    peak_time <- which.max(df_sirconn$counts) - 1
+
+    # Plotting  
+    plot(model_sirconn, main = "SIRCONNNECTED Model")
+    points(peak_time, max(df_sirconn$counts), pch = 20, col = "black")
+    segments(x0 = peak_time, y0 = 0, x1 = peak_time, 
+             y1 = max(df_sirconn$counts), col = "black", lty = 2)
+  }
   
   summary_sirconn <- function() summary(model_sirconn)
   
   reproductive_sirconn <- function()
     plot_reproductive_number(
       model_sirconn,
-      main = "SIR connected Model Reproductive Number"
+      main = "SIRCONNECTED Model Reproductive Number"
       )
 
   # Table 
-  table_sirconn <- function() as.data.frame(get_hist_total(model_sirconn))
+  table_sirconn <- function() {
+    df <- as.data.frame(get_hist_total(model_sirconn))
+    # Subset to only include "infection" state
+    infection_data <- df[df$state == "Infected", ]
+    # Row with the maximum count
+    max_infection_row <- infection_data[which.max(infection_data$count), ]
+    # Row number of the maximum count in the original data frame
+    max_row_number <- which(df$date == max_infection_row$date & 
+                              df$state == "Infected")
+    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+                                       df[max_row_number,])
+    df
+  }
   # Output list
   return(
     list(
