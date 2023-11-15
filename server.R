@@ -40,8 +40,8 @@ function(input, output) {
   output$model_table <- renderDataTable({
     model_output()$model_table()
   }, options = list(
-       scrollY = '550px',
-       lengthMenu = c(16, 25, 50), # Set the default value to 15
+       scrollY = '600px',
+       lengthMenu = c(16, 25, 50), # Set the default value to 16
        pageLength = 16), escape = FALSE)
   
   output$downloadData <- downloadHandler(

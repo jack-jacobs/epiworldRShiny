@@ -6,6 +6,7 @@ library(DT)
 library(ggplot2)
 library(shinyjs)
 library(epiworldR)
+library(shinycssloaders)
 
 # library(fresh)
 # my_theme = create_theme(
@@ -27,6 +28,7 @@ models_setup()
 
 # Loads the Non-pharmacological interventions are defined in the npi folder
 source("R/npi.R")
+
 
 header <- dashboardHeader(
   title="epiworldR"
@@ -72,18 +74,16 @@ sidebar <- do.call(
 
 body <- dashboardBody(
   fluidRow(
-    column(6, plotOutput("model_plot")),
-    column(6, plotOutput("model_reproductive_plot"))
+    column(6, plotOutput("model_plot") %>% withSpinner(color="#009bff")),
+    column(6, plotOutput("model_reproductive_plot") %>% withSpinner(color="#009bff"))
   ),
   HTML("<br>"),
   fluidRow(
-    column(6, verbatimTextOutput("model_summary")),
-    column(6, dataTableOutput("model_table"))
+    column(6, verbatimTextOutput("model_summary") %>% withSpinner(color="#009bff")),
+    column(6, dataTableOutput("model_table") %>% withSpinner(color="#009bff"))
   ),
-  downloadButton("downloadData", "Download Data"),
-  tags$style(type='text/css', "#downloadData { margin-bottom: 100px; float: right}")
-  
-
+  downloadButton("downloadData", "Download Model Data"),
+  tags$style(type='text/css', "#downloadData {position: fixed; bottom: 20px; right: 20px; }")
 )
 
 ui <- dashboardPage(
