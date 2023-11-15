@@ -10,7 +10,7 @@ text_input_disease_name <- function(model_name) {
 slider_prevalence <- function(model_name) {
   sliderInput(
     paste0(model_name, "_prevalence"),
-    label = "Disease Prevalence",
+    label = "% of population infected",
     value = "0.1",
     min = 0, 
     max = 1,
@@ -31,11 +31,16 @@ numeric_input_ndays <- function(model_name) {
 }
 
 slider_input_rate <- function(
-  model_name, rate_name, value, maxval = 1
+  model_name, rate_name, value, maxval = 1, input_label = NULL
   ) {
+
+  if (is.null(input_label)) {
+    input_label <- gsub("[^a-z0-9]", "_", tolower(rate_name))
+  }
+
   sliderInput(
     inputId = paste(
-      model_name, gsub("\\s+", "_", tolower(rate_name)),
+      model_name, input_label,
       sep = "_"
     ),
     label = rate_name,
@@ -105,7 +110,7 @@ npis_input <- function(model_name) {
       div(id = paste0("npis_inputs_", model_name),
         sliderInput(
           inputId = paste0(model_name, "_vaccine_prevalence"),
-          label   = "Vaccine Prevalence",
+          label   = "% of agents vaccinated",
           min     = 0, 
           max     = 1, 
           value   = 0, 
@@ -114,7 +119,7 @@ npis_input <- function(model_name) {
           ),
         sliderInput(
           inputId = paste0(model_name, "_masking_prevalence"),
-          label   = "Masking Prevalence",
+          label   = "% of agents using masks",
           value   = "0",
           min     = 0, 
           max     = 1,
@@ -133,7 +138,7 @@ npis_input <- function(model_name) {
           ),
         numericInput(
           inputId = paste0(model_name, "_school_closure_day"),
-          label   = "Day of Implementation",
+          label   = "Implementation day",
           value = "0",
           min = 0,
           max = 100,

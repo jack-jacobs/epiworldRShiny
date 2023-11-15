@@ -182,8 +182,8 @@ seirconnequity_panel <- function(model_alt) {
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("seirconnequity"),
     slider_prevalence("seirconnequity"),
-    slider_input_rate("seirconnequity", "Transmission Rate", 0.05),
-    slider_input_rate("seirconnequity", "Recovery Rate", 0.14),
+    slider_input_rate("seirconnequity", "Probability of exposure (daily)", 0.05, input_label = "transmission_rate"),
+    slider_input_rate("seirconnequity", "Recovery probability (daily)", 0.14, input_label = "recovery_rate"),
     slider_input_rate("seirconnequity", "Contact Rate", 4, maxval = 20),
     numericInput(
       inputId = "seirconnequity_incubation_days",
