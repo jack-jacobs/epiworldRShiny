@@ -1,4 +1,4 @@
-# alt-name: SIS
+# alt-name: Network SIS
 
 shiny_sis <- function(input) {
   

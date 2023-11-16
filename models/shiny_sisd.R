@@ -1,4 +1,4 @@
-# alt-name: SISD
+# alt-name: Network SISD
 
 shiny_sisd <- function(input) {
   

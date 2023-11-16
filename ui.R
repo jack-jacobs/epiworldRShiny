@@ -31,7 +31,8 @@ source("R/npi.R")
 
 
 header <- dashboardHeader(
-  title="epiworldR"
+  title=
+    HTML('epiworldR <text style="color: gray; font-size:50%">(alpha)</text>')
   )
 
 # Preparing CSS for cursor pointer
@@ -74,6 +75,9 @@ sidebar <- do.call(
 
 body <- dashboardBody(
   fluidRow(
+    column(12, htmlOutput("model_description"))
+  ),
+  fluidRow(
     column(6, plotOutput("model_plot") %>% withSpinner(color="#009bff")),
     column(6, plotOutput("model_reproductive_plot") %>% withSpinner(color="#009bff"))
   ),
@@ -82,8 +86,12 @@ body <- dashboardBody(
     column(6, verbatimTextOutput("model_summary") %>% withSpinner(color="#009bff")),
     column(6, dataTableOutput("model_table") %>% withSpinner(color="#009bff"))
   ),
-  downloadButton("downloadData", "Download Model Data"),
-  tags$style(type='text/css', "#downloadData {position: fixed; bottom: 20px; right: 20px; }")
+  htmlOutput("download_button"),
+  tags$style(type='text/css', "#downloadData {position: fixed; bottom: 20px; right: 20px; }"),
+  fluidRow(
+    column(6, markdown("epiworldRShiny app version 0.0-1 (alpha)")),
+    column(6, markdown("**The University of Utah**"))
+  )
 )
 
 ui <- dashboardPage(

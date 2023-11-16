@@ -27,6 +27,20 @@ function(input, output) {
 
   })
 
+  # Displaying Model Description
+  # Only if the file exists
+  output$model_description <- renderText({
+
+    fn <- paste0("models/shiny_", model_id(), ".md")
+    contents <- if (file.exists(fn))
+      readLines(fn, warn = FALSE)
+    else
+      "No description available."
+
+    markdown(contents)
+
+  })
+
   # Displaying Plots and Model Summary
   output$model_plot <- renderPlot({
     model_output()$epicurves_plot()
@@ -52,4 +66,8 @@ function(input, output) {
       write.csv(model_output()$model_table(), file)
     }
   )
+
+  output$download_button <- renderUI({
+    downloadButton("downloadData", "Download Data")
+  })
 }

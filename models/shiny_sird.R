@@ -1,4 +1,4 @@
-# alt-name: SIRD
+# alt-name: Network SIRD
 
 shiny_sird <- function(input) {
   
@@ -79,7 +79,7 @@ sird_panel <- function(model_alt) {
     slider_prevalence("sird"),
     slider_input_rate("sird", "Probability of exposure (daily)", 0.05, input_label = "transmission_rate"),
     slider_input_rate("sird", "Recovery probability (daily)", 0.14, input_label = "recovery_rate"),
-    slider_input_rate("sird", "Death Rate", "0.01"),
+    slider_input_rate("sird", "Probability of death (daily)", 0.01, input_label = "death_rate"),
     numeric_input_ndays("sird"),
     seed_input("sird"),
     simulate_button("sird"),

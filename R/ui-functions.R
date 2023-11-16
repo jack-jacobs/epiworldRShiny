@@ -57,7 +57,14 @@ network_input <- function(model_name) {
   tagList(
     div(
       id = paste0("network_header_", model_name),
-      headerPanel(h4("Population structure"))
+      headerPanel(
+        h4(
+          tagList(
+            icon("circle-info"),
+          "Population structure"
+          )
+        )
+      )
       ),
     hidden(
       div(
@@ -103,7 +110,13 @@ npis_input <- function(model_name) {
   tagList(
     div(
       id = paste0("npis_header_", model_name),
-      headerPanel(h4("Non-pharmaceutical interventions"))
+      headerPanel(
+        h4(
+          tagList(
+            icon("circle-info"),
+            "Non-pharmaceutical interventions"
+            )
+      ))
       ),
     # By default hidden
     hidden(
@@ -169,7 +182,7 @@ models_setup <- function() {
   eval({
 
     # Get a list of all model files in the "models" directory
-    models <- list.files("models", full.names = TRUE)
+    models <- list.files("models", pattern = "shiny_[a-z]+\\.R$", full.names = TRUE)
 
     # Source each model file
     for (f in models) {
