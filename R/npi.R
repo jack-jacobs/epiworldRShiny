@@ -1,13 +1,19 @@
-npi_add_vaccine <- function(model, preval) {
+npi_add_vaccine <- function(
+  model, preval,
+  susceptibility_reduction = .9,
+  transmission_reduction = .5,
+  recovery_enhancer = .5,
+  death_reduction = .9
+  ) {
 
   if (preval > 0) {
 
     tool_ <- tool(
       name = "Vaccine",
-      susceptibility_reduction = .9,
-      transmission_reduction = .5,
-      recovery_enhancer = .5,
-      death_reduction = .9
+      susceptibility_reduction = susceptibility_reduction,
+      transmission_reduction = transmission_reduction,
+      recovery_enhancer = recovery_enhancer,
+      death_reduction = death_reduction
     )
 
     add_tool(

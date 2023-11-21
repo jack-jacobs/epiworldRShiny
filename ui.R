@@ -29,6 +29,9 @@ models_setup()
 # Loads the Non-pharmacological interventions are defined in the npi folder
 source("R/npi.R")
 
+# Functions to generate population
+source("R/server-functions.R")
+
 
 header <- dashboardHeader(
   title=
@@ -38,7 +41,7 @@ header <- dashboardHeader(
 # Preparing CSS for cursor pointer
 cursor_header_pointer <-
   sprintf(
-    "#npis_header_%1$s, #network_header_%1$s",
+    "#npis_header_%1$s, #network_header_%1$s, #population_header_%1$s",
     epiworldR_env$models
     ) |>
   paste0(collapse = ", ") |>
@@ -50,14 +53,10 @@ sidebar <- do.call(
     list(
       width = NULL,
       tags$style(
-        paste0("#sidebarItemExpanded {
-            overflow: auto;
-            max-height: 100vh;
-        }
-        /*#npis_header, #network_header {
-          cursor: pointer;
-        }*/
-        ", cursor_header_pointer)
+        paste0(
+          "#sidebarItemExpanded {overflow: auto;max-height: 100vh;}",
+          cursor_header_pointer
+        )
       ),
       # To activate shinyJs
       useShinyjs(),

@@ -114,7 +114,7 @@ npis_input <- function(model_name) {
         h4(
           tagList(
             icon("circle-info"),
-            "Non-pharmaceutical interventions"
+            "Interventions"
             )
       ))
       ),
@@ -231,6 +231,53 @@ models_setup <- function() {
 
   }, envir = env)
 
+}
+
+population_input <- function(model_name) {
+  tagList(
+    div(
+      id = paste0("population_header_", model_name),
+      headerPanel(
+        h4(
+          tagList(
+            icon("circle-info"),
+            "Population (equity)"
+            )
+      ))
+    ),
+    hidden(
+      div(
+        id = paste0("population_inputs_", model_name),
+        sliderInput(
+          inputId = paste0(model_name, "_prop_hispanic"),
+          label   = "% Hispanic",
+          value   = "0.5",
+          min     = 0, 
+          max     = 1,
+          step    = 0.01,
+          ticks   = FALSE
+          ),
+        sliderInput(
+          inputId = paste0(model_name, "_prop_female"),
+          label   = "% Female",
+          value   = "0.5",
+          min     = 0,
+          max     = 1,
+          step    = 0.01,
+          ticks   = FALSE
+          ),
+        sliderInput(
+          inputId = paste0(model_name, "_prop_ages"),
+          min     = 0,
+          max     = 1,
+          value   = c(.3, .6),
+          label   = "Age distribution (< 20, < 60, 60+)",
+          dragRange = TRUE
+        )
+      )
+    )
+  )
+    
 }
 
 simulate_button <- function(model_name) {

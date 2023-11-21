@@ -5,7 +5,7 @@ function(input, output) {
   # was not working.
   # See the following issue:
   # https://github.com/daattali/shinyjs/issues/167#issuecomment-409475023
-  for (i in c("npis", "network")) {
+  for (i in c("npis", "network", "population")) {
     for (m in epiworldR_env$models) {
       local({
         id0 <- paste0(i, "_header_", m)

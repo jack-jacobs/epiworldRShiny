@@ -31,16 +31,12 @@ shiny_seirconnequity <- function(input) {
   # Generating artificial pop data ---------------------------------------------
   set.seed(input$seirconnequity_seed)
 
-  agegroups <- sample.int(3, size = n, replace = TRUE)
-  X <- matrix(0, nrow = n, ncol = 3)
-  X[cbind(1:n, agegroups)] <- 1
-  colnames(X) <- c("0-19", "20-59", "60+")
-
-  X <- cbind(
-    X,
-    NotHispanic = sample.int(2, size = n, replace = TRUE) - 1,
-    Female   = sample.int(2, size = n, replace = TRUE) - 1
-  )
+  X <- pop_generator(
+    n,
+    prop_hispanic = input$seirconnequity_prop_hispanic,
+    prop_female = input$seirconnequity_prop_female,
+    prop_19_59_60plus = input$seirconnequity_prop_ages
+    ) 
 
   # Saving the data to the global environment (this way we make sure it is
   # available to the model)
@@ -205,6 +201,7 @@ seirconnequity_panel <- function(model_alt) {
     numeric_input_ndays("seirconnequity"),
     seed_input("seirconnequity"),
     simulate_button("seirconnequity"),
+    population_input("seirconnequity"),
     npis_input("seirconnequity")
   )
   
