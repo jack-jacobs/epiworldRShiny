@@ -1,12 +1,25 @@
 
-library(shiny)
-library(tidyverse)
-library(shinydashboard)
-library(DT)
-library(ggplot2)
-library(shinyjs)
-library(epiworldR)
-library(shinycssloaders)
+# Loading R packages
+pkgs <- c(
+  "shinydashboard",
+  "DT",
+  "ggplot2",
+  "shinyjs",
+  "epiworldR",
+  "shinycssloaders"
+  )
+
+# Id these are not available, will be installed.
+for (p in pkgs) {
+  if (!require(p, character.only = TRUE)) {
+    install.packages(
+      p,
+      repos = "https://cloud.r-project.org",
+      character.only = TRUE
+      )
+    library(p)
+  }
+}
 
 # library(fresh)
 # my_theme = create_theme(
