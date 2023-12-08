@@ -6,7 +6,8 @@ pkgs <- c(
   "ggplot2",
   "shinyjs",
   "epiworldR",
-  "shinycssloaders"
+  "shinycssloaders",
+  "plotly"
   )
 
 # Id these are not available, will be installed.
@@ -90,7 +91,7 @@ body <- dashboardBody(
     column(12, htmlOutput("model_description"))
   ),
   fluidRow(
-    column(6, plotOutput("model_plot") %>% withSpinner(color="#009bff")),
+    column(6, plotlyOutput("model_plot") %>% withSpinner(color="#009bff")),
     column(6, plotOutput("model_reproductive_plot") %>% withSpinner(color="#009bff"))
   ),
   HTML("<br>"),

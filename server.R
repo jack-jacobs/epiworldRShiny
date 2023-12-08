@@ -42,7 +42,7 @@ function(input, output) {
   })
 
   # Displaying Plots and Model Summary
-  output$model_plot <- renderPlot({
+  output$model_plot <- renderPlotly({
     model_output()$epicurves_plot()
   })
   output$model_reproductive_plot <- renderPlot({

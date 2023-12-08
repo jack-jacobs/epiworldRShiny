@@ -27,17 +27,7 @@ shiny_sir <- function(input) {
   run(model_sir, ndays = input$sir_n_days, seed = input$sir_seed)
 
   # Plot, summary and repnum
-  plot_sir <- function() {
-    df_sir <- get_hist_total(model_sir)[get_hist_total(model_sir)$state 
-                                          == "Infected",]
-    peak_time <- which.max(df_sir$counts) - 1
-
-    # Plotting  
-    plot(model_sir, main = "SIR Model")
-    points(peak_time, max(df_sir$counts), pch = 20, col = "black")
-    segments(x0 = peak_time, y0 = 0, x1 = peak_time, 
-             y1 = max(df_sir$counts), col = "black", lty = 2)
-  }
+  plot_sir <- function() plot_epi(model_sir)
   summary_sir <- function() summary(model_sir)
   reproductive_sir <- function()
     plot_reproductive_number(

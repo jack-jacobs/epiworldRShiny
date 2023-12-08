@@ -18,18 +18,7 @@ shiny_sirconn <- function(input) {
   run(model_sirconn, ndays = input$sirconn_n_days, seed = input$sirconn_seed)
   
   # Plot, summary, and reproductive number
-  plot_sirconn <- function() {
-    df_sirconn <- 
-      get_hist_total(model_sirconn)[get_hist_total(model_sirconn)$state 
-                                          == "Infected",]
-    peak_time <- which.max(df_sirconn$counts) - 1
-
-    # Plotting  
-    plot(model_sirconn, main = "SIRCONNNECTED Model")
-    points(peak_time, max(df_sirconn$counts), pch = 20, col = "black")
-    segments(x0 = peak_time, y0 = 0, x1 = peak_time, 
-             y1 = max(df_sirconn$counts), col = "black", lty = 2)
-  }
+  plot_sirconn <- function() plot_epi(model_sirconn)
   
   summary_sirconn <- function() summary(model_sirconn)
   

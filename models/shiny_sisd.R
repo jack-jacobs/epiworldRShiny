@@ -28,17 +28,7 @@ shiny_sisd <- function(input) {
   run(model_sisd, ndays = input$sisd_n_days, seed = input$sisd_seed)
 
   # Plot, summary, and repnum
-  plot_sisd <- function() {
-    df_sisd <- get_hist_total(model_sisd)[get_hist_total(model_sisd)$state 
-                                          == "Infected",]
-    peak_time <- which.max(df_sisd$counts) - 1
-
-    # Plotting  
-    plot(model_sisd, main = "SISD Model")
-    points(peak_time, max(df_sisd$counts), pch = 20, col = "red")
-    segments(x0 = peak_time, y0 = 0, x1 = peak_time, 
-             y1 = max(df_sisd$counts), col = "red", lty = 2)
-  }
+  plot_sisd <- function() plot_epi(model_sisd)
   summary_sisd <- function() summary(model_sisd)
   reproductive_sisd <- function()
     plot_reproductive_number(
