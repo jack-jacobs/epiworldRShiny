@@ -210,3 +210,29 @@ plot_epi <- function(model, mark_max) {
                    )
   return(plot)
 }
+
+#' plot_reproductive_epi Function
+#' 
+#' This function generates a plot of the reproductive number over time
+#' @param model The model object
+#' 
+#' @return A plot displaying the reproductive number for the model over the 
+#' course of the simulation
+#' 
+#' @export
+plot_reproductive_epi <- function (model) {
+  # Calculating average rep. number for each unique source_exposure_date
+  rep_num <- get_reproductive_number(model)
+  average_rt <- aggregate(rt ~ source_exposure_date, data = rep_num, 
+                          FUN = mean)
+  # Plotting
+  reproductive_plot <- plot_ly(data = average_rt, x = ~source_exposure_date, 
+                               y = ~rt, type = 'scatter', 
+                               mode = 'lines+markers')
+  reproductive_plot <- 
+    reproductive_plot |> 
+      plotly::layout(title = "Reproductive Number",
+                     xaxis = list(title = 'Day (step)'),
+                     yaxis = list(title = 'Average Rep. Number'))
+  return(reproductive_plot)         
+}

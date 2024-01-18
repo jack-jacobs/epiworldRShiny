@@ -29,12 +29,7 @@ shiny_sir <- function(input) {
   # Plot, summary and repnum
   plot_sir <- function() plot_epi(model_sir)
   summary_sir <- function() summary(model_sir)
-  reproductive_sir <- function()
-    plot_reproductive_number(
-      model_sir,
-      main = "SIR Model Reproductive Number"
-    )
-
+  reproductive_sir <- function() plot_reproductive_epi(model_sir)
   # Table 
   table_sir <- function() {
     df <- as.data.frame(get_hist_total(model_sir))

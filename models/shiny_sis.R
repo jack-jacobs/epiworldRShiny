@@ -28,15 +28,8 @@ shiny_sis <- function(input) {
   
   # Plot, summary, and reproductive number
   plot_sis <- function() plot_epi(model_sis)
-  
   summary_sis <- function() summary(model_sis)
-  
-  reproductive_sis <- function()
-    plot_reproductive_number(
-      model_sis,
-      main = "SIS Model Reproductive Number"
-      )
-
+  reproductive_sis <- function() plot_reproductive_epi(model_sis)
   # Table 
   table_sis <- function() {
     df <- as.data.frame(get_hist_total(model_sis))

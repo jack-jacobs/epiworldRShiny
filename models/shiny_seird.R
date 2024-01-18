@@ -32,45 +32,31 @@ shiny_seird <- function(input) {
   # Summary
   summary_seird <- function() summary(model_seird)
   # Reproductive Number
-  reproductive_seird <- function() 
-    plot_reproductive_number(
-      model_seird,
-      main = "SEIRD Model Reproductive Number"
-    )
-
+  reproductive_seird <- function() plot_reproductive_epi(model_seird)
   # Table 
   table_seird <- function() {
-
     df <- as.data.frame(get_hist_total(model_seird))
-    
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
-    
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$counts), ]
-    
     # Row number of the maximum count in the original data frame
     max_row_number <- which(
       df$date == max_infection_row$date & df$state == "Infected"
       )
-
     df[max_row_number,"counts"] <- sprintf(
       "<strong>%s</strong>", 
       df[max_row_number, "counts"]
       )
-
     # Making sure factor variables are ordered
     df$state <- factor(
       x      = df$state,
       levels = c("Susceptible", "Exposed", "Infected", "Removed")
       )
-    
     # Reshaping the data to wide format
     df <- reshape(df, idvar = "date", timevar = "state", direction = "wide")
-
     colnames(df) <- gsub(colnames(df), pattern = "counts.", replacement = "")
     df
-    
   }
 
   # Output list

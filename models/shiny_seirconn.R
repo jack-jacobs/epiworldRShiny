@@ -21,15 +21,8 @@ shiny_seirconn <- function(input) {
   
   # Plot, summary, and reproductive number
   plot_seirconn <- function() plot_epi(model_seirconn)
-  
   summary_seirconn <- function() summary(model_seirconn)
-  
-  reproductive_seirconn <- function()
-    plot_reproductive_number(
-      model_seirconn,
-      main = "SEIRCONNECTED Model Reproductive Number"
-      )
-
+  reproductive_seirconn <- function() plot_reproductive_epi(model_seirconn)
   # Table 
   table_seirconn <- function() {
     df <- as.data.frame(get_hist_total(model_seirconn))

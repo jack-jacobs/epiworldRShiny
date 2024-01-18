@@ -99,7 +99,7 @@ body <- dashboardBody(
   ),
   fluidRow(
     column(6, plotlyOutput("model_plot") %>% withSpinner(color="#009bff")),
-    column(6, plotOutput("model_reproductive_plot") %>% withSpinner(color="#009bff"))
+    column(6, plotlyOutput("model_reproductive_plot") %>% withSpinner(color="#009bff"))
   ),
   HTML("<br>"),
   fluidRow(

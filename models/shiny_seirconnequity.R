@@ -139,13 +139,9 @@ shiny_seirconnequity <- function(input) {
   }
   
   summary_seirconnequity <- function() summary(model_seirconnequity)
+  reproductive_seirconnequity <- 
+    function() plot_reproductive_epi(model_seirconnequity)
   
-  reproductive_seirconnequity <- function()
-    plot_reproductive_number(
-      model_seirconnequity,
-      main = "SEIRCONNECTED Model Reproductive Number"
-      )
-
   # Table 
   table_seirconnequity <- function() {
     df <- as.data.frame(get_hist_total(model_seirconnequity))

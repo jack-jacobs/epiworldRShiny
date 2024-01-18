@@ -19,15 +19,8 @@ shiny_sirconn <- function(input) {
   
   # Plot, summary, and reproductive number
   plot_sirconn <- function() plot_epi(model_sirconn)
-  
   summary_sirconn <- function() summary(model_sirconn)
-  
-  reproductive_sirconn <- function()
-    plot_reproductive_number(
-      model_sirconn,
-      main = "SIRCONNECTED Model Reproductive Number"
-      )
-
+  reproductive_sirconn <- function() plot_reproductive_epi(model_sirconn)
   # Table 
   table_sirconn <- function() {
     df <- as.data.frame(get_hist_total(model_sirconn))

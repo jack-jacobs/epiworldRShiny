@@ -45,7 +45,7 @@ function(input, output) {
   output$model_plot <- renderPlotly({
     model_output()$epicurves_plot()
   })
-  output$model_reproductive_plot <- renderPlot({
+  output$model_reproductive_plot <- renderPlotly({
     model_output()$reproductive_plot()
   })
   output$model_summary <- renderPrint({

@@ -31,12 +31,7 @@ shiny_seir <- function(input) {
   # Summary
   summary_seir <- function() summary(model_seir)
   # Reproductive Number
-  reproductive_seir <- function() 
-    plot_reproductive_number(
-      model_seir,
-      main = "SEIR Model Reproductive Number"
-    )
-
+  reproductive_seir <- function() plot_reproductive_epi(model_seir)
   # Table 
   table_seir <- function() {
 

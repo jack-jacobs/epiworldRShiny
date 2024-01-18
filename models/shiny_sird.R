@@ -30,12 +30,7 @@ shiny_sird <- function(input) {
   # Plot, summary, and repnum
   plot_sird <- function() plot_epi(model_sird)
   summary_sird <- function() summary(model_sird)
-  reproductive_sird <- function()
-    plot_reproductive_number(
-      model_sird,
-      main = "SIRD Model Reproductive Number"
-    )
-
+  reproductive_sird <- function() plot_reproductive_epi(model_sird)
   # Table 
   table_sird <- function() {
     df <- as.data.frame(get_hist_total(model_sird))

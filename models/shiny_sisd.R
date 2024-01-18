@@ -30,12 +30,7 @@ shiny_sisd <- function(input) {
   # Plot, summary, and repnum
   plot_sisd <- function() plot_epi(model_sisd)
   summary_sisd <- function() summary(model_sisd)
-  reproductive_sisd <- function()
-    plot_reproductive_number(
-      model_sisd,
-      main = "SISD Model Reproductive Number"
-    )
-
+  reproductive_sisd <- function() plot_reproductive_epi(model_sisd)
   # Table 
   table_sisd <- function() {
     df <- as.data.frame(get_hist_total(model_sisd))
