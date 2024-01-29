@@ -20,9 +20,10 @@ epiworldRShiny <- function(...) {
     assign("epiworldR_env", new.env(parent = .GlobalEnv), envir = .GlobalEnv)
 
     source("R/functions/ui-functions.R")
-    models_setup()
     source("R/functions/npi.R")
     source("R/functions/server-functions.R")
+
+    models_setup()
 
     header <- dashboardHeader(
       title = HTML('epiworldR <text style="color: gray; font-size:50%">(alpha)</text>')

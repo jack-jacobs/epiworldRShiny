@@ -1,13 +1,12 @@
-# alt-name: Network SEIR
-
-# Creating model
+#' Network SEIR Function
+#' @export
 shiny_seir <- function(input) {
 
   model_seir <- ModelSEIR(
-    name              = input$seir_disease_name, 
+    name              = input$seir_disease_name,
     prevalence        = input$seir_prevalence,
-    transmission_rate = input$seir_transmission_rate, 
-    recovery_rate     = input$seir_recovery_rate, 
+    transmission_rate = input$seir_transmission_rate,
+    recovery_rate     = input$seir_recovery_rate,
     incubation_days   = input$seir_incubation_days
     )
 
@@ -19,10 +18,10 @@ shiny_seir <- function(input) {
     d = as.logical(input$seir_directed),
     p = input$seir_prob_rewiring
   )
-  
+
   # NPIs -----------------------------------------------------------------------
   npi_add_all(model_seir, "seir", input)
-  
+
   # Running and printing
   verbose_off(model_seir)
   run(model_seir, ndays = input$seir_n_days, seed = input$seir_seed)
@@ -32,24 +31,24 @@ shiny_seir <- function(input) {
   summary_seir <- function() summary(model_seir)
   # Reproductive Number
   reproductive_seir <- function() plot_reproductive_epi(model_seir)
-  # Table 
+  # Table
   table_seir <- function() {
 
     df <- as.data.frame(get_hist_total(model_seir))
-    
+
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
-    
+
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$counts), ]
-    
+
     # Row number of the maximum count in the original data frame
     max_row_number <- which(
       df$date == max_infection_row$date & df$state == "Infected"
       )
 
     df[max_row_number,"counts"] <- sprintf(
-      "<strong>%s</strong>", 
+      "<strong>%s</strong>",
       df[max_row_number, "counts"]
       )
 
@@ -58,13 +57,13 @@ shiny_seir <- function(input) {
       x      = df$state,
       levels = c("Susceptible", "Exposed", "Infected", "Removed")
       )
-    
+
     # Reshaping the data to wide format
     df <- reshape(df, idvar = "date", timevar = "state", direction = "wide")
 
     colnames(df) <- gsub(colnames(df), pattern = "counts.", replacement = "")
     df
-    
+
   }
 
   # Output list
@@ -79,6 +78,7 @@ shiny_seir <- function(input) {
 
 }
 
+#' @export
 seir_panel <- function(model_alt) {
   conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
@@ -90,7 +90,7 @@ seir_panel <- function(model_alt) {
       inputId = "seir_incubation_days",
       label   = "Incubation Days",
       value   = "7",
-      min     = 0, 
+      min     = 0,
       max     = NA,
       step    = 1
       ),

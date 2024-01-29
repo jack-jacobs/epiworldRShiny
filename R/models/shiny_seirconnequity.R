@@ -1,5 +1,5 @@
 # alt-name: SEIR Equity
-
+#' @export
 shiny_seirconnequity <- function(input) {
 
   # input <- list(
@@ -36,12 +36,12 @@ shiny_seirconnequity <- function(input) {
     prop_hispanic = input$seirconnequity_prop_hispanic,
     prop_female = input$seirconnequity_prop_female,
     prop_19_59_60plus = input$seirconnequity_prop_ages
-    ) 
+    )
 
   # Saving the data to the global environment (this way we make sure it is
   # available to the model)
   epiworldR_env <- globalenv()$epiworldR_env
-  epiworldR_env$X <- X  
+  epiworldR_env$X <- X
 
   # Adding population data
   set_agents_data(
@@ -52,7 +52,7 @@ shiny_seirconnequity <- function(input) {
   # Creating immune system to add the difference in susceptibility -------------
   immune <- tool(
     "Immune system",
-    susceptibility_reduction = 0, 
+    susceptibility_reduction = 0,
     transmission_reduction = 0,
     recovery_enhancer = 0,
     death_reduction = 0
@@ -90,11 +90,11 @@ shiny_seirconnequity <- function(input) {
   # effective trate (user defined) = t rate virus x (1 - suscept redux)
   # we use the middle as a reference
   set_prob_infecting(
-    virus = get_virus(model_seirconnequity, 0), 
+    virus = get_virus(model_seirconnequity, 0),
     prob  = min(1, input$seirconnequity_transmission_rate/
       (1 - plogis(log(4.0))))
   )
-  
+
   # NPIs -----------------------------------------------------------------------
   npi_add_all(model_seirconnequity, "seirconnequity", input)
 
@@ -113,36 +113,39 @@ shiny_seirconnequity <- function(input) {
     State = agents_states,
     check.names = FALSE
   )
-  
+
   # Common plots ---------------------------------------------------------------
-  
+
   # Plot, summary, and reproductive number
+  #' @export
   plot_seirconnequity <- function() {
 
     # We treat recovered and exposed as infected
     agents$State <- ifelse(
-      agents$State %in% c("Recovered", "Exposed"), 
+      agents$State %in% c("Recovered", "Exposed"),
       "Infected", agents$State
       )
 
     subset(agents, State != "Susceptible") |>
       ggplot(aes(y = Age)) +
         geom_bar(aes(fill = Sex), position = "dodge") +
-        
+
         facet_wrap(~Race) +
         labs(
           title = "Total number of infected",
           x     = "Number of infected",
           y     = "Age group"
         )
-    
+
   }
-  
+  #' @export
   summary_seirconnequity <- function() summary(model_seirconnequity)
-  reproductive_seirconnequity <- 
+  #' @export
+  reproductive_seirconnequity <-
     function() plot_reproductive_epi(model_seirconnequity)
-  
-  # Table 
+
+  # Table
+  #' @export
   table_seirconnequity <- function() {
     df <- as.data.frame(get_hist_total(model_seirconnequity))
     # Subset to only include "infection" state
@@ -150,9 +153,9 @@ shiny_seirconnequity <- function(input) {
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$count), ]
     # Row number of the maximum count in the original data frame
-    max_row_number <- which(df$date == max_infection_row$date & 
+    max_row_number <- which(df$date == max_infection_row$date &
                               df$state == "Infected")
-    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+    df[max_row_number,] <- sprintf("<strong>%s</strong>",
                                        df[max_row_number,])
     df
   }
@@ -168,6 +171,7 @@ shiny_seirconnequity <- function(input) {
   )
 }
 
+#' @export
 seirconnequity_panel <- function(model_alt) {
 
   conditionalPanel(
@@ -181,16 +185,16 @@ seirconnequity_panel <- function(model_alt) {
       inputId = "seirconnequity_incubation_days",
       label   = "Incubation Days",
       value   = 7,
-      min     = 0, 
+      min     = 0,
       max     = NA,
       step    = 1
       ),
     sliderInput(
       inputId = "seirconnequity_population_size",
       label   = "Population Size",
-      min     = 0, 
-      max     = 100000, 
-      value   = 50000, 
+      min     = 0,
+      max     = 100000,
+      value   = 50000,
       step    = 1000,
       ticks   = FALSE
     ),
@@ -200,5 +204,5 @@ seirconnequity_panel <- function(model_alt) {
     population_input("seirconnequity"),
     npis_input("seirconnequity")
   )
-  
+
 }

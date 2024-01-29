@@ -1,5 +1,5 @@
 # alt-name: SEIR
-
+#' @export
 shiny_seirconn <- function(input) {
 
   model_seirconn <- ModelSEIRCONN(
@@ -11,19 +11,19 @@ shiny_seirconn <- function(input) {
     n                 = input$seirconn_population_size,
     incubation_days   = input$seirconn_incubation_days
     )
-  
+
   # NPIs -----------------------------------------------------------------------
   npi_add_all(model_seirconn, "seirconn", input)
 
   # Running and printing
   verbose_off(model_seirconn)
   run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
-  
+
   # Plot, summary, and reproductive number
   plot_seirconn <- function() plot_epi(model_seirconn)
   summary_seirconn <- function() summary(model_seirconn)
   reproductive_seirconn <- function() plot_reproductive_epi(model_seirconn)
-  # Table 
+  # Table
   table_seirconn <- function() {
     df <- as.data.frame(get_hist_total(model_seirconn))
     # Subset to only include "infection" state
@@ -31,9 +31,9 @@ shiny_seirconn <- function(input) {
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$count), ]
     # Row number of the maximum count in the original data frame
-    max_row_number <- which(df$date == max_infection_row$date & 
+    max_row_number <- which(df$date == max_infection_row$date &
                               df$state == "Infected")
-    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+    df[max_row_number,] <- sprintf("<strong>%s</strong>",
                                        df[max_row_number,])
     df
   }
@@ -48,6 +48,7 @@ shiny_seirconn <- function(input) {
   )
 }
 
+#' @export
 seirconn_panel <- function(model_alt) {
   conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
@@ -60,16 +61,16 @@ seirconn_panel <- function(model_alt) {
       inputId = "seirconn_incubation_days",
       label   = "Incubation Days",
       value   = "7",
-      min     = 0, 
+      min     = 0,
       max     = NA,
       step    = 1
       ),
     sliderInput(
       inputId = "seirconn_population_size",
       label   = "Population Size",
-      min     = 0, 
-      max     = 100000, 
-      value   = 50000, 
+      min     = 0,
+      max     = 100000,
+      value   = 50000,
       step    = 1000,
       ticks   = FALSE
     ),

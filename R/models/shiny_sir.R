@@ -1,7 +1,7 @@
 # alt-name: SIR Network
-
+#' @export
 shiny_sir <- function(input) {
-  
+
   # Creating model
   model_sir <- ModelSIR(
     name              = input$sir_disease_name,
@@ -21,7 +21,7 @@ shiny_sir <- function(input) {
 
   # NPIs -----------------------------------------------------------------------
   npi_add_all(model_sir, "sir", input)
-  
+
   # Running and printing
   verbose_off(model_sir)
   run(model_sir, ndays = input$sir_n_days, seed = input$sir_seed)
@@ -30,7 +30,7 @@ shiny_sir <- function(input) {
   plot_sir <- function() plot_epi(model_sir)
   summary_sir <- function() summary(model_sir)
   reproductive_sir <- function() plot_reproductive_epi(model_sir)
-  # Table 
+  # Table
   table_sir <- function() {
     df <- as.data.frame(get_hist_total(model_sir))
     # Subset to only include "infection" state
@@ -38,9 +38,9 @@ shiny_sir <- function(input) {
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$count), ]
     # Row number of the maximum count in the original data frame
-    max_row_number <- which(df$date == max_infection_row$date & 
+    max_row_number <- which(df$date == max_infection_row$date &
                               df$state == "Infected")
-    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+    df[max_row_number,] <- sprintf("<strong>%s</strong>",
                                        df[max_row_number,])
     df
   }
@@ -55,6 +55,7 @@ shiny_sir <- function(input) {
   )
 }
 
+#' @export
 sir_panel <- function(model_alt) {
 
   conditionalPanel(

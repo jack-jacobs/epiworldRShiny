@@ -1,3 +1,6 @@
+#' text_input_disease_name Function
+#' Creates the text input for the disease name
+#' @export
 text_input_disease_name <- function(model_name) {
   textInput(
     inputId     = paste0(model_name, "_disease_name"),
@@ -7,6 +10,9 @@ text_input_disease_name <- function(model_name) {
   )
 }
 
+#' slider_prevalence Function
+#' Creates the prevalence slider
+#' @export
 slider_prevalence <- function(model_name) {
   sliderInput(
     paste0(model_name, "_prevalence"),
@@ -19,6 +25,9 @@ slider_prevalence <- function(model_name) {
     )
 }
 
+#' numeric_input_ndays Function
+#' Allows for the ability to specify the number of simulation days
+#' @export
 numeric_input_ndays <- function(model_name) {
   numericInput(
     inputId = paste0(model_name, "_n_days"),
@@ -30,6 +39,9 @@ numeric_input_ndays <- function(model_name) {
     )
 }
 
+#' slider_input_rate Function
+#' Creates all rate sliders
+#' @export
 slider_input_rate <- function(
   model_name, rate_name, value, maxval = 1, input_label = NULL
   ) {
@@ -52,6 +64,9 @@ slider_input_rate <- function(
   )
 }
 
+#' network_input Function
+#' Allows for the ability to specify network parameters
+#' @export
 network_input <- function(model_name) {
 
   tagList(
@@ -106,6 +121,9 @@ network_input <- function(model_name) {
     )
 }
 
+#' npis_input Function
+#' Allows the ability to specify npi/tool characteristics
+#' @export
 npis_input <- function(model_name) {
   tagList(
     div(
@@ -162,6 +180,9 @@ npis_input <- function(model_name) {
   )
 }
 
+#' seed_input Function
+#' Allows the user to input a seed for reproducibility
+#' @export
 seed_input <- function(model_name) {
   numericInput(
     inputId = paste0(model_name, "_seed"),
@@ -173,7 +194,9 @@ seed_input <- function(model_name) {
     )
 }
 
-# Function to set up models
+#' models_setup function
+#' Function to set up models
+#' @export
 models_setup <- function() {
 
   # Getting the environment
@@ -233,6 +256,9 @@ models_setup <- function() {
 
 }
 
+#' population_input Function
+#' Generates population (equity) demographics
+#' @export
 population_input <- function(model_name) {
   tagList(
     div(
@@ -280,6 +306,9 @@ population_input <- function(model_name) {
 
 }
 
+#' simulate_button Function
+#' Runs the ABM simulation when selected
+#' @export
 simulate_button <- function(model_name) {
   actionButton(
     inputId = paste0("simulate_", model_name),

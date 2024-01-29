@@ -1,13 +1,13 @@
 # alt-name: Network SEIRD
 
-# Creating model
+#' @export
 shiny_seird <- function(input) {
 
   model_seird <- ModelSEIRD(
-    name              = input$seird_disease_name, 
+    name              = input$seird_disease_name,
     prevalence        = input$seird_prevalence,
-    transmission_rate = input$seird_transmission_rate, 
-    recovery_rate     = input$seird_recovery_rate, 
+    transmission_rate = input$seird_transmission_rate,
+    recovery_rate     = input$seird_recovery_rate,
     incubation_days   = input$seird_incubation_days,
     death_rate        = input$seird_death_rate
     )
@@ -20,10 +20,10 @@ shiny_seird <- function(input) {
     d = as.logical(input$seird_directed),
     p = input$seird_prob_rewiring
   )
-  
+
   # NPIs -----------------------------------------------------------------------
   npi_add_all(model_seird, "seird", input)
-  
+
   # Running and printing
   verbose_off(model_seird)
   run(model_seird, ndays = input$seird_n_days, seed = input$seird_seed)
@@ -33,7 +33,7 @@ shiny_seird <- function(input) {
   summary_seird <- function() summary(model_seird)
   # Reproductive Number
   reproductive_seird <- function() plot_reproductive_epi(model_seird)
-  # Table 
+  # Table
   table_seird <- function() {
     df <- as.data.frame(get_hist_total(model_seird))
     # Subset to only include "infection" state
@@ -45,7 +45,7 @@ shiny_seird <- function(input) {
       df$date == max_infection_row$date & df$state == "Infected"
       )
     df[max_row_number,"counts"] <- sprintf(
-      "<strong>%s</strong>", 
+      "<strong>%s</strong>",
       df[max_row_number, "counts"]
       )
     # Making sure factor variables are ordered
@@ -71,6 +71,7 @@ shiny_seird <- function(input) {
 
 }
 
+#' @export
 seird_panel <- function(model_alt) {
   conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
@@ -83,7 +84,7 @@ seird_panel <- function(model_alt) {
       inputId = "seird_incubation_days",
       label   = "Incubation Days",
       value   = "7",
-      min     = 0, 
+      min     = 0,
       max     = NA,
       step    = 1
       ),
