@@ -30,7 +30,6 @@ Imports:
     shinydashboard,
     DT,
     ggplot2,
-    shinyjs,
     epiworldR,
     shinycssloaders,
     plotly

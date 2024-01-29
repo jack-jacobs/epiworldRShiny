@@ -6,9 +6,13 @@
 # library(shinycssloaders)
 # library(plotly)
 
-#' epiworldRShiny Function
+#' @import epiworldR
+#' @import shinydashboard
+#' @import DT
+#' @import ggplot2
+#' @import shinycssloaders
+#' @import plotly
 #'
-#' This function runs the Shiny app for epiworldR
 #' @return Loads and opens the RShiny app for the epiworldR package
 #' @export
 epiworldRShiny <- function(...) {
