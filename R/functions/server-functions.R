@@ -16,7 +16,7 @@
 #'
 #' @export
 pop_generator <- function(
-  n, 
+  n,
   prop_hispanic = .5,
   prop_female   = .5,
   prop_19_59_60plus = c(.3, .6)
@@ -52,14 +52,14 @@ pop_generator <- function(
 }
 
 #' find_scale Function
-#' 
+#'
 #' This function determines the scale of the y-axis for plot_epi.
-#' @param x The maximum value found in the model state counts 
-#' 
-#' @return An integer representing the scale for the y-axis. A max counts value 
-#' of 10000 will return a scale of 1, 100000 will return a scale of 1000, 
+#' @param x The maximum value found in the model state counts
+#'
+#' @return An integer representing the scale for the y-axis. A max counts value
+#' of 10000 will return a scale of 1, 100000 will return a scale of 1000,
 #' 1000000 will return a scale of 10000.
-#' 
+#'
 #' @export
 find_scale <- function(x) {
   res <- 10^(floor(log10(x)) + 1 - 3)
@@ -69,56 +69,56 @@ find_scale <- function(x) {
 }
 
 #' plot_epi Function
-#' 
+#'
 #' This function generates a plot of the model states over time
 #' @param model The number of individuals in the population.
 #' @param mark_max The state which will have a mark at the peak
-#' 
-#' @return A plot displaying each state from the model over the course of the 
+#'
+#' @return A plot displaying each state from the model over the course of the
 #' simulation
-#' 
+#'
 #' @export
 plot_epi <- function(model, mark_max) {
   # If the user didn't specify mark_max
   if (missing(mark_max))
     mark_max <- "Infected"
-  
+
   # Obtain time of peak infections
-  df_model <- get_hist_total(model)[get_hist_total(model)$state 
+  df_model <- epiworldR::get_hist_total(model)[epiworldR::get_hist_total(model)$state
                                           == mark_max,]
   peak_time <- which.max(df_model$counts) - 1
-  
+
   # Begin plotting code
   curves <- as.data.frame(get_hist_total(model))
   states <- unique(curves$state)
-  
+
   counts_scale <- find_scale(max(curves$counts))
-  
+
   curves$counts <- curves$counts/counts_scale
-  
+
   # Initialize date vector of size length for state names
-  date_candidates <- integer(length = length(states)) 
+  date_candidates <- integer(length = length(states))
   # Identify max date when the counts stop significantly changing by state
-  
+
   benchmark_value <- diff(range(curves$counts))/200 # 0.5% of range
-  
+
   for (i in 1L:length(states)) {
     date_candidates[i] <- with(
-      curves[curves$state == states[i],], 
+      curves[curves$state == states[i],],
       sum(abs(diff(counts)) > benchmark_value )
       )
   }
-  # Round the maximum date up to the nearest 10th 
+  # Round the maximum date up to the nearest 10th
   max_date <- min(
     diff(range(curves$date)),
     max(ceiling(max(date_candidates) / 10L) * 10L, 10L)
   )
-  
+
   # Defining range of x values by max date as the max
   curves <- curves[curves$date < max_date,]
-  # Defining range of y values  
+  # Defining range of y values
   counts_range <- range(curves$counts)
-  
+
   # Using reshape to pivot the data
   curves_pivot <- reshape(
     data = curves,
@@ -129,29 +129,29 @@ plot_epi <- function(model, mark_max) {
   )
   # Renaming columns to remove the "counts." prefix
   names(curves_pivot) <- sub("counts\\.", "", names(curves_pivot))
-  
+
   extract_words_in_parentheses <- function(model_name) {
     # Regular expression to extract words within parentheses
     extracted <- gregexpr("\\(([^)]+)\\)", model_name)  # Updated regex pattern
-    
+
     # Extracting words within parentheses
     words_within_parentheses <- regmatches(model_name, extracted)
-    
+
     # Extract the words without parentheses and combine instances with more than one word
     extracted_words <- gsub("[\\(\\)]", "", unlist(words_within_parentheses))
-    
+
     # Combine multiple extracted words into a single string
     combined_words <- paste(extracted_words, collapse = " ")  # Combine words with a space
-    
+
     # Return the extracted words within parentheses as a single string
     return(combined_words)
   }
   extracted_title <- extract_words_in_parentheses(get_name(model))
   title <- paste0(extracted_title, " Model")
-  
+
   # Plotting
-  plot <- plot_ly(data = curves_pivot, x = ~date) 
-  
+  plot <- plotly::plot_ly(data = curves_pivot, x = ~date)
+
   # Line colors
   # Define a vector of colors (adjust as needed for the number of states)
   line_colors <- c("blue", "orange", "purple")
@@ -159,44 +159,44 @@ plot_epi <- function(model, mark_max) {
   for (state in states) {
     if (state == "Infected") {
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state, 
+      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = "red"))
     } else if (state == "Removed" | state == "Recovered") {
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state, 
+      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = "green"))
     } else if (state == "Deceased") {
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state, 
+      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = "black"))
     } else {
     # For other states, use different colors sequentially from the vector
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state, 
+      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = line_colors[color_index]))
     color_index <- color_index + 1  # Move to the next color in the vector
     }
   }
-  
+
   if (peak_time < max(curves$date)){
     # Add a point at the moment of peak infections
     plot <- plot |>
-      plotly::add_markers(x = peak_time, 
-                          y = max(df_model$counts), 
+      plotly::add_markers(x = peak_time,
+                          y = max(df_model$counts),
                           marker = list(color = 'red', symbol = 0),
-                          name = "Max Infections", 
+                          name = "Max Infections",
                           showlegend = FALSE)
-    
+
     # Add a vertical dashed line at the moment of peak infections
     plot <- plot |>
-      plotly::add_segments(x = ~peak_time, xend = ~peak_time, 
-                           y = 0, 
+      plotly::add_segments(x = ~peak_time, xend = ~peak_time,
+                           y = 0,
                            yend = ~max(df_model$counts),
                            line = list(color = 'red', dash = "dash"),
-                           name = "Max Infections", 
+                           name = "Max Infections",
                            showlegend = TRUE)
   }
-  
+
   plot <- plot |>
     plotly::layout(title  = title,
                    xaxis  = list(title = 'Day (step)'),
@@ -212,27 +212,27 @@ plot_epi <- function(model, mark_max) {
 }
 
 #' plot_reproductive_epi Function
-#' 
+#'
 #' This function generates a plot of the reproductive number over time
 #' @param model The model object
-#' 
-#' @return A plot displaying the reproductive number for the model over the 
+#'
+#' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
-#' 
+#'
 #' @export
 plot_reproductive_epi <- function (model) {
   # Calculating average rep. number for each unique source_exposure_date
-  rep_num <- get_reproductive_number(model)
-  average_rt <- aggregate(rt ~ source_exposure_date, data = rep_num, 
+  rep_num <- epiworldR::get_reproductive_number(model)
+  average_rt <- aggregate(rt ~ source_exposure_date, data = rep_num,
                           FUN = mean)
   # Plotting
-  reproductive_plot <- plot_ly(data = average_rt, x = ~source_exposure_date, 
-                               y = ~rt, type = 'scatter', 
+  reproductive_plot <- plotly::plot_ly(data = average_rt, x = ~source_exposure_date,
+                               y = ~rt, type = 'scatter',
                                mode = 'lines+markers')
-  reproductive_plot <- 
-    reproductive_plot |> 
+  reproductive_plot <-
+    reproductive_plot |>
       plotly::layout(title = "Reproductive Number",
                      xaxis = list(title = 'Day (step)'),
                      yaxis = list(title = 'Average Rep. Number'))
-  return(reproductive_plot)         
+  return(reproductive_plot)
 }

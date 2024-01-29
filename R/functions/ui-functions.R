@@ -12,7 +12,7 @@ slider_prevalence <- function(model_name) {
     paste0(model_name, "_prevalence"),
     label = "% of population infected",
     value = "0.1",
-    min = 0, 
+    min = 0,
     max = 1,
     step = 0.01,
     ticks = FALSE
@@ -24,7 +24,7 @@ numeric_input_ndays <- function(model_name) {
     inputId = paste0(model_name, "_n_days"),
     label   = "Simulation Time (Days)",
     value   = "100",
-    min     = 0, 
+    min     = 0,
     max     = NA,
     step    = 1
     )
@@ -45,7 +45,7 @@ slider_input_rate <- function(
     ),
     label = rate_name,
     value = value,
-    min   = 0, 
+    min   = 0,
     max   = maxval,
     step  = 0.01,
     ticks = FALSE
@@ -72,17 +72,17 @@ network_input <- function(model_name) {
         sliderInput(
           inputId = paste0(model_name, "_population_size"),
           label   = "Population Size",
-          min     = 0, 
-          max     = 100000, 
-          value   = 50000, 
+          min     = 0,
+          max     = 100000,
+          value   = 50000,
           step    = 1000,
           ticks   = FALSE
           ),
         numericInput(
           inputId = paste0(model_name, "_k"),
-          label   = "Number of Ties", 
-          min     = 0, 
-          max     = 500, 
+          label   = "Number of Ties",
+          min     = 0,
+          max     = 500,
           step    = 1,
           value   = 20
           ),
@@ -91,12 +91,12 @@ network_input <- function(model_name) {
           label    = "Directed",
           choices  = c("TRUE", "FALSE"),
           selected = "FALSE"
-          ), 
+          ),
         sliderInput(
           inputId = paste0(model_name, "_prob_rewiring"),
           label   = "Probability of Rewiring",
           value   = "0.20",
-          min     = 0, 
+          min     = 0,
           max     = 1,
           step    = 0.01,
           ticks   = FALSE
@@ -124,9 +124,9 @@ npis_input <- function(model_name) {
         sliderInput(
           inputId = paste0(model_name, "_vaccine_prevalence"),
           label   = "% of agents vaccinated",
-          min     = 0, 
-          max     = 1, 
-          value   = 0, 
+          min     = 0,
+          max     = 1,
+          value   = 0,
           step    = 0.01,
           ticks   = FALSE
           ),
@@ -134,7 +134,7 @@ npis_input <- function(model_name) {
           inputId = paste0(model_name, "_masking_prevalence"),
           label   = "% of agents using masks",
           value   = "0",
-          min     = 0, 
+          min     = 0,
           max     = 1,
           step    = 0.01,
           ticks   = FALSE
@@ -144,7 +144,7 @@ npis_input <- function(model_name) {
           inputId = paste0(model_name, "_school_closure_prevalence"),
           label   = "Prevalence",
           value   = "0",
-          min     = 0, 
+          min     = 0,
           max     = 1,
           step    = 0.01,
           ticks   = FALSE
@@ -165,9 +165,9 @@ npis_input <- function(model_name) {
 seed_input <- function(model_name) {
   numericInput(
     inputId = paste0(model_name, "_seed"),
-    label   = "Seed (Optional)", 
-    min     = 0, 
-    max     = NA, 
+    label   = "Seed (Optional)",
+    min     = 0,
+    max     = NA,
     step    = 1,
     value   = 2023
     )
@@ -182,7 +182,7 @@ models_setup <- function() {
   eval({
 
     # Get a list of all model files in the "models" directory
-    models <- list.files("models", pattern = "shiny_[a-z]+\\.R$", full.names = TRUE)
+    models <- list.files("R/models", pattern = "shiny_[a-z]+\\.R$", full.names = TRUE)
 
     # Source each model file
     for (f in models) {
@@ -191,7 +191,7 @@ models_setup <- function() {
 
     # Capturing alt names
     models_names <- sapply(models, \(f) {
-      
+
       # Only on the first line
       altname <- readLines(f, n = 1)
 
@@ -252,7 +252,7 @@ population_input <- function(model_name) {
           inputId = paste0(model_name, "_prop_hispanic"),
           label   = "% Hispanic",
           value   = "0.5",
-          min     = 0, 
+          min     = 0,
           max     = 1,
           step    = 0.01,
           ticks   = FALSE
@@ -277,7 +277,7 @@ population_input <- function(model_name) {
       )
     )
   )
-    
+
 }
 
 simulate_button <- function(model_name) {

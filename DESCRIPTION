@@ -1,0 +1,37 @@
+Package: epiworldRShiny
+Type: Package
+Title: Fast Agent-Based Epi Models - RShiny Application
+Version: 0.0-3.9000
+Date: 2024-01-22
+Authors@R: c(
+  person("Derek", "Meyer", role=c("aut","cre"), 
+  email="derekmeyer37@gmail.com", comment = c(ORCID = "0009-0005-1350-6988")),
+  person("George", "Vega Yon", role=c("aut"),
+  email="g.vegayon@gmail.com", comment = c(ORCID = "0000-0002-3171-0844")),
+  person("Centers for Disease Control and Prevention", role="fnd", comment = "Award number 1U01CK000585; 75D30121F00003"
+  ))
+Description: A flexible framework for Agent-Based Models (ABM), the 'epiworldRShiny' package provides methods for prototyping disease outbreaks and transmission models using a 'C++' backend, making it very fast. It supports multiple epidemiological models, including the Susceptible-Infected-Susceptible (SIS), Susceptible-Infected-Removed (SIR), Susceptible-Exposed-Infected-Removed (SEIR), and others, involving arbitrary mitigation policies and multiple-disease models. Users can specify infectiousness/susceptibility rates as a function of agents' features, providing great complexity for the model dynamics. Furthermore, 'epiworldR' is ideal for simulation studies featuring large populations.
+URL: https://github.com/UofUEpiBio/epiworldRShiny,
+    https://uofuepibio.github.io/epiworldRShiny/,
+BugReports: https://github.com/UofUEpiBio/epiworldRShiny/issues
+License: file LICENSE
+RoxygenNote: 7.3.1
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+LinkingTo: cpp11
+Suggests: 
+    knitr,
+    rmarkdown,
+    tinytest,
+    netplot,
+    igraph
+Imports: 
+    utils,
+    shinydashboard,
+    DT,
+    ggplot2,
+    shinyjs,
+    epiworldR,
+    shinycssloaders,
+    plotly
+VignetteBuilder: knitr
