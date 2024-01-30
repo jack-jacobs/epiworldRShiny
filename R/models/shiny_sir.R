@@ -1,5 +1,4 @@
 # alt-name: SIR Network
-#' @export
 shiny_sir <- function(input) {
 
   # Creating model
@@ -55,7 +54,6 @@ shiny_sir <- function(input) {
   )
 }
 
-#' @export
 sir_panel <- function(model_alt) {
 
   conditionalPanel(

@@ -1,5 +1,4 @@
 #' Network SEIR Function
-#' @export
 shiny_seir <- function(input) {
 
   model_seir <- ModelSEIR(
@@ -78,7 +77,6 @@ shiny_seir <- function(input) {
 
 }
 
-#' @export
 seir_panel <- function(model_alt) {
   conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),

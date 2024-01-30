@@ -76,8 +76,6 @@ find_scale <- function(x) {
 #'
 #' @return A plot displaying each state from the model over the course of the
 #' simulation
-#'
-#' @export
 plot_epi <- function(model, mark_max) {
   # If the user didn't specify mark_max
   if (missing(mark_max))
@@ -218,8 +216,6 @@ plot_epi <- function(model, mark_max) {
 #'
 #' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
-#'
-#' @export
 plot_reproductive_epi <- function (model) {
   # Calculating average rep. number for each unique source_exposure_date
   rep_num <- epiworldR::get_reproductive_number(model)

@@ -1,6 +1,5 @@
 # alt-name: Network SEIRD
 
-#' @export
 shiny_seird <- function(input) {
 
   model_seird <- ModelSEIRD(
@@ -71,7 +70,6 @@ shiny_seird <- function(input) {
 
 }
 
-#' @export
 seird_panel <- function(model_alt) {
   conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),

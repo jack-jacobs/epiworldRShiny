@@ -1,5 +1,4 @@
 # alt-name: SEIR Equity
-#' @export
 shiny_seirconnequity <- function(input) {
 
   # input <- list(
@@ -116,8 +115,7 @@ shiny_seirconnequity <- function(input) {
 
   # Common plots ---------------------------------------------------------------
 
-  # Plot, summary, and reproductive number
-  #' @export
+# Plot, summary, and reproductive number
   plot_seirconnequity <- function() {
 
     # We treat recovered and exposed as infected
@@ -138,14 +136,11 @@ shiny_seirconnequity <- function(input) {
         )
 
   }
-  #' @export
   summary_seirconnequity <- function() summary(model_seirconnequity)
-  #' @export
   reproductive_seirconnequity <-
     function() plot_reproductive_epi(model_seirconnequity)
 
   # Table
-  #' @export
   table_seirconnequity <- function() {
     df <- as.data.frame(get_hist_total(model_seirconnequity))
     # Subset to only include "infection" state
@@ -171,7 +166,6 @@ shiny_seirconnequity <- function(input) {
   )
 }
 
-#' @export
 seirconnequity_panel <- function(model_alt) {
 
   conditionalPanel(
