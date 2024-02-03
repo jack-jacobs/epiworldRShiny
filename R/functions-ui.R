@@ -1,7 +1,8 @@
 #' text_input_disease_name Function
+#' @export 
 #' @return Creates the text input for the disease name
 text_input_disease_name <- function(model_name) {
-  textInput(
+  shiny::textInput(
     inputId     = paste0(model_name, "_disease_name"),
     label       = "Disease",
     value       = "",
@@ -10,9 +11,10 @@ text_input_disease_name <- function(model_name) {
 }
 
 #' slider_prevalence Function
+#' @export 
 #' @return Creates the prevalence slider
 slider_prevalence <- function(model_name) {
-  sliderInput(
+  shiny::sliderInput(
     paste0(model_name, "_prevalence"),
     label = "% of population infected",
     value = "0.1",
@@ -24,9 +26,10 @@ slider_prevalence <- function(model_name) {
 }
 
 #' numeric_input_ndays Function
+#' @export 
 #' @return Allows for the ability to specify the number of simulation days
 numeric_input_ndays <- function(model_name) {
-  numericInput(
+  shiny::numericInput(
     inputId = paste0(model_name, "_n_days"),
     label   = "Simulation Time (Days)",
     value   = "100",
@@ -37,6 +40,7 @@ numeric_input_ndays <- function(model_name) {
 }
 
 #' slider_input_rate Function
+#' @export 
 #' @return Creates all rate sliders
 slider_input_rate <- function(
   model_name, rate_name, value, maxval = 1, input_label = NULL
@@ -46,7 +50,7 @@ slider_input_rate <- function(
     input_label <- gsub("[^a-z0-9]", "_", tolower(rate_name))
   }
 
-  sliderInput(
+  shiny::sliderInput(
     inputId = paste(
       model_name, input_label,
       sep = "_"
@@ -61,25 +65,26 @@ slider_input_rate <- function(
 }
 
 #' network_input Function
+#' @export 
 #' @return Allows for the ability to specify network parameters
 network_input <- function(model_name) {
 
-  tagList(
-    div(
+  shiny::tagList(
+    shiny::div(
       id = paste0("network_header_", model_name),
-      headerPanel(
+      shiny::headerPanel(
         h4(
-          tagList(
+          shiny::tagList(
             icon("circle-info"),
           "Population structure"
           )
         )
       )
       ),
-    hidden(
-      div(
+    shinyjs::hidden(
+      shiny::div(
         id = paste0("network_inputs_", model_name),
-        sliderInput(
+        shiny::sliderInput(
           inputId = paste0(model_name, "_population_size"),
           label   = "Population Size",
           min     = 0,
@@ -88,7 +93,7 @@ network_input <- function(model_name) {
           step    = 1000,
           ticks   = FALSE
           ),
-        numericInput(
+        shiny::numericInput(
           inputId = paste0(model_name, "_k"),
           label   = "Number of Ties",
           min     = 0,
@@ -96,13 +101,13 @@ network_input <- function(model_name) {
           step    = 1,
           value   = 20
           ),
-        selectInput(
+        shiny::selectInput(
           inputId  = paste0(model_name, "_directed"),
           label    = "Directed",
           choices  = c("TRUE", "FALSE"),
           selected = "FALSE"
           ),
-        sliderInput(
+        shiny::sliderInput(
           inputId = paste0(model_name, "_prob_rewiring"),
           label   = "Probability of Rewiring",
           value   = "0.20",
@@ -117,23 +122,24 @@ network_input <- function(model_name) {
 }
 
 #' npis_input Function
+#' @export 
 #' @return Allows the ability to specify npi/tool characteristics
 npis_input <- function(model_name) {
-  tagList(
-    div(
+  shiny::tagList(
+    shiny::div(
       id = paste0("npis_header_", model_name),
-      headerPanel(
+      shiny::headerPanel(
         h4(
-          tagList(
+          shiny::tagList(
             icon("circle-info"),
             "Interventions"
             )
       ))
       ),
-    # By default hidden
-    hidden(
-      div(id = paste0("npis_inputs_", model_name),
-        sliderInput(
+    # By default shinyjs::hidden
+    shinyjs::hidden(
+      shiny::div(id = paste0("npis_inputs_", model_name),
+        shiny::sliderInput(
           inputId = paste0(model_name, "_vaccine_prevalence"),
           label   = "% of agents vaccinated",
           min     = 0,
@@ -142,7 +148,7 @@ npis_input <- function(model_name) {
           step    = 0.01,
           ticks   = FALSE
           ),
-        sliderInput(
+        shiny::sliderInput(
           inputId = paste0(model_name, "_masking_prevalence"),
           label   = "% of agents using masks",
           value   = "0",
@@ -151,8 +157,8 @@ npis_input <- function(model_name) {
           step    = 0.01,
           ticks   = FALSE
           ),
-        headerPanel(h4("School Closure")),
-        sliderInput(
+        shiny::headerPanel(h4("School Closure")),
+        shiny::sliderInput(
           inputId = paste0(model_name, "_school_closure_prevalence"),
           label   = "Prevalence",
           value   = "0",
@@ -161,7 +167,7 @@ npis_input <- function(model_name) {
           step    = 0.01,
           ticks   = FALSE
           ),
-        numericInput(
+        shiny::numericInput(
           inputId = paste0(model_name, "_school_closure_day"),
           label   = "Implementation day",
           value = "0",
@@ -175,9 +181,10 @@ npis_input <- function(model_name) {
 }
 
 #' seed_input Function
+#' @export 
 #' @return Allows the user to input a seed for reproducibility
 seed_input <- function(model_name) {
-  numericInput(
+  shiny::numericInput(
     inputId = paste0(model_name, "_seed"),
     label   = "Seed (Optional)",
     min     = 0,
@@ -188,6 +195,7 @@ seed_input <- function(model_name) {
 }
 
 #' models_setup function
+#' @export 
 #' @return Function to set up models
 models_setup <- function() {
 
@@ -197,7 +205,11 @@ models_setup <- function() {
   eval({
 
     # Get a list of all model files in the "models" directory
-    models <- list.files("R/models", pattern = "shiny_[a-z]+\\.R$", full.names = TRUE)
+    models <- list.files(
+      system.file("models", package = "epiworldRShiny"),
+      pattern = "shiny_[a-z]+\\.R$",
+      full.names = TRUE
+      )
 
     # Source each model file
     for (f in models) {
@@ -249,23 +261,24 @@ models_setup <- function() {
 }
 
 #' population_input Function
+#' @export 
 #' @return Generates population (equity) demographics
 population_input <- function(model_name) {
-  tagList(
-    div(
+  shiny::tagList(
+    shiny::div(
       id = paste0("population_header_", model_name),
-      headerPanel(
+      shiny::headerPanel(
         h4(
-          tagList(
+          shiny::tagList(
             icon("circle-info"),
             "Population (equity)"
             )
       ))
     ),
-    hidden(
-      div(
+    shinyjs::hidden(
+      shiny::div(
         id = paste0("population_inputs_", model_name),
-        sliderInput(
+        shiny::sliderInput(
           inputId = paste0(model_name, "_prop_hispanic"),
           label   = "% Hispanic",
           value   = "0.5",
@@ -274,7 +287,7 @@ population_input <- function(model_name) {
           step    = 0.01,
           ticks   = FALSE
           ),
-        sliderInput(
+        shiny::sliderInput(
           inputId = paste0(model_name, "_prop_female"),
           label   = "% Female",
           value   = "0.5",
@@ -283,7 +296,7 @@ population_input <- function(model_name) {
           step    = 0.01,
           ticks   = FALSE
           ),
-        sliderInput(
+        shiny::sliderInput(
           inputId = paste0(model_name, "_prop_ages"),
           min     = 0,
           max     = 1,
@@ -298,6 +311,7 @@ population_input <- function(model_name) {
 }
 
 #' simulate_button Function
+#' @export 
 #' @return Runs the ABM simulation when selected
 simulate_button <- function(model_name) {
   actionButton(

@@ -1,3 +1,4 @@
+#' @export 
 npi_add_vaccine <- function(
   model, preval,
   susceptibility_reduction = .9,
@@ -8,7 +9,7 @@ npi_add_vaccine <- function(
 
   if (preval > 0) {
 
-    tool_ <- tool(
+    tool_ <- epiworldR::tool(
       name = "Vaccine",
       susceptibility_reduction = susceptibility_reduction,
       transmission_reduction = transmission_reduction,
@@ -16,7 +17,7 @@ npi_add_vaccine <- function(
       death_reduction = death_reduction
     )
 
-    add_tool(
+    epiworldR::add_tool(
       model      = model,
       tool       = tool_,
       proportion = preval
@@ -26,11 +27,12 @@ npi_add_vaccine <- function(
 
 }
 
+#' @export 
 npi_add_masking <- function(model, preval) {
 
   if (preval > 0) {
 
-    tool_ <- tool(
+    tool_ <- epiworldR::tool(
       name = "Masking",
       susceptibility_reduction = 0,
       transmission_reduction = 0.5,
@@ -38,7 +40,7 @@ npi_add_masking <- function(model, preval) {
       death_reduction = 0
     )
 
-    add_tool(
+    epiworldR::add_tool(
       model      = model,
       tool       = tool_,
       proportion = preval
@@ -48,12 +50,13 @@ npi_add_masking <- function(model, preval) {
 
 }
 
+#' @export 
 npi_add_school_closure <- function(model, preval, day) {
   
   if (preval > 0) {
     
     # Creating a tool
-    tool_ <- tool(
+    tool_ <- epiworldR::tool(
       name                     = "School Closure",
       susceptibility_reduction = 0,
       transmission_reduction   = 0.90,
@@ -62,13 +65,13 @@ npi_add_school_closure <- function(model, preval, day) {
     )
 
     # Adding a global action
-    action_ <- globalaction_tool(
+    action_ <- epiworldR::globalevent_tool(
       tool = tool_, 
       prob = preval, 
       day  = day
       )
 
-    add_global_action(
+    epiworldR::add_globalevent(
       model,
       action_
       )
@@ -77,7 +80,7 @@ npi_add_school_closure <- function(model, preval, day) {
 
 }
 
-
+#' @export 
 npi_add_all <- function(model, modelname, input) {
 
   npi_add_vaccine(

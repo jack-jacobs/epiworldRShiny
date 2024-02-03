@@ -1,7 +1,7 @@
 # alt-name: SIR
 shiny_sirconn <- function(input) {
 
-  model_sirconn <- ModelSIRCONN(
+  model_sirconn <- epiworldR::ModelSIRCONN(
     name              = input$sirconn_disease_name,
     prevalence        = input$sirconn_prevalence,
     transmission_rate = input$sirconn_transmission_rate,
@@ -14,8 +14,8 @@ shiny_sirconn <- function(input) {
   npi_add_all(model_sirconn, "sirconn", input)
   
   # Running and printing
-  verbose_off(model_sirconn)
-  run(model_sirconn, ndays = input$sirconn_n_days, seed = input$sirconn_seed)
+  epiworldR::verbose_off(model_sirconn)
+  epiworldR::run(model_sirconn, ndays = input$sirconn_n_days, seed = input$sirconn_seed)
   
   # Plot, summary, and reproductive number
   plot_sirconn <- function() plot_epi(model_sirconn)
@@ -23,7 +23,7 @@ shiny_sirconn <- function(input) {
   reproductive_sirconn <- function() plot_reproductive_epi(model_sirconn)
   # Table 
   table_sirconn <- function() {
-    df <- as.data.frame(get_hist_total(model_sirconn))
+    df <- as.data.frame(epiworldR::get_hist_total(model_sirconn))
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
     # Row with the maximum count
@@ -47,14 +47,14 @@ shiny_sirconn <- function(input) {
 }
 
 sirconn_panel <- function(model_alt) {
-  conditionalPanel(
+  shiny::conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("sirconn"),
     slider_prevalence("sirconn"),
     slider_input_rate("sirconn", "Probability of exposure (daily)", 0.1, input_label = "transmission_rate"),
     slider_input_rate("sirconn", "Recovery probability (daily)", 0.14, input_label = "recovery_rate"),
     slider_input_rate("sirconn", "Contact Rate", 4, maxval = 20),
-    sliderInput(
+    shiny::sliderInput(
       inputId = "sirconn_population_size",
       label   = "Population Size",
       min     = 0, 

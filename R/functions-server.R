@@ -76,6 +76,7 @@ find_scale <- function(x) {
 #'
 #' @return A plot displaying each state from the model over the course of the
 #' simulation
+#' @export 
 plot_epi <- function(model, mark_max) {
   # If the user didn't specify mark_max
   if (missing(mark_max))
@@ -87,7 +88,7 @@ plot_epi <- function(model, mark_max) {
   peak_time <- which.max(df_model$counts) - 1
 
   # Begin plotting code
-  curves <- as.data.frame(get_hist_total(model))
+  curves <- as.data.frame(epiworldR::get_hist_total(model))
   states <- unique(curves$state)
 
   counts_scale <- find_scale(max(curves$counts))
@@ -157,20 +158,20 @@ plot_epi <- function(model, mark_max) {
   for (state in states) {
     if (state == "Infected") {
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
+      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = "red"))
     } else if (state == "Removed" | state == "Recovered") {
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
+      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = "green"))
     } else if (state == "Deceased") {
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
+      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = "black"))
     } else {
     # For other states, use different colors sequentially from the vector
     plot <- plot |>
-      add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
+      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
                 line = list(color = line_colors[color_index]))
     color_index <- color_index + 1  # Move to the next color in the vector
     }
@@ -216,6 +217,7 @@ plot_epi <- function(model, mark_max) {
 #'
 #' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
+#' @export 
 plot_reproductive_epi <- function (model) {
   # Calculating average rep. number for each unique source_exposure_date
   rep_num <- epiworldR::get_reproductive_number(model)

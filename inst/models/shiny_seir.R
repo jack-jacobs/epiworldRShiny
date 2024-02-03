@@ -1,7 +1,7 @@
-#' Network SEIR Function
+# alt-name: Network SEIR Function
 shiny_seir <- function(input) {
 
-  model_seir <- ModelSEIR(
+  model_seir <- epiworldR::ModelSEIR(
     name              = input$seir_disease_name,
     prevalence        = input$seir_prevalence,
     transmission_rate = input$seir_transmission_rate,
@@ -10,7 +10,7 @@ shiny_seir <- function(input) {
     )
 
   # Generating random graph
-  agents_smallworld(
+  epiworldR::agents_smallworld(
     model_seir,
     n = input$seir_population_size,
     k = input$seir_k,
@@ -22,8 +22,8 @@ shiny_seir <- function(input) {
   npi_add_all(model_seir, "seir", input)
 
   # Running and printing
-  verbose_off(model_seir)
-  run(model_seir, ndays = input$seir_n_days, seed = input$seir_seed)
+  epiworldR::verbose_off(model_seir)
+  epiworldR::run(model_seir, ndays = input$seir_n_days, seed = input$seir_seed)
   # Plot
   plot_seir <- function() plot_epi(model_seir)
   # Summary
@@ -33,7 +33,7 @@ shiny_seir <- function(input) {
   # Table
   table_seir <- function() {
 
-    df <- as.data.frame(get_hist_total(model_seir))
+    df <- as.data.frame(epiworldR::get_hist_total(model_seir))
 
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
@@ -78,13 +78,13 @@ shiny_seir <- function(input) {
 }
 
 seir_panel <- function(model_alt) {
-  conditionalPanel(
+  shiny::conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("seir"),
     slider_prevalence("seir"),
     slider_input_rate("seir", "Probability of exposure (daily)", "0.05", input_label = "transmission_rate"),
     slider_input_rate("seir", "Recovery probability (daily)", "0.14", input_label = "recovery_rate"),
-    numericInput(
+    shiny::numericInput(
       inputId = "seir_incubation_days",
       label   = "Incubation Days",
       value   = "7",

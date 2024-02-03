@@ -2,7 +2,7 @@
 
 shiny_seird <- function(input) {
 
-  model_seird <- ModelSEIRD(
+  model_seird <- epiworldR::ModelSEIRD(
     name              = input$seird_disease_name,
     prevalence        = input$seird_prevalence,
     transmission_rate = input$seird_transmission_rate,
@@ -12,7 +12,7 @@ shiny_seird <- function(input) {
     )
 
   # Generating random graph
-  agents_smallworld(
+  epiworldR::agents_smallworld(
     model_seird,
     n = input$seird_population_size,
     k = input$seird_k,
@@ -24,8 +24,8 @@ shiny_seird <- function(input) {
   npi_add_all(model_seird, "seird", input)
 
   # Running and printing
-  verbose_off(model_seird)
-  run(model_seird, ndays = input$seird_n_days, seed = input$seird_seed)
+  epiworldR::verbose_off(model_seird)
+  epiworldR::run(model_seird, ndays = input$seird_n_days, seed = input$seird_seed)
   # Plot
   plot_seird <- function() plot_epi(model_seird)
   # Summary
@@ -34,7 +34,7 @@ shiny_seird <- function(input) {
   reproductive_seird <- function() plot_reproductive_epi(model_seird)
   # Table
   table_seird <- function() {
-    df <- as.data.frame(get_hist_total(model_seird))
+    df <- as.data.frame(epiworldR::get_hist_total(model_seird))
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
     # Row with the maximum count
@@ -71,14 +71,14 @@ shiny_seird <- function(input) {
 }
 
 seird_panel <- function(model_alt) {
-  conditionalPanel(
+  shiny::conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("seird"),
     slider_prevalence("seird"),
     slider_input_rate("seird", "Probability of exposure (daily)", "0.05", input_label = "transmission_rate"),
     slider_input_rate("seird", "Recovery probability (daily)", "0.14", input_label = "recovery_rate"),
     slider_input_rate("seird", "Probability of death (daily)", 0.01, input_label = "death_rate"),
-    numericInput(
+    shiny::numericInput(
       inputId = "seird_incubation_days",
       label   = "Incubation Days",
       value   = "7",

@@ -3,7 +3,7 @@
 shiny_sis <- function(input) {
   
   # Creating model
-  model_sis <- ModelSIS(
+  model_sis <- epiworldR::ModelSIS(
     name              = input$sis_disease_name,
     prevalence        = input$sis_prevalence,
     transmission_rate = input$sis_transmission_rate,
@@ -11,7 +11,7 @@ shiny_sis <- function(input) {
     )
 
   # Creating network
-  agents_smallworld(
+  epiworldR::agents_smallworld(
       model_sis,
       n = input$sis_population_size,
       k = input$sis_k,
@@ -23,8 +23,8 @@ shiny_sis <- function(input) {
   npi_add_all(model_sis, "sis", input)
   
   # Running and printing
-  verbose_off(model_sis)
-  run(model_sis, ndays = input$sis_n_days, seed = input$sis_seed)
+  epiworldR::verbose_off(model_sis)
+  epiworldR::run(model_sis, ndays = input$sis_n_days, seed = input$sis_seed)
   
   # Plot, summary, and reproductive number
   plot_sis <- function() plot_epi(model_sis)
@@ -32,7 +32,7 @@ shiny_sis <- function(input) {
   reproductive_sis <- function() plot_reproductive_epi(model_sis)
   # Table 
   table_sis <- function() {
-    df <- as.data.frame(get_hist_total(model_sis))
+    df <- as.data.frame(epiworldR::get_hist_total(model_sis))
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
     # Row with the maximum count
@@ -58,7 +58,7 @@ shiny_sis <- function(input) {
 
 sis_panel <- function(model_alt) {
 
-  conditionalPanel(
+  shiny::conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("sis"),
     slider_prevalence("sis"),

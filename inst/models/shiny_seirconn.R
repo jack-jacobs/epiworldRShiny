@@ -1,7 +1,7 @@
 # alt-name: SEIR
 shiny_seirconn <- function(input) {
 
-  model_seirconn <- ModelSEIRCONN(
+  model_seirconn <- epiworldR::ModelSEIRCONN(
     name              = input$seirconn_disease_name,
     prevalence        = input$seirconn_prevalence,
     transmission_rate = input$seirconn_transmission_rate,
@@ -15,8 +15,8 @@ shiny_seirconn <- function(input) {
   npi_add_all(model_seirconn, "seirconn", input)
 
   # Running and printing
-  verbose_off(model_seirconn)
-  run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
+  epiworldR::verbose_off(model_seirconn)
+  epiworldR::run(model_seirconn, ndays = input$seirconn_n_days, seed = input$seirconn_seed)
 
   # Plot, summary, and reproductive number
   plot_seirconn <- function() plot_epi(model_seirconn)
@@ -24,7 +24,7 @@ shiny_seirconn <- function(input) {
   reproductive_seirconn <- function() plot_reproductive_epi(model_seirconn)
   # Table
   table_seirconn <- function() {
-    df <- as.data.frame(get_hist_total(model_seirconn))
+    df <- as.data.frame(epiworldR::get_hist_total(model_seirconn))
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
     # Row with the maximum count
@@ -48,14 +48,14 @@ shiny_seirconn <- function(input) {
 }
 
 seirconn_panel <- function(model_alt) {
-  conditionalPanel(
+  shiny::conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("seirconn"),
     slider_prevalence("seirconn"),
     slider_input_rate("seirconn", "Probability of exposure (daily)", 0.1, input_label = "transmission_rate"),
     slider_input_rate("seirconn", "Recovery probability (daily)", 0.14, input_label = "recovery_rate"),
     slider_input_rate("seirconn", "Contact Rate", 4, maxval = 20),
-    numericInput(
+    shiny::numericInput(
       inputId = "seirconn_incubation_days",
       label   = "Incubation Days",
       value   = "7",
@@ -63,7 +63,7 @@ seirconn_panel <- function(model_alt) {
       max     = NA,
       step    = 1
       ),
-    sliderInput(
+    shiny::sliderInput(
       inputId = "seirconn_population_size",
       label   = "Population Size",
       min     = 0,

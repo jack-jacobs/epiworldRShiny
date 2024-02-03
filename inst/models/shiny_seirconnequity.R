@@ -15,7 +15,7 @@ shiny_seirconnequity <- function(input) {
 
   n <- input$seirconnequity_population_size
 
-  model_seirconnequity <- ModelSEIRCONN(
+  model_seirconnequity <- epiworldR::ModelSEIRCONN(
     name              = input$seirconnequity_disease_name,
     prevalence        = input$seirconnequity_prevalence,
     transmission_rate = input$seirconnequity_transmission_rate,
@@ -98,8 +98,8 @@ shiny_seirconnequity <- function(input) {
   npi_add_all(model_seirconnequity, "seirconnequity", input)
 
   # Running and printing
-  verbose_off(model_seirconnequity)
-  run(model_seirconnequity, ndays = input$seirconnequity_n_days, seed = input$seirconnequity_seed)
+  epiworldR::verbose_off(model_seirconnequity)
+  epiworldR::run(model_seirconnequity, ndays = input$seirconnequity_n_days, seed = input$seirconnequity_seed)
 
   # Equity plots ---------------------------------------------------------------
   agents_states <- epiworldR::get_agents_states(model_seirconnequity)
@@ -142,7 +142,7 @@ shiny_seirconnequity <- function(input) {
 
   # Table
   table_seirconnequity <- function() {
-    df <- as.data.frame(get_hist_total(model_seirconnequity))
+    df <- as.data.frame(epiworldR::get_hist_total(model_seirconnequity))
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
     # Row with the maximum count
@@ -168,14 +168,14 @@ shiny_seirconnequity <- function(input) {
 
 seirconnequity_panel <- function(model_alt) {
 
-  conditionalPanel(
+  shiny::conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("seirconnequity"),
     slider_prevalence("seirconnequity"),
     slider_input_rate("seirconnequity", "Probability of exposure (daily)", 0.05, input_label = "transmission_rate"),
     slider_input_rate("seirconnequity", "Recovery probability (daily)", 0.14, input_label = "recovery_rate"),
     slider_input_rate("seirconnequity", "Contact Rate", 4, maxval = 20),
-    numericInput(
+    shiny::numericInput(
       inputId = "seirconnequity_incubation_days",
       label   = "Incubation Days",
       value   = 7,
@@ -183,7 +183,7 @@ seirconnequity_panel <- function(model_alt) {
       max     = NA,
       step    = 1
       ),
-    sliderInput(
+    shiny::sliderInput(
       inputId = "seirconnequity_population_size",
       label   = "Population Size",
       min     = 0,

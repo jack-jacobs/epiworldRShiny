@@ -8,20 +8,18 @@
 
 #' @import epiworldR
 #' @import shinydashboard
-#' @import DT
+#' @importFrom DT dataTableOutput renderDataTable
 #' @import ggplot2
 #' @import shinycssloaders
-#' @import plotly
+#' @importFrom plotly plot_ly add_markers add_segments layout
+#' @import shiny
+#' @importFrom shinyjs hidden useShinyjs toggle
 #'
 #' @return Loads and opens the RShiny app for the epiworldR package
 #' @export
 epiworldRShiny <- function(...) {
 
     assign("epiworldR_env", new.env(parent = .GlobalEnv), envir = .GlobalEnv)
-
-    source("R/functions/ui-functions.R")
-    source("R/functions/npi.R")
-    source("R/functions/server-functions.R")
 
     models_setup()
 
@@ -48,8 +46,8 @@ epiworldRShiny <- function(...) {
               cursor_header_pointer
             )
           ),
-          useShinyjs(),
-          selectInput(
+          shinyjs::useShinyjs(),
+          shiny::selectInput(
             inputId = "model",
             label = h3("Model"),
             choices = unname(epiworldR_env$models_names)
@@ -64,13 +62,13 @@ epiworldRShiny <- function(...) {
         column(12, htmlOutput("model_description"))
       ),
       fluidRow(
-        column(6, plotlyOutput("model_plot") %>% withSpinner(color = "#009bff")),
-        column(6, plotlyOutput("model_reproductive_plot") %>% withSpinner(color = "#009bff"))
+        column(6, plotly::plotlyOutput("model_plot") |> shinycssloaders::withSpinner(color = "#009bff")),
+        column(6, plotly::plotlyOutput("model_reproductive_plot") |> shinycssloaders::withSpinner(color = "#009bff"))
       ),
       HTML("<br>"),
       fluidRow(
-        column(6, verbatimTextOutput("model_summary") %>% withSpinner(color = "#009bff")),
-        column(6, dataTableOutput("model_table") %>% withSpinner(color = "#009bff"))
+        column(6, verbatimTextOutput("model_summary") |> shinycssloaders::withSpinner(color = "#009bff")),
+        column(6, DT::dataTableOutput("model_table") |> shinycssloaders::withSpinner(color = "#009bff"))
       ),
       htmlOutput("download_button"),
       tags$style(type = 'text/css', "#downloadData {position: fixed; bottom: 20px; right: 20px; }"),
@@ -94,14 +92,14 @@ epiworldRShiny <- function(...) {
          local({
            id0 <- paste0(i, "_header_", m)
            id1 <- paste0(i, "_inputs_", m)
-           onclick(id = id0, toggle(id = id1, anim = TRUE))
+           shinyjs::onclick(id = id0, shinyjs::toggle(id = id1, anim = TRUE))
          })
        }
      }
 
-     model_id <- reactive(globalenv()$epiworldR_env$models[input$model])
+     model_id <- shiny::reactive(globalenv()$epiworldR_env$models[input$model])
 
-     model_output <- eventReactive(
+     model_output <- shiny::eventReactive(
        eventExpr = input[[paste0("simulate_", model_id())]],
        valueExpr = {
          eval(parse(text = paste0("shiny_", model_id(), "(input)")))
@@ -109,7 +107,13 @@ epiworldRShiny <- function(...) {
      )
 
      output$model_description <- renderText({
-       fn <- paste0("R/models/shiny_", model_id(), ".md")
+
+       # Reading the model description from the package
+       fn <- system.file(
+          "models", paste0("shiny_", model_id(), ".md"),
+          package = "epiworldRShiny"
+        )
+        
        contents <- if (file.exists(fn))
          readLines(fn, warn = FALSE)
        else
@@ -118,16 +122,16 @@ epiworldRShiny <- function(...) {
        markdown(contents)
      })
 
-     output$model_plot <- renderPlotly({
+     output$model_plot <- plotly::renderPlotly({
        model_output()$epicurves_plot()
      })
-     output$model_reproductive_plot <- renderPlotly({
+     output$model_reproductive_plot <- plotly::renderPlotly({
        model_output()$reproductive_plot()
      })
-     output$model_summary <- renderPrint({
+     output$model_summary <- shiny::renderPrint({
        model_output()$model_summary()
      })
-     output$model_table <- renderDataTable({
+     output$model_table <- DT::renderDataTable({
        model_output()$model_table()
      }, options = list(
        scrollY = '600px',
@@ -135,7 +139,7 @@ epiworldRShiny <- function(...) {
        pageLength = 16
      ), escape = FALSE)
 
-     output$downloadData <- downloadHandler(
+     output$downloadData <- shiny::downloadHandler(
        filename = function() {
          paste("data", ".csv", sep = "")
        },
@@ -144,10 +148,10 @@ epiworldRShiny <- function(...) {
        }
      )
 
-     output$download_button <- renderUI({
-       downloadButton("downloadData", "Download Data")
+     output$download_button <- shiny::renderUI({
+       shiny::downloadButton("downloadData", "Download Data")
      })
    }
-   shinyApp(ui=ui, server=server)
+   shiny::shinyApp(ui=ui, server=server)
 }
 

@@ -3,7 +3,7 @@
 shiny_sird <- function(input) {
   
   # Creating model
-  model_sird <- ModelSIRD(
+  model_sird <- epiworldR::ModelSIRD(
     name              = input$sird_disease_name,
     prevalence        = input$sird_prevalence,
     transmission_rate = input$sird_transmission_rate,
@@ -12,7 +12,7 @@ shiny_sird <- function(input) {
     )
 
   # Generating random graph
-  agents_smallworld(
+  epiworldR::agents_smallworld(
       model_sird,
       n = input$sird_population_size,
       k = input$sird_k,
@@ -24,8 +24,8 @@ shiny_sird <- function(input) {
   npi_add_all(model_sird, "sird", input)
 
   # Running and printing
-  verbose_off(model_sird)
-  run(model_sird, ndays = input$sird_n_days, seed = input$sird_seed)
+  epiworldR::verbose_off(model_sird)
+  epiworldR::run(model_sird, ndays = input$sird_n_days, seed = input$sird_seed)
 
   # Plot, summary, and repnum
   plot_sird <- function() plot_epi(model_sird)
@@ -33,7 +33,7 @@ shiny_sird <- function(input) {
   reproductive_sird <- function() plot_reproductive_epi(model_sird)
   # Table 
   table_sird <- function() {
-    df <- as.data.frame(get_hist_total(model_sird))
+    df <- as.data.frame(epiworldR::get_hist_total(model_sird))
     # Subset to only include "infection" state
     infection_data <- df[df$state == "Infected", ]
     # Row with the maximum count
@@ -58,7 +58,7 @@ shiny_sird <- function(input) {
 
 sird_panel <- function(model_alt) {
 
-  conditionalPanel(
+  shiny::conditionalPanel(
     condition = sprintf("input.model == '%s'", model_alt),
     text_input_disease_name("sird"),
     slider_prevalence("sird"),
