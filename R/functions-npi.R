@@ -1,4 +1,14 @@
-#' @export 
+#' Vaccine definition function
+#' @param model epiworldR model.
+#' @param preval Initial prevalence of the vaccine.
+#' @param susceptibility_reduction Reduction in susceptibility probability due
+#' to vaccine.
+#' @param transmission_reduction Reduction in transmission probability due to
+#' vaccine.
+#' @param recovery_enhancer Probability increase in recovery due to vaccine.
+#' @param death_reduction Reduction in death probability due to vaccine.
+#' @return Returns a vaccine tool with parameter reducers/enhancers.
+#' @export
 npi_add_vaccine <- function(
   model, preval,
   susceptibility_reduction = .9,
@@ -27,7 +37,11 @@ npi_add_vaccine <- function(
 
 }
 
-#' @export 
+#' Masking definition function
+#' @param model epiworldR model.
+#' @param preval Prevalence of masking within the population.
+#' @return Creates a masking npi with specified prevalence in specified model.
+#' @export
 npi_add_masking <- function(model, preval) {
 
   if (preval > 0) {
@@ -50,11 +64,17 @@ npi_add_masking <- function(model, preval) {
 
 }
 
-#' @export 
+#' School closure definition function
+#' @param model epiworldR model.
+#' @param preval Prevalence of school closure within the population.
+#' @param day Day in the simulation where school closure goes into effect.
+#' @return Creates a school closure npi with specified prevalence and day to
+#' implement
+#' @export
 npi_add_school_closure <- function(model, preval, day) {
-  
+
   if (preval > 0) {
-    
+
     # Creating a tool
     tool_ <- epiworldR::tool(
       name                     = "School Closure",
@@ -66,8 +86,8 @@ npi_add_school_closure <- function(model, preval, day) {
 
     # Adding a global action
     action_ <- epiworldR::globalevent_tool(
-      tool = tool_, 
-      prob = preval, 
+      tool = tool_,
+      prob = preval,
       day  = day
       )
 
@@ -80,7 +100,10 @@ npi_add_school_closure <- function(model, preval, day) {
 
 }
 
-#' @export 
+#' NPI adding function
+#' @param model epiworldR model.
+#' @param modelname Specified model.
+#' @export
 npi_add_all <- function(model, modelname, input) {
 
   npi_add_vaccine(

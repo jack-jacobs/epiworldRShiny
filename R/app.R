@@ -1,11 +1,3 @@
-# library(shinydashboard)
-# library(DT)
-# library(ggplot2)
-# library(shinyjs)
-# library(epiworldR)
-# library(shinycssloaders)
-# library(plotly)
-
 #' @import epiworldR
 #' @import shinydashboard
 #' @importFrom DT dataTableOutput renderDataTable
@@ -113,7 +105,7 @@ epiworldRShiny <- function(...) {
           "models", paste0("shiny_", model_id(), ".md"),
           package = "epiworldRShiny"
         )
-        
+
        contents <- if (file.exists(fn))
          readLines(fn, warn = FALSE)
        else
