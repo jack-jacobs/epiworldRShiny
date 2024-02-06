@@ -9,11 +9,6 @@
 #' @param prop_19_59_60plus A vector of length 3 representing the proportions of individuals in the age groups 0-19, 20-59, and 60+. Default is c(0.5, 0.3, 0.2).
 #'
 #' @return A matrix representing the generated population, with columns for age groups (0-19, 20-59, 60+), NotHispanic, and Female.
-#'
-#' @examples
-#' pop_generator(100)
-#' pop_generator(100, prop_hispanic = 0.3, prop_female = 0.6, prop_19_59_60plus = c(0.4, 0.4, 0.2))
-#'
 #' @export
 pop_generator <- function(
   n,
@@ -76,7 +71,7 @@ find_scale <- function(x) {
 #'
 #' @return A plot displaying each state from the model over the course of the
 #' simulation
-#' @export 
+#' @export
 plot_epi <- function(model, mark_max) {
   # If the user didn't specify mark_max
   if (missing(mark_max))
@@ -217,7 +212,7 @@ plot_epi <- function(model, mark_max) {
 #'
 #' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
-#' @export 
+#' @export
 plot_reproductive_epi <- function (model) {
   # Calculating average rep. number for each unique source_exposure_date
   rep_num <- epiworldR::get_reproductive_number(model)
