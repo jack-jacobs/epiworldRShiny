@@ -26,8 +26,3 @@ A matrix representing the generated population, with columns for age groups (0-1
 \description{
 This function generates a population matrix with specified characteristics.
 }
-\examples{
-pop_generator(100)
-pop_generator(100, prop_hispanic = 0.3, prop_female = 0.6, prop_19_59_60plus = c(0.4, 0.4, 0.2))
-
-}
