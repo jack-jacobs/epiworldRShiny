@@ -9,3 +9,6 @@ install:
 
 run:
 	Rscript --vanilla -e 'shiny::runApp(".")'
+
+check:
+	cd .. && R CMD check epiworldRShiny_*.tar.gz

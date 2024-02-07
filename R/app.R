@@ -1,13 +1,14 @@
+#' epiworldRShiny App Launcher
 #' @import epiworldR
 #' @import shinydashboard
 #' @importFrom DT dataTableOutput renderDataTable
 #' @import ggplot2
 #' @import shinycssloaders
 #' @importFrom plotly plot_ly add_markers add_segments layout
-#' @import shiny
 #' @importFrom shinyjs hidden useShinyjs toggle
 #'
 #' @return Loads and opens the RShiny app for the epiworldR package
+#' @param ... Currently ignored.
 #' @export
 epiworldRShiny <- function(...) {
 

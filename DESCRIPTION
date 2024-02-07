@@ -19,14 +19,9 @@ RoxygenNote: 7.3.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 LinkingTo: cpp11
-Suggests: 
-    knitr,
-    rmarkdown,
-    tinytest,
-    netplot,
-    igraph
+Suggests:
+    knitr
 Imports: 
-    shiny,
     shinyjs,
     utils,
     shinydashboard,
@@ -35,4 +30,6 @@ Imports:
     epiworldR,
     shinycssloaders,
     plotly
+Depends:
+    shiny
 VignetteBuilder: knitr
