@@ -1,4 +1,5 @@
 #' epiworldRShiny App Launcher
+#' @rawNamespace import(shiny, except=c(dataTableOutput, renderDataTable))
 #' @import epiworldR
 #' @import shinydashboard
 #' @importFrom DT dataTableOutput renderDataTable
@@ -13,7 +14,6 @@
 #' @param ... Currently ignored.
 #' @export
 epiworldRShiny <- function(...) {
-
     assign("epiworldR_env", new.env(parent = .GlobalEnv), envir = .GlobalEnv)
 
     models_setup()
