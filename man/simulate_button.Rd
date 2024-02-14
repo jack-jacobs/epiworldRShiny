@@ -6,6 +6,9 @@
 \usage{
 simulate_button(model_name)
 }
+\arguments{
+\item{model_name}{Name of the epiworldR model.}
+}
 \value{
 Runs the ABM simulation when selected
 }

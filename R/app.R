@@ -6,6 +6,8 @@
 #' @import shinycssloaders
 #' @importFrom plotly plot_ly add_markers add_segments layout
 #' @importFrom shinyjs hidden useShinyjs toggle
+#' @importFrom stats aggregate as.formula reshape
+#' @importFrom utils write.csv
 #'
 #' @return Loads and opens the RShiny app for the epiworldR package
 #' @param ... Currently ignored.
@@ -17,7 +19,7 @@ epiworldRShiny <- function(...) {
     models_setup()
 
     header <- dashboardHeader(
-      title = HTML('epiworldR <text style="color: gray; font-size:50%">(alpha)</text>')
+      title = shiny::HTML('epiworldR <text style="color: gray; font-size:50%">(alpha)</text>')
     )
 
     cursor_header_pointer <-
@@ -33,7 +35,7 @@ epiworldRShiny <- function(...) {
       c(
         list(
           width = NULL,
-          tags$style(
+          shiny::tags$style(
             paste0(
               "#sidebarItemExpanded {overflow: auto;max-height: 100vh;}",
               cursor_header_pointer
@@ -42,7 +44,7 @@ epiworldRShiny <- function(...) {
           shinyjs::useShinyjs(),
           shiny::selectInput(
             inputId = "model",
-            label = h3("Model"),
+            label = shiny::h3("Model"),
             choices = unname(epiworldR_env$models_names)
           )
         ),
@@ -51,23 +53,23 @@ epiworldRShiny <- function(...) {
     )
 
     body <- dashboardBody(
-      fluidRow(
-        column(12, htmlOutput("model_description"))
+      shiny::fluidRow(
+        shiny::column(12, shiny::htmlOutput("model_description"))
       ),
-      fluidRow(
-        column(6, plotly::plotlyOutput("model_plot") |> shinycssloaders::withSpinner(color = "#009bff")),
-        column(6, plotly::plotlyOutput("model_reproductive_plot") |> shinycssloaders::withSpinner(color = "#009bff"))
+      shiny::fluidRow(
+        shiny::column(6, plotly::plotlyOutput("model_plot") |> shinycssloaders::withSpinner(color = "#009bff")),
+        shiny::column(6, plotly::plotlyOutput("model_reproductive_plot") |> shinycssloaders::withSpinner(color = "#009bff"))
       ),
-      HTML("<br>"),
-      fluidRow(
-        column(6, verbatimTextOutput("model_summary") |> shinycssloaders::withSpinner(color = "#009bff")),
-        column(6, DT::dataTableOutput("model_table") |> shinycssloaders::withSpinner(color = "#009bff"))
+      shiny::HTML("<br>"),
+      shiny::fluidRow(
+        shiny::column(6, shiny::verbatimTextOutput("model_summary") |> shinycssloaders::withSpinner(color = "#009bff")),
+        shiny::column(6, DT::dataTableOutput("model_table") |> shinycssloaders::withSpinner(color = "#009bff"))
       ),
-      htmlOutput("download_button"),
-      tags$style(type = 'text/css', "#downloadData {position: fixed; bottom: 20px; right: 20px; }"),
-      fluidRow(
-        column(6, markdown("epiworldRShiny app version 0.0-1 (alpha)")),
-        column(6, markdown("**The University of Utah**"))
+      shiny::htmlOutput("download_button"),
+      shiny::tags$style(type = 'text/css', "#downloadData {position: fixed; bottom: 20px; right: 20px; }"),
+      shiny::fluidRow(
+        shiny::column(6, shiny::markdown("epiworldRShiny app version 0.0-1 (alpha)")),
+        shiny::column(6, shiny::markdown("**The University of Utah**"))
       )
     )
 
@@ -99,7 +101,7 @@ epiworldRShiny <- function(...) {
        }
      )
 
-     output$model_description <- renderText({
+     output$model_description <- shiny::renderText({
 
        # Reading the model description from the package
        fn <- system.file(
@@ -112,7 +114,7 @@ epiworldRShiny <- function(...) {
        else
          "No description available."
 
-       markdown(contents)
+       shiny::markdown(contents)
      })
 
      output$model_plot <- plotly::renderPlotly({

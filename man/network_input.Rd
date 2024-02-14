@@ -6,6 +6,9 @@
 \usage{
 network_input(model_name)
 }
+\arguments{
+\item{model_name}{Name of the epiworldR model.}
+}
 \value{
 Allows for the ability to specify network parameters
 }

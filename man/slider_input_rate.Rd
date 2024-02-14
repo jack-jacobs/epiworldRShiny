@@ -6,6 +6,17 @@
 \usage{
 slider_input_rate(model_name, rate_name, value, maxval = 1, input_label = NULL)
 }
+\arguments{
+\item{model_name}{Name of the epiworldR model.}
+
+\item{rate_name}{Name of the rate.}
+
+\item{value}{Initial value for the slider.}
+
+\item{maxval}{Maxiumum value for the slider.}
+
+\item{input_label}{Aids in creating the appropriate slider name.}
+}
 \value{
 Creates all rate sliders
 }

@@ -6,6 +6,9 @@
 \usage{
 slider_prevalence(model_name)
 }
+\arguments{
+\item{model_name}{Name of the epiworldR model.}
+}
 \value{
 Creates the prevalence slider
 }

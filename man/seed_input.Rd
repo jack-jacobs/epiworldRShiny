@@ -6,6 +6,9 @@
 \usage{
 seed_input(model_name)
 }
+\arguments{
+\item{model_name}{Name of the epiworldR model.}
+}
 \value{
 Allows the user to input a seed for reproducibility
 }

@@ -6,6 +6,9 @@
 \usage{
 text_input_disease_name(model_name)
 }
+\arguments{
+\item{model_name}{Name of the epiworldR model.}
+}
 \value{
 Creates the text input for the disease name
 }

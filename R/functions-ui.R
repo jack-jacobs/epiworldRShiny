@@ -1,5 +1,6 @@
 #' text_input_disease_name Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Creates the text input for the disease name
 text_input_disease_name <- function(model_name) {
   shiny::textInput(
@@ -11,7 +12,8 @@ text_input_disease_name <- function(model_name) {
 }
 
 #' slider_prevalence Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Creates the prevalence slider
 slider_prevalence <- function(model_name) {
   shiny::sliderInput(
@@ -26,7 +28,8 @@ slider_prevalence <- function(model_name) {
 }
 
 #' numeric_input_ndays Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Allows for the ability to specify the number of simulation days
 numeric_input_ndays <- function(model_name) {
   shiny::numericInput(
@@ -40,7 +43,12 @@ numeric_input_ndays <- function(model_name) {
 }
 
 #' slider_input_rate Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @param rate_name Name of the rate.
+#' @param value Initial value for the slider.
+#' @param maxval Maxiumum value for the slider.
+#' @param input_label Aids in creating the appropriate slider name.
+#' @export
 #' @return Creates all rate sliders
 slider_input_rate <- function(
   model_name, rate_name, value, maxval = 1, input_label = NULL
@@ -65,7 +73,8 @@ slider_input_rate <- function(
 }
 
 #' network_input Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Allows for the ability to specify network parameters
 network_input <- function(model_name) {
 
@@ -73,9 +82,9 @@ network_input <- function(model_name) {
     shiny::div(
       id = paste0("network_header_", model_name),
       shiny::headerPanel(
-        h4(
+        shiny::h4(
           shiny::tagList(
-            icon("circle-info"),
+            shiny::icon("circle-info"),
           "Population structure"
           )
         )
@@ -122,16 +131,17 @@ network_input <- function(model_name) {
 }
 
 #' npis_input Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Allows the ability to specify npi/tool characteristics
 npis_input <- function(model_name) {
   shiny::tagList(
     shiny::div(
       id = paste0("npis_header_", model_name),
       shiny::headerPanel(
-        h4(
+        shiny::h4(
           shiny::tagList(
-            icon("circle-info"),
+            shiny::icon("circle-info"),
             "Interventions"
             )
       ))
@@ -157,7 +167,7 @@ npis_input <- function(model_name) {
           step    = 0.01,
           ticks   = FALSE
           ),
-        shiny::headerPanel(h4("School Closure")),
+        shiny::headerPanel(shiny::h4("School Closure")),
         shiny::sliderInput(
           inputId = paste0(model_name, "_school_closure_prevalence"),
           label   = "Prevalence",
@@ -181,7 +191,8 @@ npis_input <- function(model_name) {
 }
 
 #' seed_input Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Allows the user to input a seed for reproducibility
 seed_input <- function(model_name) {
   shiny::numericInput(
@@ -195,7 +206,7 @@ seed_input <- function(model_name) {
 }
 
 #' models_setup function
-#' @export 
+#' @export
 #' @return Function to set up models
 models_setup <- function() {
 
@@ -261,16 +272,17 @@ models_setup <- function() {
 }
 
 #' population_input Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Generates population (equity) demographics
 population_input <- function(model_name) {
   shiny::tagList(
     shiny::div(
       id = paste0("population_header_", model_name),
       shiny::headerPanel(
-        h4(
+        shiny::h4(
           shiny::tagList(
-            icon("circle-info"),
+            shiny::icon("circle-info"),
             "Population (equity)"
             )
       ))
@@ -311,10 +323,11 @@ population_input <- function(model_name) {
 }
 
 #' simulate_button Function
-#' @export 
+#' @param model_name Name of the epiworldR model.
+#' @export
 #' @return Runs the ABM simulation when selected
 simulate_button <- function(model_name) {
-  actionButton(
+  shiny::actionButton(
     inputId = paste0("simulate_", model_name),
     label   = "Run Simulation"
     )

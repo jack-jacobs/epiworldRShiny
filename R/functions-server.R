@@ -216,7 +216,7 @@ plot_epi <- function(model, mark_max) {
 plot_reproductive_epi <- function (model) {
   # Calculating average rep. number for each unique source_exposure_date
   rep_num <- epiworldR::get_reproductive_number(model)
-  average_rt <- aggregate(rt ~ source_exposure_date, data = rep_num,
+  average_rt <- stats::aggregate(rt ~ source_exposure_date, data = rep_num,
                           FUN = mean)
   # Plotting
   reproductive_plot <- plotly::plot_ly(data = average_rt, x = ~source_exposure_date,

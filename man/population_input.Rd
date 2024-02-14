@@ -6,6 +6,9 @@
 \usage{
 population_input(model_name)
 }
+\arguments{
+\item{model_name}{Name of the epiworldR model.}
+}
 \value{
 Generates population (equity) demographics
 }

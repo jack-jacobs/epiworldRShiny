@@ -103,6 +103,7 @@ npi_add_school_closure <- function(model, preval, day) {
 #' NPI adding function
 #' @param model epiworldR model.
 #' @param modelname Specified model.
+#' @param input User epiworldR model selection.
 #' @export
 npi_add_all <- function(model, modelname, input) {
 
