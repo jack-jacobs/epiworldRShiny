@@ -39,13 +39,12 @@ shiny_seirconnequity <- function(input) {
 
   # Saving the data to the global environment (this way we make sure it is
   # available to the model)
-  epiworldR_env <- globalenv()$epiworldR_env
-  epiworldR_env$X <- X
+  epiworldRenv()$X <- X
 
   # Adding population data
   set_agents_data(
     model = model_seirconnequity,
-    data  = epiworldR_env$X
+    data  = epiworldRenv()$X
     )
 
   # Creating immune system to add the difference in susceptibility -------------

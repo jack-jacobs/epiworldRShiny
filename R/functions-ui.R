@@ -251,12 +251,9 @@ models_setup <- function() {
     names(models_names) <- models
     names(models) <- models_names
 
-    # Get the epiworldR environment
-    epiworldR_env <- get("epiworldR_env", envir = .GlobalEnv)
-
     # Add the model names and models to the epiworldR environment
-    epiworldR_env$models_names <- models_names
-    epiworldR_env$models <- models
+    assign("models_names", models_names, envir = epiworldRenv())
+    assign("models", models, envir = epiworldRenv())
 
     # Doing some hacking
     models_panels <- mget(paste0(models, "_panel"), envir = .GlobalEnv)
