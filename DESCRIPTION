@@ -1,8 +1,8 @@
 Package: epiworldRShiny
 Type: Package
-Title: Fast Agent-Based Epi Models - RShiny Application
-Version: 0.0-3.9000
-Date: 2024-01-22
+Title: A shiny wrapper of the R package epiworldR.
+Version: 0.0-0.9000
+Date: 2024-02-17
 Authors@R: c(
   person("Derek", "Meyer", role=c("aut","cre"), 
   email="derekmeyer37@gmail.com", comment = c(ORCID = "0009-0005-1350-6988")),
@@ -10,7 +10,7 @@ Authors@R: c(
   email="g.vegayon@gmail.com", comment = c(ORCID = "0000-0002-3171-0844")),
   person("Centers for Disease Control and Prevention", role="fnd", comment = "Award number 1U01CK000585; 75D30121F00003"
   ))
-Description: A flexible framework for Agent-Based Models (ABM), the 'epiworldRShiny' package provides methods for prototyping disease outbreaks and transmission models using a 'C++' backend, making it very fast. It supports multiple epidemiological models, including the Susceptible-Infected-Susceptible (SIS), Susceptible-Infected-Removed (SIR), Susceptible-Exposed-Infected-Removed (SEIR), and others, involving arbitrary mitigation policies and multiple-disease models. Users can specify infectiousness/susceptibility rates as a function of agents' features, providing great complexity for the model dynamics. Furthermore, 'epiworldR' is ideal for simulation studies featuring large populations.
+Description: This shiny wrapper provides a user-friendly interface to the R package epiworldR. Currently, the package features the SIS, SIR, SEIR, SISD, SIRD, and SEIRD models, networked and fully connected versions.
 URL: https://github.com/UofUEpiBio/epiworldRShiny,
     https://uofuepibio.github.io/epiworldRShiny/,
 BugReports: https://github.com/UofUEpiBio/epiworldRShiny/issues

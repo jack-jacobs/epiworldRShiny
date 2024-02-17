@@ -31,10 +31,17 @@ epiworldRenv <- function() {
 #' @rdname epiworldRShiny
 epiworldRShiny <- function(...) {
 
+  # If the package is not loaded, load it
+  if (!"epiworldRShiny" %in% search()) {
+    library(epiworldRShiny)
+  }
+
   models_setup()
 
-  header <- dashboardHeader(
-    title = shiny::HTML('epiworldR <text style="color: gray; font-size:50%">(alpha)</text>')
+  header <- shinydashboard::dashboardHeader(
+    title = shiny::HTML(
+      'epiworldR <text style="color: gray; font-size:50%">(alpha)</text>'
+      )
   )
 
   cursor_header_pointer <-
@@ -67,7 +74,7 @@ epiworldRShiny <- function(...) {
     )
   )
 
-  body <- dashboardBody(
+  body <- shinydashboard::dashboardBody(
     shiny::fluidRow(
       shiny::column(12, shiny::htmlOutput("model_description"))
     ),
@@ -88,7 +95,7 @@ epiworldRShiny <- function(...) {
     )
   )
 
-    ui <- dashboardPage(
+    ui <- shinydashboard::dashboardPage(
       header = header,
       sidebar = sidebar,
       body = body,

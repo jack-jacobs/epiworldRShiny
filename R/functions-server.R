@@ -151,57 +151,66 @@ plot_epi <- function(model, mark_max) {
   line_colors <- c("blue", "orange", "purple")
   color_index <- 1  # Index for selecting colors from the vector
   for (state in states) {
-    if (state == "Infected") {
+
+    # Picking the line color
+    col <- switch(
+      state,
+      Infected  = "red",
+      Removed   = "green",
+      Recovered = "green",
+      Deceased  = "black",
+      {
+        line_colors[color_index]
+        color_index <- color_index + 1
+      }
+    )
+
     plot <- plot |>
-      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
-                line = list(color = "red"))
-    } else if (state == "Removed" | state == "Recovered") {
-    plot <- plot |>
-      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
-                line = list(color = "green"))
-    } else if (state == "Deceased") {
-    plot <- plot |>
-      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
-                line = list(color = "black"))
-    } else {
-    # For other states, use different colors sequentially from the vector
-    plot <- plot |>
-      plotly::add_lines(y = as.formula(paste0("~`", state, "`")), name = state,
-                line = list(color = line_colors[color_index]))
-    color_index <- color_index + 1  # Move to the next color in the vector
-    }
+      plotly::add_lines(
+        y = as.formula(paste0("~`", state, "`")), name = state,
+        line = list(color = col)
+        )
   }
 
   if (peak_time < max(curves$date)){
+
     # Add a point at the moment of peak infections
     plot <- plot |>
-      plotly::add_markers(x = peak_time,
-                          y = max(df_model$counts),
-                          marker = list(color = 'red', symbol = 0),
-                          name = "Max Infections",
-                          showlegend = FALSE)
+      plotly::add_markers(
+        x = peak_time,
+        y = max(df_model$counts),
+        marker = list(color = 'red', symbol = 0),
+        name = "Max Infections",
+        showlegend = FALSE
+      )
 
     # Add a vertical dashed line at the moment of peak infections
     plot <- plot |>
-      plotly::add_segments(x = ~peak_time, xend = ~peak_time,
-                           y = 0,
-                           yend = ~max(df_model$counts),
-                           line = list(color = 'red', dash = "dash"),
-                           name = "Max Infections",
-                           showlegend = TRUE)
+      plotly::add_segments(
+        x = ~peak_time,
+        xend = ~peak_time,
+        y = 0,
+        yend = ~max(df_model$counts),
+        line = list(color = 'red', dash = "dash"),
+        name = "Max Infections",
+        showlegend = TRUE
+      )
   }
 
   plot <- plot |>
-    plotly::layout(title  = title,
-                   xaxis  = list(title = 'Day (step)'),
-                   yaxis  = list(title = 'Population', range = counts_range),
-                   legend = list(
-                                 x = 1,  # Places the legend on the right side
-                                 y = 0.5,  # Puts it in the middle vertically
-                                 xanchor = 'right',  # Sets the x-coordinate as the right edge of the legend
-                                 yanchor = 'middle'  # Sets the y-coordinate as the middle of the legend
-                            )
-                   )
+    plotly::layout(
+      title  = title,
+      xaxis  = list(title = 'Day (step)'),
+      yaxis  = list(title = 'Population', range = counts_range),
+      legend = list(
+        x = 1,    # Places the legend on the right side
+        y = 0.5,  # Puts it in the middle vertically
+        # Sets the x-coordinate
+        xanchor = 'right',
+        yanchor = 'middle'
+      )
+    )
+
   return(plot)
 }
 
@@ -214,18 +223,27 @@ plot_epi <- function(model, mark_max) {
 #' course of the simulation
 #' @export
 plot_reproductive_epi <- function (model) {
+
   # Calculating average rep. number for each unique source_exposure_date
   rep_num <- epiworldR::get_reproductive_number(model)
-  average_rt <- stats::aggregate(rt ~ source_exposure_date, data = rep_num,
-                          FUN = mean)
+  average_rt <- stats::aggregate(
+    rt ~ source_exposure_date, data = rep_num, FUN = mean
+    )
+
   # Plotting
-  reproductive_plot <- plotly::plot_ly(data = average_rt, x = ~source_exposure_date,
-                               y = ~rt, type = 'scatter',
-                               mode = 'lines+markers')
-  reproductive_plot <-
-    reproductive_plot |>
-      plotly::layout(title = "Reproductive Number",
-                     xaxis = list(title = 'Day (step)'),
-                     yaxis = list(title = 'Average Rep. Number'))
+  reproductive_plot <- plotly::plot_ly(
+    data = average_rt, x = ~source_exposure_date,
+    y = ~rt, type = 'scatter',
+    mode = 'lines+markers'
+    )
+
+  reproductive_plot <- reproductive_plot |>
+    plotly::layout(
+      title = "Reproductive Number",
+      xaxis = list(title = 'Day (step)'),
+      yaxis = list(title = 'Average Rep. Number')
+    )
+
   return(reproductive_plot)
+
 }
