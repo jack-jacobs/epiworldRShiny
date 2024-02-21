@@ -10,8 +10,11 @@ numeric_input_ndays(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Allows for the ability to specify the number of simulation days
+Returns an object of class shiny.tag.
 }
 \description{
 numeric_input_ndays Function
+}
+\examples{
+numeric_input_ndays("SEIRD")
 }

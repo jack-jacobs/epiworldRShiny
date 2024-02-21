@@ -7,7 +7,11 @@
 #' vaccine.
 #' @param recovery_enhancer Probability increase in recovery due to vaccine.
 #' @param death_reduction Reduction in death probability due to vaccine.
-#' @return Returns a vaccine tool with parameter reducers/enhancers.
+#' @return Returns an object of class epiworld_model, where model is
+#' substituted with the model name.
+#' @examples
+#' npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
+#' transmission_reduction = .5, recovery_enhancer = .5, death_reduction = .9)
 #' @export
 npi_add_vaccine <- function(
   model, preval,
@@ -40,7 +44,10 @@ npi_add_vaccine <- function(
 #' Masking definition function
 #' @param model epiworldR model.
 #' @param preval Prevalence of masking within the population.
-#' @return Creates a masking npi with specified prevalence in specified model.
+#' @return Returns an object of class epiworld_model, where model is
+#' substituted with the model name.
+#' @examples
+#' npi_add_masking(model, preval = .8)
 #' @export
 npi_add_masking <- function(model, preval) {
 
@@ -68,8 +75,10 @@ npi_add_masking <- function(model, preval) {
 #' @param model epiworldR model.
 #' @param preval Prevalence of school closure within the population.
 #' @param day Day in the simulation where school closure goes into effect.
-#' @return Creates a school closure npi with specified prevalence and day to
-#' implement
+#' @return Returns an object of class epiworld_model, where model is
+#' substituted with the model name.
+#' @examples
+#' npi_add_school_closure(model, preval = .8, day = 10)
 #' @export
 npi_add_school_closure <- function(model, preval, day) {
 
@@ -104,6 +113,11 @@ npi_add_school_closure <- function(model, preval, day) {
 #' @param model epiworldR model.
 #' @param modelname Specified model.
 #' @param input User epiworldR model selection.
+#' @returns Returns an object of class epiworld_model, where model is
+#' substituted with the model name.
+#' @examples
+#' npi_add_all(model, "SEIRD", input)
+#'
 #' @export
 npi_add_all <- function(model, modelname, input) {
 

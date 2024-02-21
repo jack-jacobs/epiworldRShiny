@@ -10,8 +10,11 @@ simulate_button(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Runs the ABM simulation when selected
+Returns an object of class shiny.tag.
 }
 \description{
 simulate_button Function
+}
+\examples{
+simulate_button("SEIRD")
 }

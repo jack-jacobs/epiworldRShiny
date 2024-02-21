@@ -10,8 +10,11 @@ npis_input(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Allows the ability to specify npi/tool characteristics
+Returns an object of class shiny.tag.list.
 }
 \description{
 npis_input Function
+}
+\examples{
+npis_input("SEIRD")
 }

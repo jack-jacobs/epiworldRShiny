@@ -10,8 +10,11 @@ network_input(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Allows for the ability to specify network parameters
+Returns an object of class shiny.tag.list.
 }
 \description{
 network_input Function
+}
+\examples{
+network_input("SEIRD")
 }

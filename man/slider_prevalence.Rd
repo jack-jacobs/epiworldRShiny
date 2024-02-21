@@ -10,8 +10,11 @@ slider_prevalence(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Creates the prevalence slider
+Returns an object of class shiny.tag.
 }
 \description{
 slider_prevalence Function
+}
+\examples{
+# slider_prevalence("SEIRD")
 }

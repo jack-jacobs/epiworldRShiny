@@ -1,7 +1,9 @@
 #' text_input_disease_name Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Creates the text input for the disease name
+#' @return Returns an object of class shiny.tag.
+#' @examples
+#' text_input_disease_name("SEIRD")
 text_input_disease_name <- function(model_name) {
   shiny::textInput(
     inputId     = paste0(model_name, "_disease_name"),
@@ -14,7 +16,9 @@ text_input_disease_name <- function(model_name) {
 #' slider_prevalence Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Creates the prevalence slider
+#' @return Returns an object of class shiny.tag.
+#' @examples
+#' # slider_prevalence("SEIRD")
 slider_prevalence <- function(model_name) {
   shiny::sliderInput(
     paste0(model_name, "_prevalence"),
@@ -30,7 +34,9 @@ slider_prevalence <- function(model_name) {
 #' numeric_input_ndays Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Allows for the ability to specify the number of simulation days
+#' @return Returns an object of class shiny.tag.
+#' @examples
+#' numeric_input_ndays("SEIRD")
 numeric_input_ndays <- function(model_name) {
   shiny::numericInput(
     inputId = paste0(model_name, "_n_days"),
@@ -49,7 +55,10 @@ numeric_input_ndays <- function(model_name) {
 #' @param maxval Maxiumum value for the slider.
 #' @param input_label Aids in creating the appropriate slider name.
 #' @export
-#' @return Creates all rate sliders
+#' @return Returns an object of class shiny.tag.
+#' @examples
+#' slider_input_rate("SEIRD", "transmission", value = 0.3, maxval = 1,
+#' input_label = NULL)
 slider_input_rate <- function(
   model_name, rate_name, value, maxval = 1, input_label = NULL
   ) {
@@ -75,7 +84,9 @@ slider_input_rate <- function(
 #' network_input Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Allows for the ability to specify network parameters
+#' @return Returns an object of class shiny.tag.list.
+#' @examples
+#' network_input("SEIRD")
 network_input <- function(model_name) {
 
   shiny::tagList(
@@ -133,7 +144,9 @@ network_input <- function(model_name) {
 #' npis_input Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Allows the ability to specify npi/tool characteristics
+#' @return Returns an object of class shiny.tag.list.
+#' @examples
+#' npis_input("SEIRD")
 npis_input <- function(model_name) {
   shiny::tagList(
     shiny::div(
@@ -193,7 +206,9 @@ npis_input <- function(model_name) {
 #' seed_input Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Allows the user to input a seed for reproducibility
+#' @return Returns an object of class shiny.tag.
+#' @examples
+#' seed_input("SEIRD")
 seed_input <- function(model_name) {
   shiny::numericInput(
     inputId = paste0(model_name, "_seed"),
@@ -207,7 +222,9 @@ seed_input <- function(model_name) {
 
 #' models_setup function
 #' @export
-#' @return Function to set up models
+#' @return Returns an object of class list.
+#' @examples
+#' models_setup()
 models_setup <- function() {
 
   # Getting the environment
@@ -271,7 +288,9 @@ models_setup <- function() {
 #' population_input Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Generates population (equity) demographics
+#' @return Returns an object of class shiny.tag.list.
+#' @examples
+#' population_input("SEIRD")
 population_input <- function(model_name) {
   shiny::tagList(
     shiny::div(
@@ -322,7 +341,9 @@ population_input <- function(model_name) {
 #' simulate_button Function
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Runs the ABM simulation when selected
+#' @return Returns an object of class shiny.tag.
+#' @examples
+#' simulate_button("SEIRD")
 simulate_button <- function(model_name) {
   shiny::actionButton(
     inputId = paste0("simulate_", model_name),

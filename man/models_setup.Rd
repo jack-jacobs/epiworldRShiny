@@ -7,8 +7,11 @@
 models_setup()
 }
 \value{
-Function to set up models
+Returns an object of class list.
 }
 \description{
 models_setup function
+}
+\examples{
+models_setup()
 }

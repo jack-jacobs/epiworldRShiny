@@ -18,8 +18,12 @@ slider_input_rate(model_name, rate_name, value, maxval = 1, input_label = NULL)
 \item{input_label}{Aids in creating the appropriate slider name.}
 }
 \value{
-Creates all rate sliders
+Returns an object of class shiny.tag.
 }
 \description{
 slider_input_rate Function
+}
+\examples{
+slider_input_rate("SEIRD", "transmission", value = 0.3, maxval = 1,
+input_label = NULL)
 }

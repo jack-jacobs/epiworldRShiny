@@ -10,8 +10,11 @@ population_input(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Generates population (equity) demographics
+Returns an object of class shiny.tag.list.
 }
 \description{
 population_input Function
+}
+\examples{
+population_input("SEIRD")
 }

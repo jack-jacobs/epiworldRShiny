@@ -10,8 +10,11 @@ text_input_disease_name(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Creates the text input for the disease name
+Returns an object of class shiny.tag.
 }
 \description{
 text_input_disease_name Function
+}
+\examples{
+text_input_disease_name("SEIRD")
 }

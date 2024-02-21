@@ -10,8 +10,11 @@ seed_input(model_name)
 \item{model_name}{Name of the epiworldR model.}
 }
 \value{
-Allows the user to input a seed for reproducibility
+Returns an object of class shiny.tag.
 }
 \description{
 seed_input Function
+}
+\examples{
+seed_input("SEIRD")
 }
