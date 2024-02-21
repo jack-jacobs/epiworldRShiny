@@ -36,6 +36,10 @@ substituted with the model name.
 Vaccine definition function
 }
 \examples{
+model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
+                   incubation_days = 6, recovery_rate = 0.15)
+
 npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
-transmission_reduction = .5, recovery_enhancer = .5, death_reduction = .9)
+                transmission_reduction = .5, recovery_enhancer = .5,
+                death_reduction = .9)
 }

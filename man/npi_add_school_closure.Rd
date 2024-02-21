@@ -21,5 +21,7 @@ substituted with the model name.
 School closure definition function
 }
 \examples{
+model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
+                   incubation_days = 6, recovery_rate = 0.15)
 npi_add_school_closure(model, preval = .8, day = 10)
 }
