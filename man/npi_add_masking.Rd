@@ -19,6 +19,7 @@ substituted with the model name.
 Masking definition function
 }
 \examples{
+library(epiworldR) # for ModelSEIR function
 model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
                    incubation_days = 6, recovery_rate = 0.15)
 npi_add_masking(model, preval = .8)

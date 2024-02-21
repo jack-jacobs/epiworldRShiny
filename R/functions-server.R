@@ -78,6 +78,7 @@ find_scale <- function(x) {
 #' @return A plot displaying each state from the model over the course of the
 #' simulation
 #' @examples
+#' library(epiworldR) # for ModelSEIR function
 #' model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
 #'                    incubation_days = 6, recovery_rate = 0.15)
 #' plot_epi(model, mark_max = "Infected")
@@ -233,6 +234,7 @@ plot_epi <- function(model, mark_max) {
 #' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
 #' @examples
+#' library(epiworldR) # for ModelSEIR function
 #' model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
 #'                    incubation_days = 6, recovery_rate = 0.15)
 #' plot_reproductive_epi(model)

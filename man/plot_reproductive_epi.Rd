@@ -17,6 +17,7 @@ course of the simulation
 This function generates a plot of the reproductive number over time
 }
 \examples{
+library(epiworldR) # for ModelSEIR function
 model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
                    incubation_days = 6, recovery_rate = 0.15)
 plot_reproductive_epi(model)
