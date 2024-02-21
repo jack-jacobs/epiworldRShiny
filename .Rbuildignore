@@ -1,3 +1,5 @@
 ^epiworldRShiny\.Rproj$
 ^\.Rproj\.user$
 Makefile
+README.Rmd
+.github
