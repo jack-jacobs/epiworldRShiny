@@ -20,7 +20,3 @@ substituted with the model name.
 \description{
 NPI adding function
 }
-\examples{
-npi_add_all(model, "SEIRD", input)
-
-}
