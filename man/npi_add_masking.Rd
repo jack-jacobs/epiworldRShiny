@@ -12,8 +12,12 @@ npi_add_masking(model, preval)
 \item{preval}{Prevalence of masking within the population.}
 }
 \value{
-Creates a masking npi with specified prevalence in specified model.
+Returns an object of class epiworld_model, where model is
+substituted with the model name.
 }
 \description{
 Masking definition function
+}
+\examples{
+npi_add_masking(model, preval = .8)
 }

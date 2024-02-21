@@ -29,8 +29,13 @@ vaccine.}
 \item{death_reduction}{Reduction in death probability due to vaccine.}
 }
 \value{
-Returns a vaccine tool with parameter reducers/enhancers.
+Returns an object of class epiworld_model, where model is
+substituted with the model name.
 }
 \description{
 Vaccine definition function
+}
+\examples{
+npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
+transmission_reduction = .5, recovery_enhancer = .5, death_reduction = .9)
 }

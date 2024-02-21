@@ -14,9 +14,12 @@ npi_add_school_closure(model, preval, day)
 \item{day}{Day in the simulation where school closure goes into effect.}
 }
 \value{
-Creates a school closure npi with specified prevalence and day to
-implement
+Returns an object of class epiworld_model, where model is
+substituted with the model name.
 }
 \description{
 School closure definition function
+}
+\examples{
+npi_add_school_closure(model, preval = .8, day = 10)
 }

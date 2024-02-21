@@ -13,6 +13,14 @@ npi_add_all(model, modelname, input)
 
 \item{input}{User epiworldR model selection.}
 }
+\value{
+Returns an object of class epiworld_model, where model is
+substituted with the model name.
+}
 \description{
 NPI adding function
+}
+\examples{
+npi_add_all(model, "SEIRD", input)
+
 }
