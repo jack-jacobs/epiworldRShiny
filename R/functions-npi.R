@@ -115,8 +115,6 @@ npi_add_school_closure <- function(model, preval, day) {
 #' @param input User epiworldR model selection.
 #' @returns Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
-#' @examples
-#' npi_add_all(model, "SEIRD", input)
 #'
 #' @export
 npi_add_all <- function(model, modelname, input) {
