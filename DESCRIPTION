@@ -1,6 +1,6 @@
 Package: epiworldRShiny
 Type: Package
-Title: A shiny wrapper of the R package epiworldR.
+Title: An RShiny wrapper of the R package epiworldR
 Version: 0.0-0.9000
 Date: 2024-02-17
 Authors@R: c(
