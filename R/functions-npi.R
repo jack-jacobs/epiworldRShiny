@@ -14,7 +14,7 @@
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
-#'
+#' run(model, ndays = 100, seed = 123)
 #' npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
 #'                 transmission_reduction = .5, recovery_enhancer = .5,
 #'                 death_reduction = .9)
@@ -57,6 +57,7 @@ npi_add_vaccine <- function(
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
+#' run(model, ndays = 100, seed = 123)
 #' npi_add_masking(model, preval = .8)
 #' @export
 npi_add_masking <- function(model, preval) {
@@ -92,6 +93,7 @@ npi_add_masking <- function(model, preval) {
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
+#' run(model, ndays = 100, seed = 123)
 #' npi_add_school_closure(model, preval = .8, day = 10)
 #' @export
 npi_add_school_closure <- function(model, preval, day) {
