@@ -18,6 +18,6 @@ of 10000 will return a scale of 1, 100000 will return a scale of 1000,
 This function determines the scale of the y-axis for plot_epi.
 }
 \examples{
-find_scale(x = 100000)
+find_scale(100000)
 
 }

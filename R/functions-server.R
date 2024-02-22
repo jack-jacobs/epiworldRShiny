@@ -59,7 +59,7 @@ pop_generator <- function(
 #' 1000000 will return a scale of 10000.
 #'
 #' @examples
-#' find_scale(x = 100000)
+#' find_scale(100000)
 #'
 #' @export
 find_scale <- function(x) {
@@ -78,9 +78,10 @@ find_scale <- function(x) {
 #' @return A plot displaying each state from the model over the course of the
 #' simulation
 #' @examples
-#' library(epiworldR) # for ModelSEIR function
-#' model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
-#'                    incubation_days = 6, recovery_rate = 0.15)
+#' library(epiworldR) # for ModelSEIRCONN function
+#' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
+#'                        contact_rate = 4, transmission_rate = 0.1,
+#'                        incubation_days = 7, recovery_rate = 0.14)
 #' plot_epi(model, mark_max = "Infected")
 #'
 #' @export
@@ -234,9 +235,10 @@ plot_epi <- function(model, mark_max) {
 #' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
 #' @examples
-#' library(epiworldR) # for ModelSEIR function
-#' model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
-#'                    incubation_days = 6, recovery_rate = 0.15)
+#' library(epiworldR) # for ModelSEIRCONN function
+#' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
+#'                        contact_rate = 4, transmission_rate = 0.1,
+#'                        incubation_days = 7, recovery_rate = 0.14)
 #' plot_reproductive_epi(model)
 #' @export
 plot_reproductive_epi <- function (model) {

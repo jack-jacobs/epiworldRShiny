@@ -10,9 +10,10 @@
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
 #' @examples
-#' library(epiworldR) # for ModelSEIR function
-#' model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
-#'                    incubation_days = 6, recovery_rate = 0.15)
+#' library(epiworldR) # for ModelSEIRCONN function
+#' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
+#'                        contact_rate = 4, transmission_rate = 0.1,
+#'                        incubation_days = 7, recovery_rate = 0.14)
 #'
 #' npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
 #'                 transmission_reduction = .5, recovery_enhancer = .5,
@@ -52,9 +53,10 @@ npi_add_vaccine <- function(
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
 #' @examples
-#' library(epiworldR) # for ModelSEIR function
-#' model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
-#'                    incubation_days = 6, recovery_rate = 0.15)
+#' library(epiworldR) # for ModelSEIRCONN function
+#' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
+#'                        contact_rate = 4, transmission_rate = 0.1,
+#'                        incubation_days = 7, recovery_rate = 0.14)
 #' npi_add_masking(model, preval = .8)
 #' @export
 npi_add_masking <- function(model, preval) {
@@ -86,9 +88,10 @@ npi_add_masking <- function(model, preval) {
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
 #' @examples
-#' library(epiworldR) # for ModelSEIR function
-#' model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
-#'                    incubation_days = 6, recovery_rate = 0.15)
+#' library(epiworldR) # for ModelSEIRCONN function
+#' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
+#'                        contact_rate = 4, transmission_rate = 0.1,
+#'                        incubation_days = 7, recovery_rate = 0.14)
 #' npi_add_school_closure(model, preval = .8, day = 10)
 #' @export
 npi_add_school_closure <- function(model, preval, day) {

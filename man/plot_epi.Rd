@@ -19,9 +19,10 @@ simulation
 This function generates a plot of the model states over time
 }
 \examples{
-library(epiworldR) # for ModelSEIR function
-model <- ModelSEIR("COVID-19", prevalence = 0.7, transmission_rate = 0.3,
-                   incubation_days = 6, recovery_rate = 0.15)
+library(epiworldR) # for ModelSEIRCONN function
+model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
+                       contact_rate = 4, transmission_rate = 0.1,
+                       incubation_days = 7, recovery_rate = 0.14)
 plot_epi(model, mark_max = "Infected")
 
 }
