@@ -8,7 +8,7 @@ This function is for internal use only.}
 epiworldRenv()
 }
 \value{
-Returns the epiworldR environment
+Returns the \code{epiworldR_env} environment.
 }
 \description{
 Access to the epiworldR environment

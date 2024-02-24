@@ -241,7 +241,7 @@ models_setup <- function() {
 
     # Source each model file
     for (f in models) {
-      source(f)
+      source(f, local = epiworldRenv())
     }
 
     # Capturing alt names
@@ -273,10 +273,10 @@ models_setup <- function() {
     assign("models", models, envir = epiworldRenv())
 
     # Doing some hacking
-    models_panels <- mget(paste0(models, "_panel"), envir = .GlobalEnv)
+    models_panels <- mget(paste0(models, "_panel"), envir = epiworldRenv())
     invisible({
       Map(\(pfun, nam, id) {
-        assign(paste0(id, "_panel"), pfun(nam), envir = .GlobalEnv)
+        assign(paste0(id, "_panel"), pfun(nam), envir = epiworldRenv())
       }, pfun = models_panels, nam = models_names, id = models
       )
     })

@@ -2,9 +2,12 @@
 % Please edit documentation in R/app.R
 \name{epiworldRShiny}
 \alias{epiworldRShiny}
+\alias{run_app}
 \title{epiworldRShiny App Launcher}
 \usage{
 epiworldRShiny(...)
+
+run_app(...)
 }
 \arguments{
 \item{...}{Currently ignored.}
@@ -13,5 +16,6 @@ epiworldRShiny(...)
 Loads and opens the RShiny app for the epiworldR package
 }
 \description{
-epiworldRShiny App Launcher
+\code{run_app} is a wrapper for the \code{epiworldRShiny} function. It is a
+convenience function to run the app.
 }

@@ -8,7 +8,7 @@
 #' @importFrom plotly plot_ly add_markers add_segments layout
 #' @importFrom shinyjs hidden useShinyjs toggle
 #' @importFrom stats aggregate as.formula reshape
-#' @importFrom utils write.csv
+#' @importFrom utils write.csv packageVersion
 #'
 #' @return Loads and opens the RShiny app for the epiworldR package
 #' @param ... Currently ignored.
@@ -20,7 +20,7 @@ epiworldR_env <- new.env()
 
 #' Access to the epiworldR environment
 #' This function is for internal use only.
-#' @return Returns the epiworldR environment
+#' @return Returns the `epiworldR_env` environment.
 #' 
 #' @export
 epiworldRenv <- function() {
@@ -40,7 +40,7 @@ epiworldRShiny <- function(...) {
 
   header <- shinydashboard::dashboardHeader(
     title = shiny::HTML(
-      'epiworldR <text style="color: gray; font-size:50%">(alpha)</text>'
+      'epiworldR <text style="color: gray; font-size:50%">(beta)</text>'
       )
   )
 
@@ -70,9 +70,13 @@ epiworldRShiny <- function(...) {
           choices = unname(epiworldRenv()$models_names)
         )
       ),
-      mget(paste0(epiworldRenv()$models, "_panel"), envir = .GlobalEnv)
+      mget(paste0(epiworldRenv()$models, "_panel"), envir = epiworldRenv())
     )
   )
+
+  # Getting the version of epiworldR
+  epiworldRShiny_version <- utils::packageVersion("epiworldRShiny")
+  epiworldR_version <- utils::packageVersion("epiworldR")
 
   body <- shinydashboard::dashboardBody(
     shiny::fluidRow(
@@ -90,7 +94,17 @@ epiworldRShiny <- function(...) {
     shiny::htmlOutput("download_button"),
     shiny::tags$style(type = 'text/css', "#downloadData {position: fixed; bottom: 20px; right: 20px; }"),
     shiny::fluidRow(
-      shiny::column(6, shiny::markdown("epiworldRShiny app version 0.0-1 (alpha)")),
+      shiny::column(
+        6,
+        shiny::markdown(
+          paste(
+            "epiworldRShiny version",
+            epiworldRShiny_version, 
+            "| epiworldR version",
+            epiworldR_version
+            )
+          )
+      ),
       shiny::column(6, shiny::markdown("**The University of Utah**"))
     )
   )
@@ -119,9 +133,12 @@ epiworldRShiny <- function(...) {
     model_output <- shiny::eventReactive(
       eventExpr = input[[paste0("simulate_", model_id())]],
       valueExpr = {
-        eval(parse(text = paste0("shiny_", model_id(), "(input)")))
-      }
-    )
+        eval({
+          modelfun <- get(paste0("shiny_", model_id()), envir = epiworldRenv())
+          modelfun(input)
+          })
+        }
+      )
 
     output$model_description <- shiny::renderText({
 
@@ -173,3 +190,11 @@ epiworldRShiny <- function(...) {
 
 }
 
+
+#' @export 
+#' 
+#' @rdname epiworldRShiny
+#' @description 
+#' `run_app` is a wrapper for the `epiworldRShiny` function. It is a
+#' convenience function to run the app.
+run_app <- epiworldRShiny
