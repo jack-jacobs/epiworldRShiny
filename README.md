@@ -1,6 +1,7 @@
 # epiworldRShiny: An RShiny Application for the epiworldR Package
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/UofUEpiBio/epiworldRShiny/actions/workflows/r.yml/badge.svg)](https://github.com/UofUEpiBio/epiworldRShiny/actions/workflows/r.yml)
 <!-- badges: end -->
 
 To run this ShinyApp, you need to type the following:
