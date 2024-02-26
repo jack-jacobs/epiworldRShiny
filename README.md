@@ -44,4 +44,5 @@ epiworldRShiny()
 ## Examples
 ![Screen Recording 2024-02-26 at 1 44 51 PM](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/adea7da3-b223-4870-a2b3-719287896792)
 
+[recording.mov.zip](https://github.com/UofUEpiBio/epiworldRShiny/files/14411245/recording.mov.zip)
 
