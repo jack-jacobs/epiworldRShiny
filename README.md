@@ -59,5 +59,7 @@ shows the state's counts over time, marking the peak infection count in bold let
 
 ![ex1](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/1f35d22c-c8d7-420b-8a02-f5c4cf77f971)
 
+### Example #2
+
 
 
