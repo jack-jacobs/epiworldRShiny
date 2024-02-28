@@ -57,7 +57,9 @@ The transition probabilities table displays the probability of moving between st
 agent remains in the susceptible state is 0.62, with a probability of moving to the exposed state 0.38. Lastly, the counts table 
 shows the state's counts over time, marking the peak infection count in bold letters.
 
+<center>
 ![ex1](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/1f35d22c-c8d7-420b-8a02-f5c4cf77f971)
+</center>
 
 
 
