@@ -42,9 +42,8 @@ epiworldRShiny()
 ```
 
 ## Examples
-![Screen Recording 2024-02-26 at 1 44 51 PM](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/adea7da3-b223-4870-a2b3-719287896792)
+![ex1](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/1f35d22c-c8d7-420b-8a02-f5c4cf77f971)
 
-https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/d6ee2493-9274-4b55-8717-11ebdaa201db
 
 
 
