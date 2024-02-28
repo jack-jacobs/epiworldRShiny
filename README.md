@@ -42,6 +42,7 @@ epiworldRShiny()
 ```
 
 ## Examples
+### Example #1
 This first example demonstrates how to run the Shiny app, run a simulation, and observe results. Notice the sidebar 
 contains many disease and model parameters which can be altered. Changing these parameters will affect the spread of the infectious 
 disease in the simulated population. After running the simulation, a plot of the distribution of states over time, a plot 
