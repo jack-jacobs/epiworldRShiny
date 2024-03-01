@@ -69,7 +69,7 @@ Key features:
 - Significantly decreased number of infections and deaths.
 - Majority of population recovered or susceptible by day 30.
 
-![ex2](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/784bfe51-68fd-4ab4-a401-080f5e6e087f)
+![ex2](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/d5405162-f7fe-4a42-8a4c-e9a2ac31be73)
 
 ### Example #3
 
