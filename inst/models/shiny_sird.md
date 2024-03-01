@@ -4,7 +4,7 @@ This implementation of the Susceptible-Infected-Removed-Deceased model is compar
 
 ### Parameters
 
-The SEIR model has the following parameters:
+The SIRD model has the following parameters:
 
 - **Disease Name**: The name of the disease being modeled.
 - **% of Population Infected**: The percentage of the population that is infected at the start of the simulation.

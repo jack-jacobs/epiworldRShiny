@@ -4,7 +4,7 @@ This implementation of the Network Susceptible-Infected-Susceptible-Deceased mod
 
 ### Parameters
 
-The SEIR model has the following parameters:
+The SISD model has the following parameters:
 
 - **Disease Name**: The name of the disease being modeled.
 - **% of Population Infected**: The percentage of the population that is infected at the start of the simulation.

@@ -1,6 +1,6 @@
 ## SEIRD Network Model
 
-The SEIRD Network model is the network version of the Susceptible-Exposed-Infected-Removed model. In this version, agents are embedded in a network. The probability of infection is determined by the number of infected neighbors that an agent has.
+The SEIRD Network model is the network version of the Susceptible-Exposed-Infected-Removed-Deceased model. In this version, agents are embedded in a network. The probability of infection is determined by the number of infected neighbors that an agent has.
 
 ### Parameters
 
