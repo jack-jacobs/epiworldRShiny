@@ -1,4 +1,4 @@
-# alt-name: Network SEIR Function
+# alt-name: Network SEIR
 shiny_seir <- function(input) {
 
   model_seir <- epiworldR::ModelSEIR(
