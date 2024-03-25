@@ -8,8 +8,6 @@ Authors@R: c(
   email="derekmeyer37@gmail.com", comment = c(ORCID = "0009-0005-1350-6988")),
   person("George", "Vega Yon", role=c("aut"),
   email="g.vegayon@gmail.com", comment = c(ORCID = "0000-0002-3171-0844")),
-  person("Matthew", "Biggerstaff", role=c("rev"),
-  email="zmo2@cdc.gov"),
   person("Centers for Disease Control and Prevention", role="fnd", comment = "Award number 1U01CK000585; 75D30121F00003"
   ))
 Description: This shiny wrapper provides a user-friendly interface to the R package epiworldR. Currently, the package features the SEIR equity, SIS, SIR, SEIR, SISD, SIRD, and SEIRD models, networked and fully connected versions. Using agent-based modeling, it simulates user-defined infectious diseases through user-defined populations and returns useful insights about the spread of the disease over time. 
