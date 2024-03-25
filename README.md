@@ -55,7 +55,7 @@ This example features:
 - Model summary
 - State counts table
 
-![ ](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/f4e7d313-e3b6-4ebb-9c0a-ca4d53ef9cea)
+![ex1](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/f4e7d313-e3b6-4ebb-9c0a-ca4d53ef9cea)
   
 ### Example #2
 This example features the implementation of the vaccine and school closure interventions to curb disease spread. All model 
