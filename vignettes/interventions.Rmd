@@ -81,7 +81,7 @@ deceased agents.
 #   draw_image("~/Desktop/intervention.png", width = 0.5) + 
 #   draw_image("~/Desktop/comparison_plot.png", width = 0.5, x = .5)
 
-knitr::include_graphics("~/Desktop/Research/comparison.png")
+knitr::include_graphics("https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/092caa29-dee2-4230-b2c7-59a46a2493ee")
 
 ```
 
