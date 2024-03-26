@@ -49,32 +49,25 @@ disease in the simulated population. After running the simulation, a plot of the
 of the disease's reproductive number over time, a model summary, and table of states counts over time are displayed.
 
 This example features:
-- SEIR network model for COVID-19
-- Day of peak infections occurs on day 12, maxing at about 18,000 infections.
-- The disease spreads rapidly at the beginning of the simulation, and drastically decreased over the first 10 days. 
-- Model summary
-- State counts table
-
-```{r, echo=FALSE}
-knitr::include_graphics("https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/f4e7d313-e3b6-4ebb-9c0a-ca4d53ef9cea")
-```
+- SEIR network model for COVID-19  
+- Day of peak infections occurs on day 12, maxing at about 18,000 infections.  
+- The disease spreads rapidly at the beginning of the simulation, and drastically decreased over the first 10 days.   
+- Model summary  
+- State counts table  
+  
+![ex1](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/f4e7d313-e3b6-4ebb-9c0a-ca4d53ef9cea)
   
 ### Example #2
 This example features the implementation of the vaccine and school closure interventions to curb disease spread. All model 
 output can be interpreted using the same logic from example #1.
 
 Key features:
-- SEIRD network model for COVID-19
-- Vaccine prevalence = 70%
-- School closure prevalance = 50%
-- Day of school closure implementation = 7
-- Significantly decreased number of infections and deaths.
-- Majority of population recovered or susceptible by day 30.
-
+- SEIRD network model for COVID-19  
+- Vaccine prevalence = 70%  
+- School closure prevalance = 50%  
+- Day of school closure implementation = 7  
+- Significantly decreased number of infections and deaths.  
+- Majority of population recovered or susceptible by day 30.  
+  
 ![ex2](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/d5405162-f7fe-4a42-8a4c-e9a2ac31be73)
-
-### Example #3
-
-
-
-
+  
