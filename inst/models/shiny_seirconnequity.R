@@ -39,7 +39,7 @@ shiny_seirconnequity <- function(input) {
 
   # Saving the data to the global environment (this way we make sure it is
   # available to the model)
-  epiworldRenv()$X <- X
+  assign("X", X, envir=epiworldRenv())
 
   # Adding population data
   set_agents_data(
