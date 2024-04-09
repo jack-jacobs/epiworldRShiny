@@ -70,4 +70,18 @@ Key features:
 - Majority of population recovered or susceptible by day 30.  
   
 ![example 2 GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/d5405162-f7fe-4a42-8a4c-e9a2ac31be73)
+
+### Example #3
+The last example features the SEIR equity model. This model is unique because it accounts for demographic 
+diversity in a population, such as race, gender, and age. This allows for the comparison of disease spread among 
+different demographics, unlike the previous two examples.
+
+Key features:
+- SEIR equity model for COVID-19
+- 30% hispanic population, 70% non-hispanic
+- 52% female population
+- 30% of population younger than 20 years old
+- 30% of population between 20 and 60 years old
+- 40% of population older than 60.
   
+![example 3 GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/20aeb62d-cb42-4882-8577-a3406f167bca)
