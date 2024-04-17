@@ -31,7 +31,8 @@ Imports:
     ggplot2,
     epiworldR,
     shinycssloaders,
-    plotly
+    plotly,
+    pkgload
 Depends:
     shiny
 VignetteBuilder: knitr
