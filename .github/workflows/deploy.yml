@@ -16,7 +16,7 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
       - name: Deploy
         env:
-          RSHINYAPPSTOKEN: ${{ secrets.BDD37BE867B12F421BE4443534430709 }}
-          RSHINYAPPSEMAIL: ${{ secrets.derekmeyer37@gmail.com }}
+          RSHINYAPPSTOKEN: ${{ secrets.MYKEY }}
+          RSHINYAPPSEMAIL: ${{ secrets.MYEMAIL }}
         run: |
           rsconnect::deployApp(appDir = '~/Desktop/Research/epiworldRShiny')
