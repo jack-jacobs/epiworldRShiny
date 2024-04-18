@@ -23,3 +23,20 @@ run:
 
 check:
 	cd .. && R CMD check $(PKG_NAME)_$(PKG_VERSION).tar.gz
+
+docker-build:
+	docker build -t gvegayon/epiworldrshiny .
+
+docker-push:
+	docker push gvegayon/epiworldrshiny
+
+docker-run:
+	docker run -i --rm -v$(PWD):/epiworld/ uofuepibio/epiworldrshiny
+
+
+deploy:
+	Rscript --vanilla app/deploy.R
+
+	
+
+.PHONY: docs build install run check docker-build

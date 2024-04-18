@@ -6,5 +6,6 @@ rsconnect::setAccountInfo(
 
 rsconnect::deployApp(
   appDir = "app",
-  appName = "epiworldRShiny"
+  appName = "epiworldRShiny",
+  appId= Sys.getenv("SHINY_APP_ID")
   )
