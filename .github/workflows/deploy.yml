@@ -24,4 +24,5 @@ jobs:
           SHINY_TOKEN: ${{ secrets.SHINY_TOKEN }}
           SHINY_USER: ${{ secrets.SHINY_USER }}
         run: |
+          make build install
           Rscript --vanilla app/deploy.R
