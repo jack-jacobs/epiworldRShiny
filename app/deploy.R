@@ -5,6 +5,6 @@ rsconnect::setAccountInfo(
   )
 
 rsconnect::deployApp(
-  appDir = "app"
+  appDir = "app",
   appName = "epiworldRShiny"
   )
