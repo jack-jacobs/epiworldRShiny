@@ -4,8 +4,13 @@ rsconnect::setAccountInfo(
   secret = Sys.getenv("SHINY_SECRET")
   )
 
+cat("Listing the current directory and its contents\n")
+cat(getwd(), "\n")
+list.files() |> cat("\n")
+
 rsconnect::deployApp(
   appDir = "app",
   appName = "epiworldRShiny",
-  appId= Sys.getenv("SHINY_APP_ID")
+  appId= Sys.getenv("SHINY_APP_ID"),
+  forceUpdate = TRUE
   )
