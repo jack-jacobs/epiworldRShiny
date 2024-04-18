@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   deploy:
-    runs-on: [macOS-latest, windows-latest, ubuntu-latest]
+    runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v2
       - name: Set up R
@@ -16,7 +16,8 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
       - name: Deploy
         env:
-          RSHINYAPPSTOKEN: ${{ secrets.MYKEY }}
-          RSHINYAPPSEMAIL: ${{ secrets.MYEMAIL }}
+          SHINY_SECRET: ${{ secrets.SHINY_SECRET }}
+          SHINY_TOKEN: ${{ secrets.SHINY_TOKEN }}
+          SHINY_USER: ${{ secrets.SHINY_USER }}
         run: |
-          rsconnect::deployApp(appDir = '~/Desktop/Research/epiworldRShiny')
+          Rscript --vanilla app/deploy.R
