@@ -1,3 +1,5 @@
+library(rsconnect)
+
 rsconnect::setAccountInfo(
   name   = Sys.getenv("SHINY_USER"),
   token  = Sys.getenv("SHINY_TOKEN"),
