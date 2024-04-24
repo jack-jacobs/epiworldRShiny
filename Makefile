@@ -35,7 +35,7 @@ docker-run:
 
 
 deploy:
-	Rscript --vanilla epiworldRShiny/deploy.R
+	Rscript --vanilla epishiny/deploy.R
 
 	
 
