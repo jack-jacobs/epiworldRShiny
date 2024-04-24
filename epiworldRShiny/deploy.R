@@ -14,5 +14,8 @@ rsconnect::deployApp(
   appDir = file.path(getwd(), "epiworldRShiny"),
   appName = "epiworldRShiny",
   appId= Sys.getenv("SHINY_APP_ID"),
+  forceUpdate = TRUE,
+  account = Sys.getenv("SHINY_USER"),
+  logLevel = "verbose",
   forceUpdate = TRUE
   )
