@@ -11,11 +11,10 @@ cat(getwd(), "\n")
 list.files() |> cat("\n")
 
 rsconnect::deployApp(
-  appDir = file.path(getwd(), "epiworldRShiny"),
-  appName = "epiworldRShiny",
-  appId= Sys.getenv("SHINY_APP_ID"),
+  appDir = file.path(getwd(), "epishiny"),
+  appName = "epishiny",
+  # appId = Sys.getenv("SHINY_APP_ID"),
   forceUpdate = TRUE,
   account = Sys.getenv("SHINY_USER"),
-  logLevel = "verbose",
-  forceUpdate = TRUE
+  logLevel = "verbose"
   )
