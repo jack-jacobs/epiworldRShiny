@@ -5,18 +5,17 @@ on:
       - main
 jobs:
   deploy:
-    runs-on: [macOS-latest, windows-latest, ubuntu-latest]
+    runs-on: [ubuntu-latest]
+    container: 
+      image: gvegayon/epiworldrshiny:latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up R
-        uses: r-lib/actions/setup-r@v2
-      - name: Install dependencies
-        run: |
-          install.packages("remotes")
-          remotes::install_deps(dependencies = TRUE)
+
       - name: Deploy
         env:
-          RSHINYAPPSTOKEN: ${{ secrets.MYKEY }}
-          RSHINYAPPSEMAIL: ${{ secrets.MYEMAIL }}
+          SHINY_SECRET: ${{ secrets.SHINY_SECRET }}
+          SHINY_TOKEN: ${{ secrets.SHINY_TOKEN }}
+          SHINY_USER: ${{ secrets.SHINY_USER }}
         run: |
-          rsconnect::deployApp(appDir = '~/Desktop/Research/epiworldRShiny')
+          make build install deploy
+
