@@ -21,13 +21,13 @@ epiworldR_env <- new.env()
 #' Access to the epiworldR environment
 #' This function is for internal use only.
 #' @return Returns the `epiworldR_env` environment.
-#' 
+#' @noRd
 #' @export
 epiworldRenv <- function() {
   epiworldR_env
 }
 
-#' @export 
+#' @export
 #' @rdname epiworldRShiny
 epiworldRShiny <- function(...) {
 
@@ -99,7 +99,7 @@ epiworldRShiny <- function(...) {
         shiny::markdown(
           paste(
             "epiworldRShiny version",
-            epiworldRShiny_version, 
+            epiworldRShiny_version,
             "| epiworldR version",
             epiworldR_version
             )
@@ -191,10 +191,10 @@ epiworldRShiny <- function(...) {
 }
 
 
-#' @export 
-#' 
+#' @export
+#'
 #' @rdname epiworldRShiny
-#' @description 
+#' @description
 #' `run_app` is a wrapper for the `epiworldRShiny` function. It is a
 #' convenience function to run the app.
 run_app <- epiworldRShiny
