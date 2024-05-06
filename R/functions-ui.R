@@ -37,6 +37,7 @@ slider_prevalence <- function(model_name) {
 #' @param model_name Name of the epiworldR model.
 #' @export
 #' @return Returns an object of class shiny.tag.
+#' @noRd
 #' @examples
 #' numeric_input_ndays("SEIRD")
 numeric_input_ndays <- function(model_name) {
