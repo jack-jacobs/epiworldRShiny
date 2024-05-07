@@ -18,10 +18,12 @@ NULL
 
 epiworldR_env <- new.env()
 
-#' Access to the epiworldR environment
+#' Access to the epiworldR environment.
+#' 
 #' This function is for internal use only.
+#' 
 #' @return Returns the `epiworldR_env` environment.
-#' @noRd
+#' @keywords internal
 #' @export
 epiworldRenv <- function() {
   epiworldR_env

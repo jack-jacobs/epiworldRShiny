@@ -1,8 +1,14 @@
-#' text_input_disease_name Function
+#' epiworldRShiny UI builder functions
+#' 
+#' All functions in this section are for internal use only. They are used to
+#' build the UI for the epiworldRShiny app.
+#' 
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.
-#' @noRd
+#' @return
+#' - Unless otherwise specified, returns an object of class shiny.tag.
+#' @name epiworldrshiny-ui
+#' @keywords internal
 #' @examples
 #' text_input_disease_name("SEIRD")
 text_input_disease_name <- function(model_name) {
@@ -14,11 +20,8 @@ text_input_disease_name <- function(model_name) {
   )
 }
 
-#' slider_prevalence Function
-#' @param model_name Name of the epiworldR model.
+#' @rdname epiworldrshiny-ui
 #' @export
-#' @return Returns an object of class shiny.tag.
-#' @noRd
 #' @examples
 #' # slider_prevalence("SEIRD")
 slider_prevalence <- function(model_name) {
@@ -33,11 +36,8 @@ slider_prevalence <- function(model_name) {
     )
 }
 
-#' numeric_input_ndays Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.
-#' @noRd
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' numeric_input_ndays("SEIRD")
 numeric_input_ndays <- function(model_name) {
@@ -51,15 +51,12 @@ numeric_input_ndays <- function(model_name) {
     )
 }
 
-#' slider_input_rate Function
-#' @param model_name Name of the epiworldR model.
 #' @param rate_name Name of the rate.
 #' @param value Initial value for the slider.
 #' @param maxval Maxiumum value for the slider.
 #' @param input_label Aids in creating the appropriate slider name.
 #' @export
-#' @return Returns an object of class shiny.tag.
-#' @noRd
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' slider_input_rate("SEIRD", "transmission", value = 0.3, maxval = 1,
 #' input_label = NULL)
@@ -85,11 +82,10 @@ slider_input_rate <- function(
   )
 }
 
-#' network_input Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.list.
-#' @noRd
+#' @return
+#' - `network_input` returns an object of class [shiny::tagList] (`shiny.tag.list`).
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' network_input("SEIRD")
 network_input <- function(model_name) {
@@ -146,11 +142,10 @@ network_input <- function(model_name) {
     )
 }
 
-#' npis_input Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.list.
-#' @noRd
+#' @return
+#' - `npis_input` returns an object of class [shiny::tagList] (`shiny.tag.list`).
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' npis_input("SEIRD")
 npis_input <- function(model_name) {
@@ -209,11 +204,8 @@ npis_input <- function(model_name) {
   )
 }
 
-#' seed_input Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.
-#' @noRd
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' seed_input("SEIRD")
 seed_input <- function(model_name) {
@@ -227,10 +219,10 @@ seed_input <- function(model_name) {
     )
 }
 
-#' models_setup function
 #' @export
-#' @return Returns an object of class list.
-#' @noRd
+#' @return
+#' - `models_setup` returns an object of class list.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' models_setup()
 models_setup <- function() {
@@ -293,11 +285,10 @@ models_setup <- function() {
 
 }
 
-#' population_input Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.list.
-#' @noRd
+#' @return
+#' - `population_input` returns an object of class shiny.tag.list.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' population_input("SEIRD")
 population_input <- function(model_name) {
@@ -347,11 +338,8 @@ population_input <- function(model_name) {
 
 }
 
-#' simulate_button Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.
-#' @noRd
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' simulate_button("SEIRD")
 simulate_button <- function(model_name) {

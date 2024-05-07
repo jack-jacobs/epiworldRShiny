@@ -1,15 +1,19 @@
 
-#' pop_generator Function
+#' Population generator
 #'
 #' This function generates a population matrix with specified characteristics.
 #'
 #' @param n The number of individuals in the population.
-#' @param prop_hispanic The proportion of individuals who are Hispanic. Default is 0.5.
-#' @param prop_female The proportion of individuals who are female. Default is 0.5.
-#' @param prop_19_59_60plus A vector of length 3 representing the proportions of individuals in the age groups 0-19, 20-59, and 60+. Default is c(0.5, 0.3, 0.2).
+#' @param prop_hispanic The proportion of individuals who are Hispanic.
+#' Default is 0.5.
+#' @param prop_female The proportion of individuals who are female. Default is
+#' 0.5.
+#' @param prop_19_59_60plus A vector of length 3 representing the proportions of
+#' individuals in the age groups 0-19, 20-59, and 60+. Default is c(0.5, 0.3, 0.2).
 #'
-#' @return A matrix representing the generated population, with columns for age groups (0-19, 20-59, 60+), NotHispanic, and Female.
-#' @noRd
+#' @return A matrix representing the generated population, with columns for age
+#' groups (0-19, 20-59, 60+), NotHispanic, and Female.
+#' @keywords internal
 #' @examples
 #' pop_generator(n = 10000, prop_hispanic = .5, prop_female = .5,
 #'               prop_19_59_60plus = c(.3, .6))
@@ -50,7 +54,7 @@ pop_generator <- function(
 
 }
 
-#' find_scale Function
+#' Find the right plotting-scale
 #'
 #' This function determines the scale of the y-axis for plot_epi.
 #' @param x The maximum value found in the model state counts
@@ -58,7 +62,7 @@ pop_generator <- function(
 #' @return An integer representing the scale for the y-axis. A max counts value
 #' of 10000 will return a scale of 1, 100000 will return a scale of 1000,
 #' 1000000 will return a scale of 10000.
-#' @noRd
+#' @keywords internal
 #' @examples
 #' find_scale(100000)
 #'
@@ -70,7 +74,7 @@ find_scale <- function(x) {
   res
 }
 
-#' plot_epi Function
+#' Plot daily incidence
 #'
 #' This function generates a plot of the model states over time
 #' @param model The number of individuals in the population.
@@ -78,7 +82,7 @@ find_scale <- function(x) {
 #'
 #' @return A plot displaying each state from the model over the course of the
 #' simulation
-#' @noRd
+#' @keywords internal
 #' @examples
 #' library(epiworldR) # for ModelSEIRCONN function
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
@@ -230,14 +234,14 @@ plot_epi <- function(model, mark_max) {
   return(plot)
 }
 
-#' plot_reproductive_epi Function
+#' Plot Rt
 #'
 #' This function generates a plot of the reproductive number over time
 #' @param model The model object
 #'
 #' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
-#' @noRd
+#' @keywords internal
 #' @examples
 #' library(epiworldR) # for ModelSEIRCONN function
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
