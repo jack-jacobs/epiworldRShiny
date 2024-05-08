@@ -45,4 +45,3 @@ npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
                 transmission_reduction = .5, recovery_enhancer = .5,
                 death_reduction = .9)
 }
-\keyword{internal}

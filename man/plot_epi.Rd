@@ -27,4 +27,3 @@ run(model, ndays = 100, seed = 123)
 plot_epi(model, mark_max = "Infected")
 
 }
-\keyword{internal}

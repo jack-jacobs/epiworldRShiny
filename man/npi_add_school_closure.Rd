@@ -28,4 +28,3 @@ model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 run(model, ndays = 100, seed = 123)
 npi_add_school_closure(model, preval = .8, day = 10)
 }
-\keyword{internal}

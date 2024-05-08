@@ -21,4 +21,3 @@ This function determines the scale of the y-axis for plot_epi.
 find_scale(100000)
 
 }
-\keyword{internal}

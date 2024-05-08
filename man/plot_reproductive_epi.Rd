@@ -24,4 +24,3 @@ model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 run(model, ndays = 100, seed = 123)
 plot_reproductive_epi(model)
 }
-\keyword{internal}

@@ -20,4 +20,3 @@ substituted with the model name.
 \description{
 NPI adding function
 }
-\keyword{internal}

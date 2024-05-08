@@ -83,4 +83,3 @@ models_setup()
 population_input("SEIRD")
 simulate_button("SEIRD")
 }
-\keyword{internal}

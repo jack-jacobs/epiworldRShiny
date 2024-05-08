@@ -34,4 +34,3 @@ This function generates a population matrix with specified characteristics.
 pop_generator(n = 10000, prop_hispanic = .5, prop_female = .5,
               prop_19_59_60plus = c(.3, .6))
 }
-\keyword{internal}

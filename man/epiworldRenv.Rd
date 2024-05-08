@@ -12,4 +12,3 @@ Returns the \code{epiworldR_env} environment.
 \description{
 This function is for internal use only.
 }
-\keyword{internal}
