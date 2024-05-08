@@ -8,7 +8,6 @@
 #' @return
 #' - Unless otherwise specified, returns an object of class shiny.tag.
 #' @name epiworldrshiny-ui
-
 #' @examples
 #' text_input_disease_name("SEIRD")
 text_input_disease_name <- function(model_name) {

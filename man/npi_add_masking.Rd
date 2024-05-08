@@ -26,3 +26,10 @@ model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 run(model, ndays = 100, seed = 123)
 npi_add_masking(model, preval = .8)
 }
+\seealso{
+Other npis: 
+\code{\link{npi_add_all}()},
+\code{\link{npi_add_school_closure}()},
+\code{\link{npi_add_vaccine}()}
+}
+\concept{npis}
