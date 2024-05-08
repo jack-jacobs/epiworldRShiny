@@ -1,8 +1,8 @@
 #' epiworldRShiny UI builder functions
-#' 
+#'
 #' All functions in this section are for internal use only. They are used to
 #' build the UI for the epiworldRShiny app.
-#' 
+#'
 #' @param model_name Name of the epiworldR model.
 #' @export
 #' @return
@@ -97,49 +97,60 @@ network_input <- function(model_name) {
         shiny::h4(
           shiny::tagList(
             shiny::icon("circle-info"),
-          "Population structure"
+            "Population structure"
           )
         )
       )
-      ),
+    ),
     shinyjs::hidden(
       shiny::div(
         id = paste0("network_inputs_", model_name),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_population_size"),
-          label   = "Population Size",
-          min     = 0,
-          max     = 100000,
-          value   = 50000,
-          step    = 1000,
-          ticks   = FALSE
+        shiny::tagList(
+          shiny::tags$style("p { padding: 0 20px; }"),
+          shiny::p("This input option allows for the modification of population
+                   structure parameters. Number of ties refers to the number of
+                   agents each individual agent is expected to meet, on average.
+                   Directed referes to whether or not an interaction between two
+                   agents goes one-way or two-way. The probability of rewiring is
+                   the probability that an agent becomes disconnected from their
+                   location within the network, and relocates to another location
+                   within the same network. "),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_population_size"),
+            label   = "Population Size",
+            min     = 0,
+            max     = 100000,
+            value   = 50000,
+            step    = 1000,
+            ticks   = FALSE
           ),
-        shiny::numericInput(
-          inputId = paste0(model_name, "_k"),
-          label   = "Number of Ties",
-          min     = 0,
-          max     = 500,
-          step    = 1,
-          value   = 20
+          shiny::numericInput(
+            inputId = paste0(model_name, "_k"),
+            label   = "Number of Ties",
+            min     = 0,
+            max     = 500,
+            step    = 1,
+            value   = 20
           ),
-        shiny::selectInput(
-          inputId  = paste0(model_name, "_directed"),
-          label    = "Directed",
-          choices  = c("TRUE", "FALSE"),
-          selected = "FALSE"
+          shiny::selectInput(
+            inputId  = paste0(model_name, "_directed"),
+            label    = "Directed",
+            choices  = c("TRUE", "FALSE"),
+            selected = "FALSE"
           ),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_prob_rewiring"),
-          label   = "Probability of Rewiring",
-          value   = "0.20",
-          min     = 0,
-          max     = 1,
-          step    = 0.01,
-          ticks   = FALSE
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_prob_rewiring"),
+            label   = "Probability of Rewiring",
+            value   = "0.20",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
           )
         )
       )
     )
+  )
 }
 
 #' @export
