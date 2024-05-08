@@ -45,3 +45,10 @@ npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
                 transmission_reduction = .5, recovery_enhancer = .5,
                 death_reduction = .9)
 }
+\seealso{
+Other npis: 
+\code{\link{npi_add_all}()},
+\code{\link{npi_add_masking}()},
+\code{\link{npi_add_school_closure}()}
+}
+\concept{npis}

@@ -4,7 +4,7 @@
 \alias{npi_add_school_closure}
 \title{School closure definition function}
 \usage{
-npi_add_school_closure(model, preval, day)
+npi_add_school_closure(model, preval, day, reduction = 0.9)
 }
 \arguments{
 \item{model}{epiworldR model.}
@@ -12,6 +12,8 @@ npi_add_school_closure(model, preval, day)
 \item{preval}{Prevalence of school closure within the population.}
 
 \item{day}{Day in the simulation where school closure goes into effect.}
+
+\item{reduction}{Reduction in transmission probability due to school closure.}
 }
 \value{
 Returns an object of class epiworld_model, where model is
@@ -28,3 +30,10 @@ model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 run(model, ndays = 100, seed = 123)
 npi_add_school_closure(model, preval = .8, day = 10)
 }
+\seealso{
+Other npis: 
+\code{\link{npi_add_all}()},
+\code{\link{npi_add_masking}()},
+\code{\link{npi_add_vaccine}()}
+}
+\concept{npis}

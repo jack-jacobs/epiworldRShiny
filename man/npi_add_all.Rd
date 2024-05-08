@@ -20,3 +20,10 @@ substituted with the model name.
 \description{
 NPI adding function
 }
+\seealso{
+Other npis: 
+\code{\link{npi_add_masking}()},
+\code{\link{npi_add_school_closure}()},
+\code{\link{npi_add_vaccine}()}
+}
+\concept{npis}
