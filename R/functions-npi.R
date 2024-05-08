@@ -9,7 +9,7 @@
 #' @param death_reduction Reduction in death probability due to vaccine.
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
-#' @keywords internal
+
 #' @examples
 #' library(epiworldR) # for ModelSEIRCONN function
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
@@ -53,7 +53,7 @@ npi_add_vaccine <- function(
 #' @param preval Prevalence of masking within the population.
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
-#' @keywords internal
+
 #' @examples
 #' library(epiworldR) # for ModelSEIRCONN function
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
@@ -90,7 +90,7 @@ npi_add_masking <- function(model, preval) {
 #' @param day Day in the simulation where school closure goes into effect.
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
-#' @keywords internal
+
 #' @examples
 #' library(epiworldR) # for ModelSEIRCONN function
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
@@ -134,7 +134,7 @@ npi_add_school_closure <- function(model, preval, day) {
 #' @param input User epiworldR model selection.
 #' @returns Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
-#' @keywords internal
+
 #' @export
 npi_add_all <- function(model, modelname, input) {
 

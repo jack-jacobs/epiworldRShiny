@@ -23,7 +23,7 @@ epiworldR_env <- new.env()
 #' This function is for internal use only.
 #' 
 #' @return Returns the `epiworldR_env` environment.
-#' @keywords internal
+
 #' @export
 epiworldRenv <- function() {
   epiworldR_env
