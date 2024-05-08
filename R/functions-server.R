@@ -13,7 +13,6 @@
 #'
 #' @return A matrix representing the generated population, with columns for age
 #' groups (0-19, 20-59, 60+), NotHispanic, and Female.
-
 #' @examples
 #' pop_generator(n = 10000, prop_hispanic = .5, prop_female = .5,
 #'               prop_19_59_60plus = c(.3, .6))
@@ -62,7 +61,6 @@ pop_generator <- function(
 #' @return An integer representing the scale for the y-axis. A max counts value
 #' of 10000 will return a scale of 1, 100000 will return a scale of 1000,
 #' 1000000 will return a scale of 10000.
-
 #' @examples
 #' find_scale(100000)
 #'
@@ -82,7 +80,6 @@ find_scale <- function(x) {
 #'
 #' @return A plot displaying each state from the model over the course of the
 #' simulation
-
 #' @examples
 #' library(epiworldR) # for ModelSEIRCONN function
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
@@ -241,7 +238,6 @@ plot_epi <- function(model, mark_max) {
 #'
 #' @return A plot displaying the reproductive number for the model over the
 #' course of the simulation
-
 #' @examples
 #' library(epiworldR) # for ModelSEIRCONN function
 #' model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
