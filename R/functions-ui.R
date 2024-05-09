@@ -106,14 +106,8 @@ network_input <- function(model_name) {
         id = paste0("network_inputs_", model_name),
         shiny::tagList(
           shiny::tags$style("p { padding: 0 20px; }"),
-          shiny::p("This input option allows for the modification of population
-                   structure parameters. Number of ties refers to the number of
-                   agents each individual agent is expected to meet, on average.
-                   Directed referes to whether or not an interaction between two
-                   agents goes one-way or two-way. The probability of rewiring is
-                   the probability that an agent becomes disconnected from their
-                   location within the network, and relocates to another location
-                   within the same network. "),
+          shiny::p("The below parameters affect the network structure and
+                   behavior of agents within the simulation."),
           shiny::sliderInput(
             inputId = paste0(model_name, "_population_size"),
             label   = "Population Size",
@@ -131,12 +125,17 @@ network_input <- function(model_name) {
             step    = 1,
             value   = 20
           ),
+          shiny::p("The number of
+                   agents each individual agent is expected to meet, on
+                   average."),
           shiny::selectInput(
             inputId  = paste0(model_name, "_directed"),
             label    = "Directed",
             choices  = c("TRUE", "FALSE"),
             selected = "FALSE"
           ),
+          shiny::p("Whether or not an interaction between two agents
+                   is one-way or two-way."),
           shiny::sliderInput(
             inputId = paste0(model_name, "_prob_rewiring"),
             label   = "Probability of Rewiring",
@@ -145,7 +144,10 @@ network_input <- function(model_name) {
             max     = 1,
             step    = 0.01,
             ticks   = FALSE
-          )
+          ),
+           shiny::p("The probability that an agent becomes disconnected from
+                    their location within the network, and relocates to another
+                    location within the same network")
         )
       )
     )
@@ -167,52 +169,63 @@ npis_input <- function(model_name) {
           shiny::tagList(
             shiny::icon("circle-info"),
             "Interventions"
-            )
-      ))
-      ),
-    # By default shinyjs::hidden
+          )
+        )
+      )
+    ),
     shinyjs::hidden(
-      shiny::div(id = paste0("npis_inputs_", model_name),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_vaccine_prevalence"),
-          label   = "% of agents vaccinated",
-          min     = 0,
-          max     = 1,
-          value   = 0,
-          step    = 0.01,
-          ticks   = FALSE
+      shiny::div(
+        id = paste0("npis_inputs_", model_name),
+        shiny::tagList(
+          shiny::tags$style("p { padding: 0 20px; }"),
+          tags$p("More details about the implementation of the below
+                interventions can be found in the epiworldRShiny",
+                 tags$a("reference manual",
+                 href = "https://uofuepibio.github.io/epiworldRShiny/reference/index.html"),
+                 "."
+                 ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_prevalence"),
+            label   = "% of agents vaccinated",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
           ),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_masking_prevalence"),
-          label   = "% of agents using masks",
-          value   = "0",
-          min     = 0,
-          max     = 1,
-          step    = 0.01,
-          ticks   = FALSE
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_masking_prevalence"),
+            label   = "% of agents using masks",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
           ),
-        shiny::headerPanel(shiny::h4("School Closure")),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_school_closure_prevalence"),
-          label   = "Prevalence",
-          value   = "0",
-          min     = 0,
-          max     = 1,
-          step    = 0.01,
-          ticks   = FALSE
+          shiny::headerPanel(shiny::h4("School Closure")),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_school_closure_prevalence"),
+            label   = "Prevalence",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
           ),
-        shiny::numericInput(
-          inputId = paste0(model_name, "_school_closure_day"),
-          label   = "Implementation day",
-          value = "0",
-          min = 0,
-          max = 100,
-          step = 1
+          shiny::numericInput(
+            inputId = paste0(model_name, "_school_closure_day"),
+            label   = "Implementation day",
+            value = "0",
+            min = 0,
+            max = 100,
+            step = 1
+          )
         )
       )
     )
   )
 }
+
 
 #' @export
 #' @rdname epiworldrshiny-ui
