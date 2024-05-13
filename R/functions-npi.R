@@ -15,9 +15,9 @@
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
 #' run(model, ndays = 100, seed = 123)
-#' npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
-#'                 transmission_reduction = .5, recovery_enhancer = .5,
-#'                 death_reduction = .9)
+#' npi_add_vaccine(model, preval = .8, sus_red = .9,
+#'                 trans_red = .5, rec_enhan = .5,
+#'                 death_red = .9)
 #' @export
 #' @family npis
 npi_add_vaccine <- function(
@@ -60,7 +60,7 @@ npi_add_vaccine <- function(
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
 #' run(model, ndays = 100, seed = 123)
-#' npi_add_masking(model, preval = .8)
+#' npi_add_masking(model, preval = .8, trans_red = 0.3)
 #' @export
 #' @family npis
 npi_add_masking <- function(model, preval, trans_red) {
@@ -98,7 +98,7 @@ npi_add_masking <- function(model, preval, trans_red) {
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
 #' run(model, ndays = 100, seed = 123)
-#' npi_add_school_closure(model, preval = .8, day = 10)
+#' npi_add_school_closure(model, preval = .8, trans_red = .3, day = 10)
 #' @export
 #' @family npis
 npi_add_school_closure <- function(model, preval, day,
