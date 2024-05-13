@@ -4,7 +4,7 @@
 \alias{npi_add_school_closure}
 \title{School closure definition function}
 \usage{
-npi_add_school_closure(model, preval, day, reduction = 0.9)
+npi_add_school_closure(model, preval, day, trans_red)
 }
 \arguments{
 \item{model}{epiworldR model.}

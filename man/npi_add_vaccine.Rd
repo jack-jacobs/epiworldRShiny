@@ -4,14 +4,7 @@
 \alias{npi_add_vaccine}
 \title{Vaccine definition function}
 \usage{
-npi_add_vaccine(
-  model,
-  preval,
-  susceptibility_reduction = 0.9,
-  transmission_reduction = 0.5,
-  recovery_enhancer = 0.5,
-  death_reduction = 0.9
-)
+npi_add_vaccine(model, preval, sus_red, trans_red, rec_enhan, death_red)
 }
 \arguments{
 \item{model}{epiworldR model.}

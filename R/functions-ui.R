@@ -184,6 +184,7 @@ npis_input <- function(model_name) {
                  href = "https://uofuepibio.github.io/epiworldRShiny/reference/index.html"),
                  "."
                  ),
+          shiny::headerPanel(shiny::h4("Vaccination")),
           shiny::sliderInput(
             inputId = paste0(model_name, "_vaccine_prevalence"),
             label   = "% of agents vaccinated",
@@ -194,8 +195,54 @@ npis_input <- function(model_name) {
             ticks   = FALSE
           ),
           shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_susceptibility_reduction"),
+            label   = "probability reduction of susceptibility",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_transmission_reduction"),
+            label   = "probability reduction of transmission",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_recovery_enhancer"),
+            label   = "probability increase of recovery",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_death_reduction"),
+            label   = "probability reduction of death",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::headerPanel(shiny::h4("Masking")),
+          shiny::sliderInput(
             inputId = paste0(model_name, "_masking_prevalence"),
             label   = "% of agents using masks",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_masking_transmission_reduction"),
+            label   = "probability reduction of transmission",
             value   = "0",
             min     = 0,
             max     = 1,
@@ -205,7 +252,7 @@ npis_input <- function(model_name) {
           shiny::headerPanel(shiny::h4("School Closure")),
           shiny::sliderInput(
             inputId = paste0(model_name, "_school_closure_prevalence"),
-            label   = "Prevalence",
+            label   = "prevalence",
             value   = "0",
             min     = 0,
             max     = 1,
@@ -214,11 +261,20 @@ npis_input <- function(model_name) {
           ),
           shiny::numericInput(
             inputId = paste0(model_name, "_school_closure_day"),
-            label   = "Implementation day",
+            label   = "implementation day",
             value = "0",
             min = 0,
             max = 100,
             step = 1
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_school_closure_transmission_reduction"),
+            label   = "probability reduction of transmission",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
           )
         )
       )

@@ -1,7 +1,7 @@
 # alt-name: Network SIRD
 
 shiny_sird <- function(input) {
-  
+
   # Creating model
   model_sird <- epiworldR::ModelSIRD(
     name              = input$sird_disease_name,
@@ -18,8 +18,8 @@ shiny_sird <- function(input) {
       k = input$sird_k,
       d = as.logical(input$sird_directed),
       p = input$sird_prob_rewiring
-  ) 
-  
+  )
+
   # NPIs -----------------------------------------------------------------------
   npi_add_all(model_sird, "sird", input)
 
@@ -31,7 +31,7 @@ shiny_sird <- function(input) {
   plot_sird <- function() plot_epi(model_sird)
   summary_sird <- function() summary(model_sird)
   reproductive_sird <- function() plot_reproductive_epi(model_sird)
-  # Table 
+  # Table
   table_sird <- function() {
     df <- as.data.frame(epiworldR::get_hist_total(model_sird))
     # Subset to only include "infection" state
@@ -39,9 +39,9 @@ shiny_sird <- function(input) {
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$count), ]
     # Row number of the maximum count in the original data frame
-    max_row_number <- which(df$date == max_infection_row$date & 
+    max_row_number <- which(df$date == max_infection_row$date &
                               df$state == "Infected")
-    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+    df[max_row_number,] <- sprintf("<strong>%s</strong>",
                                        df[max_row_number,])
     df
   }
@@ -67,9 +67,9 @@ sird_panel <- function(model_alt) {
     slider_input_rate("sird", "Probability of death (daily)", 0.01, input_label = "death_rate"),
     numeric_input_ndays("sird"),
     seed_input("sird"),
-    simulate_button("sird"),
     network_input("sird"),
-    npis_input("sird")
+    npis_input("sird"),
+    simulate_button("sird")
   )
 
 }

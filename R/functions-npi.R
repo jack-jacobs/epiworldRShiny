@@ -22,20 +22,20 @@
 #' @family npis
 npi_add_vaccine <- function(
   model, preval,
-  susceptibility_reduction = .9,
-  transmission_reduction = .5,
-  recovery_enhancer = .5,
-  death_reduction = .9
+  sus_red,
+  trans_red,
+  rec_enhan,
+  death_red
   ) {
 
   if (preval > 0) {
 
     tool_ <- epiworldR::tool(
       name = "Vaccine",
-      susceptibility_reduction = susceptibility_reduction,
-      transmission_reduction = transmission_reduction,
-      recovery_enhancer = recovery_enhancer,
-      death_reduction = death_reduction
+      susceptibility_reduction = sus_red,
+      transmission_reduction = trans_red,
+      recovery_enhancer = rec_enhan,
+      death_reduction = death_red
     )
 
     epiworldR::add_tool(
@@ -62,14 +62,14 @@ npi_add_vaccine <- function(
 #' npi_add_masking(model, preval = .8)
 #' @export
 #' @family npis
-npi_add_masking <- function(model, preval) {
+npi_add_masking <- function(model, preval, trans_red) {
 
   if (preval > 0) {
 
     tool_ <- epiworldR::tool(
       name = "Masking",
       susceptibility_reduction = 0,
-      transmission_reduction = 0.5,
+      transmission_reduction = trans_red,
       recovery_enhancer = 0,
       death_reduction = 0
     )
@@ -100,7 +100,8 @@ npi_add_masking <- function(model, preval) {
 #' npi_add_school_closure(model, preval = .8, day = 10)
 #' @export
 #' @family npis
-npi_add_school_closure <- function(model, preval, day, reduction = 0.9) {
+npi_add_school_closure <- function(model, preval, day,
+                                   trans_red) {
 
   if (preval > 0) {
 
@@ -108,7 +109,7 @@ npi_add_school_closure <- function(model, preval, day, reduction = 0.9) {
     tool_ <- epiworldR::tool(
       name                     = "School Closure",
       susceptibility_reduction = 0,
-      transmission_reduction   = reduction,
+      transmission_reduction   = trans_red,
       recovery_enhancer        = 0,
       death_reduction          = 0
     )
@@ -141,18 +142,24 @@ npi_add_all <- function(model, modelname, input) {
 
   npi_add_vaccine(
     model  = model,
-    preval = input[[paste0(modelname, "_vaccine_prevalence")]]
+    preval = input[[paste0(modelname, "_vaccine_prevalence")]],
+    sus_red = input[[paste0(modelname, "_vaccine_susceptibility_reduction")]],
+    trans_red = input[[paste0(modelname, "_vaccine_transmission_reduction")]],
+    rec_enhan = input[[paste0(modelname, "_vaccine_recovery_enhancer")]],
+    death_red = input[[paste0(modelname, "_vaccine_death_reduction")]]
     )
 
   npi_add_masking(
     model = model,
-    preval = input[[paste0(modelname, "_masking_prevalence")]]
+    preval = input[[paste0(modelname, "_masking_prevalence")]],
+    trans_red = input[[paste0(modelname, "_masking_transmission_reduction")]]
     )
 
   npi_add_school_closure(
-    model  = model,
-    preval = input[[paste0(modelname, "_school_closure_prevalence")]],
-    day    = input[[paste0(modelname, "_school_closure_day")]]
+    model     = model,
+    preval    = input[[paste0(modelname, "_school_closure_prevalence")]],
+    day       = input[[paste0(modelname, "_school_closure_day")]],
+    trans_red = input[[paste0(modelname, "_school_closure_transmission_reduction")]]
     )
 
 }

@@ -6,22 +6,22 @@ shiny_sirconn <- function(input) {
     prevalence        = input$sirconn_prevalence,
     transmission_rate = input$sirconn_transmission_rate,
     recovery_rate     = input$sirconn_recovery_rate,
-    contact_rate      = input$sirconn_contact_rate, 
+    contact_rate      = input$sirconn_contact_rate,
     n                 = input$sirconn_population_size
     )
-    
+
   # NPIs -----------------------------------------------------------------------
   npi_add_all(model_sirconn, "sirconn", input)
-  
+
   # Running and printing
   epiworldR::verbose_off(model_sirconn)
   epiworldR::run(model_sirconn, ndays = input$sirconn_n_days, seed = input$sirconn_seed)
-  
+
   # Plot, summary, and reproductive number
   plot_sirconn <- function() plot_epi(model_sirconn)
   summary_sirconn <- function() summary(model_sirconn)
   reproductive_sirconn <- function() plot_reproductive_epi(model_sirconn)
-  # Table 
+  # Table
   table_sirconn <- function() {
     df <- as.data.frame(epiworldR::get_hist_total(model_sirconn))
     # Subset to only include "infection" state
@@ -29,9 +29,9 @@ shiny_sirconn <- function(input) {
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$count), ]
     # Row number of the maximum count in the original data frame
-    max_row_number <- which(df$date == max_infection_row$date & 
+    max_row_number <- which(df$date == max_infection_row$date &
                               df$state == "Infected")
-    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+    df[max_row_number,] <- sprintf("<strong>%s</strong>",
                                        df[max_row_number,])
     df
   }
@@ -57,16 +57,16 @@ sirconn_panel <- function(model_alt) {
     shiny::sliderInput(
       inputId = "sirconn_population_size",
       label   = "Population Size",
-      min     = 0, 
-      max     = 100000, 
-      value   = 50000, 
+      min     = 0,
+      max     = 100000,
+      value   = 50000,
       step    = 1000,
       ticks   = FALSE
     ),
     numeric_input_ndays("sirconn"),
     seed_input("sirconn"),
-    simulate_button("sirconn"),
-    npis_input("sirconn")
+    npis_input("sirconn"),
+    simulate_button("sirconn")
   )
 }
 

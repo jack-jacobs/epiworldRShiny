@@ -64,9 +64,9 @@ sir_panel <- function(model_alt) {
     slider_input_rate("sir", "Recovery probability (daily)", "0.14", input_label = "recovery_rate"),
     numeric_input_ndays("sir"),
     seed_input("sir"),
-    simulate_button("sir"),
     network_input("sir"),
-    npis_input("sir")
+    npis_input("sir"),
+    simulate_button("sir")
   )
 
 }

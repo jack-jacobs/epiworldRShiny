@@ -4,7 +4,7 @@
 \alias{npi_add_masking}
 \title{Masking definition function}
 \usage{
-npi_add_masking(model, preval)
+npi_add_masking(model, preval, trans_red)
 }
 \arguments{
 \item{model}{epiworldR model.}
