@@ -10,6 +10,8 @@ npi_add_masking(model, preval, trans_red)
 \item{model}{epiworldR model.}
 
 \item{preval}{Prevalence of masking within the population.}
+
+\item{trans_red}{Reduction in transmission probability due to masking}
 }
 \value{
 Returns an object of class epiworld_model, where model is

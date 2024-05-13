@@ -11,15 +11,15 @@ npi_add_vaccine(model, preval, sus_red, trans_red, rec_enhan, death_red)
 
 \item{preval}{Initial prevalence of the vaccine.}
 
-\item{susceptibility_reduction}{Reduction in susceptibility probability due
+\item{sus_red}{Reduction in susceptibility probability due
 to vaccine.}
 
-\item{transmission_reduction}{Reduction in transmission probability due to
+\item{trans_red}{Reduction in transmission probability due to
 vaccine.}
 
-\item{recovery_enhancer}{Probability increase in recovery due to vaccine.}
+\item{rec_enhan}{Probability increase in recovery due to vaccine.}
 
-\item{death_reduction}{Reduction in death probability due to vaccine.}
+\item{death_red}{Reduction in death probability due to vaccine.}
 }
 \value{
 Returns an object of class epiworld_model, where model is

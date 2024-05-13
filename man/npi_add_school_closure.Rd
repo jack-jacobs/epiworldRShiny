@@ -13,7 +13,7 @@ npi_add_school_closure(model, preval, day, trans_red)
 
 \item{day}{Day in the simulation where school closure goes into effect.}
 
-\item{reduction}{Reduction in transmission probability due to school closure.}
+\item{trans_red}{Reduction in transmission probability due to school closure.}
 }
 \value{
 Returns an object of class epiworld_model, where model is

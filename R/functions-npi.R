@@ -1,12 +1,12 @@
 #' Vaccine definition function
 #' @param model epiworldR model.
 #' @param preval Initial prevalence of the vaccine.
-#' @param susceptibility_reduction Reduction in susceptibility probability due
+#' @param sus_red Reduction in susceptibility probability due
 #' to vaccine.
-#' @param transmission_reduction Reduction in transmission probability due to
+#' @param trans_red Reduction in transmission probability due to
 #' vaccine.
-#' @param recovery_enhancer Probability increase in recovery due to vaccine.
-#' @param death_reduction Reduction in death probability due to vaccine.
+#' @param rec_enhan Probability increase in recovery due to vaccine.
+#' @param death_red Reduction in death probability due to vaccine.
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
 #' @examples
@@ -51,6 +51,7 @@ npi_add_vaccine <- function(
 #' Masking definition function
 #' @param model epiworldR model.
 #' @param preval Prevalence of masking within the population.
+#' @param trans_red Reduction in transmission probability due to masking
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
 #' @examples
@@ -88,7 +89,7 @@ npi_add_masking <- function(model, preval, trans_red) {
 #' @param model epiworldR model.
 #' @param preval Prevalence of school closure within the population.
 #' @param day Day in the simulation where school closure goes into effect.
-#' @param reduction Reduction in transmission probability due to school closure.
+#' @param trans_red Reduction in transmission probability due to school closure.
 #' @return Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
 #' @examples
