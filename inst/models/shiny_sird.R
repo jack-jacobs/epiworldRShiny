@@ -21,7 +21,7 @@ shiny_sird <- function(input) {
   )
 
   # NPIs -----------------------------------------------------------------------
-  npi_add_all(model_sird, "sird", input)
+  interventions_add_all(model_sird, "sird", input)
 
   # Running and printing
   epiworldR::verbose_off(model_sird)

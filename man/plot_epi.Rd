@@ -27,3 +27,10 @@ run(model, ndays = 100, seed = 123)
 plot_epi(model, mark_max = "Infected")
 
 }
+\seealso{
+Other Server side functions: 
+\code{\link{find_scale}()},
+\code{\link{plot_reproductive_epi}()},
+\code{\link{pop_generator}()}
+}
+\concept{Server side functions}

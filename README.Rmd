@@ -1,37 +1,77 @@
-# epiworldRShiny: An RShiny Application for the epiworldR Package
+---
+title: "epiworldRShiny: An RShiny Application for the epiworldR Package"
+output: github_document
+---
 
 <!-- badges: start -->
-
+[![R-CMD-check](https://github.com/UofUEpiBio/epiworldRShiny/actions/workflows/r.yml/badge.svg)](https://github.com/UofUEpiBio/epiworldRShiny/actions/workflows/r.yml)
+[![CRAN status](https://www.r-pkg.org/badges/version/epiworldRShiny)](https://CRAN.R-project.org/package=epiworldRShiny)
 <!-- badges: end -->
-
-To run this ShinyApp, you need to type the following:
-
-```{r}
-epiworldRShiny()
-```
 
 This R package provides a user-friendly application for [epiworldR](https://github.com/UofUEpiBio/epiworldR){target="_blank"}, a wrapper of the C++ library [epiworld](https://github.com/UofUEpiBio/epiworld){target="_blank"}. It provides a general framework for modeling disease transmission using [agent-based models](https://en.wikipedia.org/w/index.php?title=Agent-based_model&oldid=1153634802){target="_blank"}. Some of the main features include:
 
--   Fast simulation with an average of 30 million agents/day per second.
--   One model can include multiple diseases.
--   Policies (tools) can be multiple and user-defined.
--   Transmission can be a function of agents’ features.
--   Out-of-the-box parallelization for multiple simulations.
-
-From package description of [epiworldR](https://github.com/UofUEpiBio/epiworldR){target="_blank"}
-
-> A flexible framework for Agent-Based Models (ABM), the epiworldR package provides methods for prototyping disease outbreaks and transmission models using a C++ backend, making it very fast. It supports multiple epidemiological models, including the Susceptible-Infected-Susceptible (SIS), Susceptible-Infected-Removed (SIR), Susceptible-Exposed-Infected-Removed (SEIR), and others, involving arbitrary mitigation policies and multiple-disease models. Users can specify infectiousness/susceptibility rates as a function of agents’ features, providing great complexity for the model dynamics. Furthermore, epiworldR is ideal for simulation studies featuring large populations.
+- Fast simulation with an average of 30 million agents/day per second.
+- 9 different epidemiological models to choose from.
+- Built-in capability for user-defined interventions. 
+- Built-in capability to define population and disease parameters.
+- Informative visualizations and tables after running each simulation.
 
 ## Installation
 
-You can install the development version of epiworldRShiny from [GitHub](https://github.com/) with:
+You can install the development version of epiworldRShiny from
+[GitHub](https://github.com/) with:
 
-```{r}
+``` r
 devtools::install_github("UofUEpiBio/epiworldRShiny")
 ```
 
 Or from CRAN
 
-```{r}
+``` r
 install.packages("epiworldRShiny")
 ```
+To run this ShinyApp, you need to type the following:
+
+```r
+epiworldRShiny::run_app()
+```
+
+## Examples
+### Example #1
+This first example demonstrates how to run the Shiny app, run a simulation, and observe results. Notice the sidebar contains many disease and model parameters that can be altered. Changing these parameters will affect the spread of the infectious disease in the simulated population. After running the simulation, a plot of the distribution of states over time, a plot of the disease's reproductive number, a model summary, and a table of counts over time are displayed.
+
+This example features:
+- SEIR network model for COVID-19  
+The day of peak infections occurs on day 12, maxing at about 18,000 infections.  
+- The disease spreads rapidly at the simulation's beginning, drastically decreasing over the first ten days.   
+- Model summary  
+- State counts table  
+  
+![example 1 GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/f4e7d313-e3b6-4ebb-9c0a-ca4d53ef9cea)
+  
+### Example #2
+This example features the implementation of the vaccine and school closure interventions to curb disease spread. All model 
+output can be interpreted using the same logic from example #1.
+
+Key features:
+- SEIRD network model for COVID-19  
+- Vaccine prevalence = 70%  
+- School closure prevalence = 50%  
+- Day of school closure implementation = 7  
+- Significantly decreased number of infections and deaths.  
+- The majority of the population recovered or was susceptible by day 30.  
+  
+![example 2 GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/d5405162-f7fe-4a42-8a4c-e9a2ac31be73)
+
+### Example #3
+The last example features the SEIR equity model. This model is unique because it accounts for demographic diversity in a population, such as race, gender, and age. This allows for comparing disease spread among different demographics, unlike the previous two examples.
+
+Key features:
+- SEIR equity model for COVID-19
+- 30% hispanic population, 70% non-hispanic
+- 52% female population
+- 30% of population younger than 20 years old
+- 30% of population between 20 and 60 years old
+- 40% of population older than 60.
+  
+![example 3 GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/20aeb62d-cb42-4882-8577-a3406f167bca)

@@ -94,7 +94,7 @@ shiny_seirconnequity <- function(input) {
   )
 
   # NPIs -----------------------------------------------------------------------
-  npi_add_all(model_seirconnequity, "seirconnequity", input)
+  interventions_add_all(model_seirconnequity, "seirconnequity", input)
 
   # Running and printing
   epiworldR::verbose_off(model_seirconnequity)

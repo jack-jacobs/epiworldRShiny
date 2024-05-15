@@ -21,3 +21,10 @@ This function determines the scale of the y-axis for plot_epi.
 find_scale(100000)
 
 }
+\seealso{
+Other Server side functions: 
+\code{\link{plot_epi}()},
+\code{\link{plot_reproductive_epi}()},
+\code{\link{pop_generator}()}
+}
+\concept{Server side functions}

@@ -11,8 +11,8 @@ shiny_sirconn <- function(input) {
     )
 
   # NPIs -----------------------------------------------------------------------
-  npi_add_all(model_sirconn, "sirconn", input)
-
+  interventions_add_all(model_sirconn, "sirconn", input)
+  
   # Running and printing
   epiworldR::verbose_off(model_sirconn)
   epiworldR::run(model_sirconn, ndays = input$sirconn_n_days, seed = input$sirconn_seed)

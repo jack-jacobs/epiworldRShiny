@@ -19,7 +19,7 @@ shiny_sir <- function(input) {
   )
 
   # NPIs -----------------------------------------------------------------------
-  npi_add_all(model_sir, "sir", input)
+  interventions_add_all(model_sir, "sir", input)
 
   # Running and printing
   epiworldR::verbose_off(model_sir)

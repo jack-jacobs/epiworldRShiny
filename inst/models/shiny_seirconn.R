@@ -12,7 +12,7 @@ shiny_seirconn <- function(input) {
     )
 
   # NPIs -----------------------------------------------------------------------
-  npi_add_all(model_seirconn, "seirconn", input)
+  interventions_add_all(model_seirconn, "seirconn", input)
 
   # Running and printing
   epiworldR::verbose_off(model_seirconn)
