@@ -13,6 +13,7 @@
 #' pop_generator(n = 10000, prop_hispanic = .5, prop_female = .5,
 #'               prop_19_59_60plus = c(.3, .6))
 #' @export
+#' @family Server side functions
 pop_generator <- function(
   n,
   prop_hispanic = .5,
@@ -62,6 +63,7 @@ pop_generator <- function(
 #' find_scale(100000)
 #'
 #' @export
+#' @family Server side functions
 find_scale <- function(x) {
   res <- 10^(floor(log10(x)) + 1 - 3)
   if (res < 1000)
@@ -86,6 +88,7 @@ find_scale <- function(x) {
 #' plot_epi(model, mark_max = "Infected")
 #'
 #' @export
+#' @family Server side functions
 plot_epi <- function(model, mark_max) {
   # If the user didn't specify mark_max
   if (missing(mark_max))
@@ -243,6 +246,7 @@ plot_epi <- function(model, mark_max) {
 #' run(model, ndays = 100, seed = 123)
 #' plot_reproductive_epi(model)
 #' @export
+#' @family Server side functions
 plot_reproductive_epi <- function (model) {
 
   # Calculating average rep. number for each unique source_exposure_date

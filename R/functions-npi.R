@@ -1,4 +1,5 @@
-#' Vaccine definition function
+#' Vaccination (pharmaceutical intervention) 
+#' 
 #' @param model epiworldR model.
 #' @param preval Initial prevalence of the vaccine.
 #' @param susceptibility_reduction Reduction in susceptibility probability due
@@ -15,11 +16,12 @@
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
 #' run(model, ndays = 100, seed = 123)
-#' npi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
+#' pi_add_vaccine(model, preval = .8, susceptibility_reduction = .9,
 #'                 transmission_reduction = .5, recovery_enhancer = .5,
 #'                 death_reduction = .9)
 #' @export
-npi_add_vaccine <- function(
+#' @family interventions
+pi_add_vaccine <- function(
   model, preval,
   susceptibility_reduction = .9,
   transmission_reduction = .5,
@@ -47,7 +49,7 @@ npi_add_vaccine <- function(
 
 }
 
-#' Masking definition function
+#' Masking intervention (non-pharmaceutical intervention)
 #' @param model epiworldR model.
 #' @param preval Prevalence of masking within the population.
 #' @return Returns an object of class epiworld_model, where model is
@@ -59,6 +61,7 @@ npi_add_vaccine <- function(
 #'                        incubation_days = 7, recovery_rate = 0.14)
 #' run(model, ndays = 100, seed = 123)
 #' npi_add_masking(model, preval = .8)
+#' @family interventions
 #' @export
 npi_add_masking <- function(model, preval) {
 
@@ -82,7 +85,7 @@ npi_add_masking <- function(model, preval) {
 
 }
 
-#' School closure definition function
+#' School closure intervention (non-pharmaceutical intervention)
 #' @param model epiworldR model.
 #' @param preval Prevalence of school closure within the population.
 #' @param day Day in the simulation where school closure goes into effect.
@@ -96,6 +99,7 @@ npi_add_masking <- function(model, preval) {
 #' run(model, ndays = 100, seed = 123)
 #' npi_add_school_closure(model, preval = .8, day = 10)
 #' @export
+#' @family interventions
 npi_add_school_closure <- function(model, preval, day) {
 
   if (preval > 0) {
@@ -131,11 +135,11 @@ npi_add_school_closure <- function(model, preval, day) {
 #' @param input User epiworldR model selection.
 #' @returns Returns an object of class epiworld_model, where model is
 #' substituted with the model name.
-#'
+#' @family interventions
 #' @export
-npi_add_all <- function(model, modelname, input) {
+interventions_add_all <- function(model, modelname, input) {
 
-  npi_add_vaccine(
+  pi_add_vaccine(
     model  = model,
     preval = input[[paste0(modelname, "_vaccine_prevalence")]]
     )

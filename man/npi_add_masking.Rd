@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions-npi.R
 \name{npi_add_masking}
 \alias{npi_add_masking}
-\title{Masking definition function}
+\title{Masking intervention (non-pharmaceutical intervention)}
 \usage{
 npi_add_masking(model, preval)
 }
@@ -16,7 +16,7 @@ Returns an object of class epiworld_model, where model is
 substituted with the model name.
 }
 \description{
-Masking definition function
+Masking intervention (non-pharmaceutical intervention)
 }
 \examples{
 library(epiworldR) # for ModelSEIRCONN function
@@ -26,3 +26,10 @@ model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 run(model, ndays = 100, seed = 123)
 npi_add_masking(model, preval = .8)
 }
+\seealso{
+Other interventions: 
+\code{\link{interventions_add_all}()},
+\code{\link{npi_add_school_closure}()},
+\code{\link{pi_add_vaccine}()}
+}
+\concept{interventions}

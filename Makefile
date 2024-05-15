@@ -37,6 +37,7 @@ docker-run:
 deploy:
 	Rscript --vanilla epishiny/deploy.R
 
-	
+README.md: README.Rmd
+	Rscript -e 'rmarkdown::render("README.Rmd")'
 
 .PHONY: docs build install run check docker-build

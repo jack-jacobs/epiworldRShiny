@@ -20,7 +20,7 @@ shiny_sis <- function(input) {
   )
   
   # NPIs -----------------------------------------------------------------------
-  npi_add_all(model_sis, "sis", input)
+  interventions_add_all(model_sis, "sis", input)
   
   # Running and printing
   epiworldR::verbose_off(model_sis)

@@ -2,7 +2,7 @@ Package: epiworldRShiny
 Type: Package
 Title: An RShiny wrapper of the R package epiworldR
 Version: 0.1-0
-Date: 2024-03-12
+Date: 2024-05-14
 Authors@R: c(
   person("Derek", "Meyer", role=c("aut","cre"), 
   email="derekmeyer37@gmail.com", comment = c(ORCID = "0009-0005-1350-6988")),
@@ -17,7 +17,7 @@ Authors@R: c(
   person("Matthew", "Samore", role=c("ctb"), email="matthew.samore@hsc.utah.edu", comment = c(ORCID = "0000-0002-4862-9196")),
   person("Jay", "Love", role=c("ctb"), email="jay.love@utah.edu", comment = c(ORCID="0000-0002-9371-2466")),
   person("Kristina", "Stratford", role=c("ctb"), email="kristina.stratford@hsc.utah.edu"))
-Description: This shiny wrapper provides a user-friendly interface to the R package epiworldR. Currently, the package features the SEIR equity, SIS, SIR, SEIR, SISD, SIRD, and SEIRD models, networked and fully connected versions. Using agent-based modeling, it simulates user-defined infectious diseases through user-defined populations and returns useful insights about the spread of the disease over time. 
+Description: This shiny wrapper provides a user-friendly interface to the R package epiworldR. Currently, the package features the SEIR equity, SIS, SIR, SEIR, SISD, SIRD, and SEIRD models, networked and fully connected versions. Using epiworldRShiny, users can easily run simulations, visualize results interactively, and generate synthetic data.
 URL: https://github.com/UofUEpiBio/epiworldRShiny,
     https://uofuepibio.github.io/epiworldRShiny/,
 BugReports: https://github.com/UofUEpiBio/epiworldRShiny/issues

@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions-npi.R
 \name{npi_add_school_closure}
 \alias{npi_add_school_closure}
-\title{School closure definition function}
+\title{School closure intervention (non-pharmaceutical intervention)}
 \usage{
 npi_add_school_closure(model, preval, day)
 }
@@ -18,7 +18,7 @@ Returns an object of class epiworld_model, where model is
 substituted with the model name.
 }
 \description{
-School closure definition function
+School closure intervention (non-pharmaceutical intervention)
 }
 \examples{
 library(epiworldR) # for ModelSEIRCONN function
@@ -28,3 +28,10 @@ model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
 run(model, ndays = 100, seed = 123)
 npi_add_school_closure(model, preval = .8, day = 10)
 }
+\seealso{
+Other interventions: 
+\code{\link{interventions_add_all}()},
+\code{\link{npi_add_masking}()},
+\code{\link{pi_add_vaccine}()}
+}
+\concept{interventions}
