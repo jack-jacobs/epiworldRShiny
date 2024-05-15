@@ -4,12 +4,14 @@
 \alias{npi_add_masking}
 \title{Masking intervention (non-pharmaceutical intervention)}
 \usage{
-npi_add_masking(model, preval)
+npi_add_masking(model, preval, transmission_reduction)
 }
 \arguments{
 \item{model}{epiworldR model.}
 
 \item{preval}{Prevalence of masking within the population.}
+
+\item{transmission_reduction}{Reduction in transmission probability due to masking}
 }
 \value{
 Returns an object of class epiworld_model, where model is
@@ -33,3 +35,4 @@ Other interventions:
 \code{\link{pi_add_vaccine}()}
 }
 \concept{interventions}
+\concept{npis}

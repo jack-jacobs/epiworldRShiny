@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions-server.R
 \name{pop_generator}
 \alias{pop_generator}
-\title{pop_generator Function}
+\title{Population generator}
 \usage{
 pop_generator(
   n,
@@ -14,14 +14,18 @@ pop_generator(
 \arguments{
 \item{n}{The number of individuals in the population.}
 
-\item{prop_hispanic}{The proportion of individuals who are Hispanic. Default is 0.5.}
+\item{prop_hispanic}{The proportion of individuals who are Hispanic.
+Default is 0.5.}
 
-\item{prop_female}{The proportion of individuals who are female. Default is 0.5.}
+\item{prop_female}{The proportion of individuals who are female. Default is
+0.5.}
 
-\item{prop_19_59_60plus}{A vector of length 3 representing the proportions of individuals in the age groups 0-19, 20-59, and 60+. Default is c(0.5, 0.3, 0.2).}
+\item{prop_19_59_60plus}{A vector of length 3 representing the proportions of
+individuals in the age groups 0-19, 20-59, and 60+. Default is c(0.5, 0.3, 0.2).}
 }
 \value{
-A matrix representing the generated population, with columns for age groups (0-19, 20-59, 60+), NotHispanic, and Female.
+A matrix representing the generated population, with columns for age
+groups (0-19, 20-59, 60+), NotHispanic, and Female.
 }
 \description{
 This function generates a population matrix with specified characteristics.

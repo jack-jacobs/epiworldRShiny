@@ -1,7 +1,13 @@
-#' text_input_disease_name Function
+#' epiworldRShiny UI builder functions
+#'
+#' All functions in this section are for internal use only. They are used to
+#' build the UI for the epiworldRShiny app.
+#'
 #' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.
+#' @return
+#' - Unless otherwise specified, returns an object of class shiny.tag.
+#' @name epiworldrshiny-ui
 #' @examples
 #' text_input_disease_name("SEIRD")
 text_input_disease_name <- function(model_name) {
@@ -13,10 +19,8 @@ text_input_disease_name <- function(model_name) {
   )
 }
 
-#' slider_prevalence Function
-#' @param model_name Name of the epiworldR model.
+#' @rdname epiworldrshiny-ui
 #' @export
-#' @return Returns an object of class shiny.tag.
 #' @examples
 #' # slider_prevalence("SEIRD")
 slider_prevalence <- function(model_name) {
@@ -31,10 +35,8 @@ slider_prevalence <- function(model_name) {
     )
 }
 
-#' numeric_input_ndays Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' numeric_input_ndays("SEIRD")
 numeric_input_ndays <- function(model_name) {
@@ -48,14 +50,12 @@ numeric_input_ndays <- function(model_name) {
     )
 }
 
-#' slider_input_rate Function
-#' @param model_name Name of the epiworldR model.
 #' @param rate_name Name of the rate.
 #' @param value Initial value for the slider.
 #' @param maxval Maxiumum value for the slider.
 #' @param input_label Aids in creating the appropriate slider name.
 #' @export
-#' @return Returns an object of class shiny.tag.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' slider_input_rate("SEIRD", "transmission", value = 0.3, maxval = 1,
 #' input_label = NULL)
@@ -81,10 +81,10 @@ slider_input_rate <- function(
   )
 }
 
-#' network_input Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.list.
+#' @return
+#' - `network_input` returns an object of class [shiny::tagList] (`shiny.tag.list`).
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' network_input("SEIRD")
 network_input <- function(model_name) {
@@ -96,55 +96,68 @@ network_input <- function(model_name) {
         shiny::h4(
           shiny::tagList(
             shiny::icon("circle-info"),
-          "Population structure"
+            "Population structure"
           )
         )
       )
-      ),
+    ),
     shinyjs::hidden(
       shiny::div(
         id = paste0("network_inputs_", model_name),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_population_size"),
-          label   = "Population Size",
-          min     = 0,
-          max     = 100000,
-          value   = 50000,
-          step    = 1000,
-          ticks   = FALSE
+        shiny::tagList(
+          shiny::tags$style("p { padding: 0 20px; }"),
+          shiny::p("The below parameters affect the network structure and
+                   behavior of agents within the simulation."),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_population_size"),
+            label   = "Population Size",
+            min     = 0,
+            max     = 100000,
+            value   = 50000,
+            step    = 1000,
+            ticks   = FALSE
           ),
-        shiny::numericInput(
-          inputId = paste0(model_name, "_k"),
-          label   = "Number of Ties",
-          min     = 0,
-          max     = 500,
-          step    = 1,
-          value   = 20
+          shiny::numericInput(
+            inputId = paste0(model_name, "_k"),
+            label   = "Number of Ties",
+            min     = 0,
+            max     = 500,
+            step    = 1,
+            value   = 20
           ),
-        shiny::selectInput(
-          inputId  = paste0(model_name, "_directed"),
-          label    = "Directed",
-          choices  = c("TRUE", "FALSE"),
-          selected = "FALSE"
+          shiny::p("The number of
+                   agents each individual agent is expected to meet, on
+                   average."),
+          shiny::selectInput(
+            inputId  = paste0(model_name, "_directed"),
+            label    = "Directed",
+            choices  = c("TRUE", "FALSE"),
+            selected = "FALSE"
           ),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_prob_rewiring"),
-          label   = "Probability of Rewiring",
-          value   = "0.20",
-          min     = 0,
-          max     = 1,
-          step    = 0.01,
-          ticks   = FALSE
-          )
+          shiny::p("Whether or not an interaction between two agents
+                   is one-way or two-way."),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_prob_rewiring"),
+            label   = "Probability of Rewiring",
+            value   = "0.20",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+           shiny::p("The probability that an agent becomes disconnected from
+                    their location within the network, and relocates to another
+                    location within the same network")
         )
       )
     )
+  )
 }
 
-#' npis_input Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.list.
+#' @return
+#' - `npis_input` returns an object of class [shiny::tagList] (`shiny.tag.list`).
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' npis_input("SEIRD")
 npis_input <- function(model_name) {
@@ -156,57 +169,122 @@ npis_input <- function(model_name) {
           shiny::tagList(
             shiny::icon("circle-info"),
             "Interventions"
-            )
-      ))
-      ),
-    # By default shinyjs::hidden
+          )
+        )
+      )
+    ),
     shinyjs::hidden(
-      shiny::div(id = paste0("npis_inputs_", model_name),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_vaccine_prevalence"),
-          label   = "% of agents vaccinated",
-          min     = 0,
-          max     = 1,
-          value   = 0,
-          step    = 0.01,
-          ticks   = FALSE
+      shiny::div(
+        id = paste0("npis_inputs_", model_name),
+        shiny::tagList(
+          shiny::tags$style("p { padding: 0 20px; }"),
+          tags$p("More details about the implementation of the below
+                interventions can be found in the epiworldRShiny",
+                 tags$a("reference manual",
+                 href = "https://uofuepibio.github.io/epiworldRShiny/reference/index.html"),
+                 "."
+                 ),
+          shiny::headerPanel(shiny::h4("Vaccination")),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_prevalence"),
+            label   = "% of agents vaccinated",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
           ),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_masking_prevalence"),
-          label   = "% of agents using masks",
-          value   = "0",
-          min     = 0,
-          max     = 1,
-          step    = 0.01,
-          ticks   = FALSE
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_susceptibility_reduction"),
+            label   = "probability reduction of susceptibility",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
           ),
-        shiny::headerPanel(shiny::h4("School Closure")),
-        shiny::sliderInput(
-          inputId = paste0(model_name, "_school_closure_prevalence"),
-          label   = "Prevalence",
-          value   = "0",
-          min     = 0,
-          max     = 1,
-          step    = 0.01,
-          ticks   = FALSE
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_transmission_reduction"),
+            label   = "probability reduction of transmission",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
           ),
-        shiny::numericInput(
-          inputId = paste0(model_name, "_school_closure_day"),
-          label   = "Implementation day",
-          value = "0",
-          min = 0,
-          max = 100,
-          step = 1
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_recovery_enhancer"),
+            label   = "probability increase of recovery",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_vaccine_death_reduction"),
+            label   = "probability reduction of death",
+            min     = 0,
+            max     = 1,
+            value   = 0,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::headerPanel(shiny::h4("Masking")),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_masking_prevalence"),
+            label   = "% of agents using masks",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_masking_transmission_reduction"),
+            label   = "probability reduction of transmission",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::headerPanel(shiny::h4("School Closure")),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_school_closure_prevalence"),
+            label   = "prevalence",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
+          ),
+          shiny::numericInput(
+            inputId = paste0(model_name, "_school_closure_day"),
+            label   = "implementation day",
+            value = "0",
+            min = 0,
+            max = 100,
+            step = 1
+          ),
+          shiny::sliderInput(
+            inputId = paste0(model_name, "_school_closure_transmission_reduction"),
+            label   = "probability reduction of transmission",
+            value   = "0",
+            min     = 0,
+            max     = 1,
+            step    = 0.01,
+            ticks   = FALSE
+          )
         )
       )
     )
   )
 }
 
-#' seed_input Function
-#' @param model_name Name of the epiworldR model.
+
 #' @export
-#' @return Returns an object of class shiny.tag.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' seed_input("SEIRD")
 seed_input <- function(model_name) {
@@ -220,9 +298,10 @@ seed_input <- function(model_name) {
     )
 }
 
-#' models_setup function
 #' @export
-#' @return Returns an object of class list.
+#' @return
+#' - `models_setup` returns an object of class list.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' models_setup()
 models_setup <- function() {
@@ -285,10 +364,10 @@ models_setup <- function() {
 
 }
 
-#' population_input Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.list.
+#' @return
+#' - `population_input` returns an object of class shiny.tag.list.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' population_input("SEIRD")
 population_input <- function(model_name) {
@@ -338,10 +417,8 @@ population_input <- function(model_name) {
 
 }
 
-#' simulate_button Function
-#' @param model_name Name of the epiworldR model.
 #' @export
-#' @return Returns an object of class shiny.tag.
+#' @rdname epiworldrshiny-ui
 #' @examples
 #' simulate_button("SEIRD")
 simulate_button <- function(model_name) {

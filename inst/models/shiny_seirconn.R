@@ -74,8 +74,8 @@ seirconn_panel <- function(model_alt) {
     ),
     numeric_input_ndays("seirconn"),
     seed_input("seirconn"),
-    simulate_button("seirconn"),
-    npis_input("seirconn")
+    npis_input("seirconn"),
+    simulate_button("seirconn")
   )
 }
 

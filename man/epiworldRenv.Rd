@@ -2,8 +2,7 @@
 % Please edit documentation in R/app.R
 \name{epiworldRenv}
 \alias{epiworldRenv}
-\title{Access to the epiworldR environment
-This function is for internal use only.}
+\title{Access to the epiworldR environment.}
 \usage{
 epiworldRenv()
 }
@@ -11,6 +10,5 @@ epiworldRenv()
 Returns the \code{epiworldR_env} environment.
 }
 \description{
-Access to the epiworldR environment
 This function is for internal use only.
 }

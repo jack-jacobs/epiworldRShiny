@@ -193,9 +193,9 @@ seirconnequity_panel <- function(model_alt) {
     ),
     numeric_input_ndays("seirconnequity"),
     seed_input("seirconnequity"),
-    simulate_button("seirconnequity"),
     population_input("seirconnequity"),
-    npis_input("seirconnequity")
+    npis_input("seirconnequity"),
+    simulate_button("seirconnequity")
   )
 
 }

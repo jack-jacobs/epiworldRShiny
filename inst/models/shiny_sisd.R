@@ -1,7 +1,7 @@
 # alt-name: Network SISD
 
 shiny_sisd <- function(input) {
-  
+
   # Creating model
   model_sisd <- epiworldR::ModelSISD(
     name              = input$sisd_disease_name,
@@ -19,7 +19,7 @@ shiny_sisd <- function(input) {
       d = as.logical(input$sisd_directed),
       p = input$sisd_prob_rewiring
   )
-   
+
   # NPIs -----------------------------------------------------------------------
   interventions_add_all(model_sisd, "sisd", input)
 
@@ -31,7 +31,7 @@ shiny_sisd <- function(input) {
   plot_sisd <- function() plot_epi(model_sisd)
   summary_sisd <- function() summary(model_sisd)
   reproductive_sisd <- function() plot_reproductive_epi(model_sisd)
-  # Table 
+  # Table
   table_sisd <- function() {
     df <- as.data.frame(epiworldR::get_hist_total(model_sisd))
     # Subset to only include "infection" state
@@ -39,9 +39,9 @@ shiny_sisd <- function(input) {
     # Row with the maximum count
     max_infection_row <- infection_data[which.max(infection_data$count), ]
     # Row number of the maximum count in the original data frame
-    max_row_number <- which(df$date == max_infection_row$date & 
+    max_row_number <- which(df$date == max_infection_row$date &
                               df$state == "Infected")
-    df[max_row_number,] <- sprintf("<strong>%s</strong>", 
+    df[max_row_number,] <- sprintf("<strong>%s</strong>",
                                        df[max_row_number,])
     df
   }
@@ -67,9 +67,9 @@ sisd_panel <- function(model_alt) {
     slider_input_rate("sisd", "Death Rate", "0.01"),
     numeric_input_ndays("sisd"),
     seed_input("sisd"),
-    simulate_button("sisd"),
     network_input("sisd"),
-    npis_input("sisd")
+    npis_input("sisd"),
+    simulate_button("sisd")
   )
 
 }

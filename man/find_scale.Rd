@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions-server.R
 \name{find_scale}
 \alias{find_scale}
-\title{find_scale Function}
+\title{Find the right plotting-scale}
 \usage{
 find_scale(x)
 }

@@ -88,8 +88,8 @@ seird_panel <- function(model_alt) {
       ),
     numeric_input_ndays("seird"),
     seed_input("seird"),
-    simulate_button("seird"),
     network_input("seird"),
-    npis_input("seird")
+    npis_input("seird"),
+    simulate_button("seird")
   )
 }

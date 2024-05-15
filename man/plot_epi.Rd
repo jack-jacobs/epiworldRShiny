@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions-server.R
 \name{plot_epi}
 \alias{plot_epi}
-\title{plot_epi Function}
+\title{Plot daily incidence}
 \usage{
 plot_epi(model, mark_max)
 }

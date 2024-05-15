@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions-server.R
 \name{plot_reproductive_epi}
 \alias{plot_reproductive_epi}
-\title{plot_reproductive_epi Function}
+\title{Plot Rt}
 \usage{
 plot_reproductive_epi(model)
 }

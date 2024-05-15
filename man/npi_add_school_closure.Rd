@@ -12,6 +12,8 @@ npi_add_school_closure(model, preval, day)
 \item{preval}{Prevalence of school closure within the population.}
 
 \item{day}{Day in the simulation where school closure goes into effect.}
+
+\item{transmission_reduction}{Reduction in transmission probability due to school closure.}
 }
 \value{
 Returns an object of class epiworld_model, where model is
@@ -26,7 +28,7 @@ model <- ModelSEIRCONN("COVID-19", n = 1000, prevalence = 0.05,
                        contact_rate = 4, transmission_rate = 0.1,
                        incubation_days = 7, recovery_rate = 0.14)
 run(model, ndays = 100, seed = 123)
-npi_add_school_closure(model, preval = .8, day = 10)
+npi_add_school_closure(model, preval = .8, transmission_reduction = .3, day = 10)
 }
 \seealso{
 Other interventions: 
