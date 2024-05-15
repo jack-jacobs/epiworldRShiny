@@ -4,7 +4,14 @@
 \alias{pi_add_vaccine}
 \title{Vaccination (pharmaceutical intervention)}
 \usage{
-pi_add_vaccine(model, preval, susceptibility_reduction, transmission_reduction, recovery_enhancer, death_reduction)
+pi_add_vaccine(
+  model,
+  preval,
+  susceptibility_reduction,
+  transmission_reduction,
+  recovery_enhancer,
+  death_reduction
+)
 }
 \arguments{
 \item{model}{epiworldR model.}

@@ -4,7 +4,7 @@
 \alias{npi_add_school_closure}
 \title{School closure intervention (non-pharmaceutical intervention)}
 \usage{
-npi_add_school_closure(model, preval, day)
+npi_add_school_closure(model, preval, day, transmission_reduction)
 }
 \arguments{
 \item{model}{epiworldR model.}

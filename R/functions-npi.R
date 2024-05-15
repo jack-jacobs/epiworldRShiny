@@ -61,7 +61,7 @@ pi_add_vaccine <- function(
 #'                        contact_rate = 4, transmission_rate = 0.1,
 #'                        incubation_days = 7, recovery_rate = 0.14)
 #' run(model, ndays = 100, seed = 123)
-#' npi_add_masking(model, preval = .8)
+#' npi_add_masking(model, preval = .8, transmission_reduction = .7)
 #' @family interventions
 #' @export
 #' @family npis
