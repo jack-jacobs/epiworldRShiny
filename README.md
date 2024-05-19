@@ -24,6 +24,9 @@ include:
 - Built-in capability to define population and disease parameters.
 - Informative visualizations and tables after running each simulation.
 
+You can find more examples on the package’s website:
+<https://uofuepibio.github.io/epiworldRShiny>
+
 ## Installation
 
 You can install the development version of epiworldRShiny from
