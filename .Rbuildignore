@@ -10,3 +10,6 @@ README.Rmd
 Dockerimage
 epishiny
 Dockerfile
+
+# Adding the vignettes as these are heavy
+vignettes/

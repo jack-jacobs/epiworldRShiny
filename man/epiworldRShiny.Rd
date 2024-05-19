@@ -16,6 +16,9 @@ run_app(...)
 Loads and opens the RShiny app for the epiworldR package
 }
 \description{
+Fires up the R Shiny App. You can find more examples and documentation at
+the package's website: \url{https://UofUEpiBio.github.io/epiworldRShiny/}.
+
 \code{run_app} is a wrapper for the \code{epiworldRShiny} function. It is a
 convenience function to run the app.
 }

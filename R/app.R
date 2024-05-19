@@ -1,5 +1,9 @@
 #' epiworldRShiny App Launcher
 #' @rawNamespace import(shiny, except=c(dataTableOutput, renderDataTable))
+#' @description 
+#' Fires up the R Shiny App. You can find more examples and documentation at
+#' the package's website: <https://UofUEpiBio.github.io/epiworldRShiny/>.
+#' 
 #' @import epiworldR
 #' @import shinydashboard
 #' @importFrom DT dataTableOutput renderDataTable
