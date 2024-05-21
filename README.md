@@ -9,23 +9,21 @@ status](https://www.r-pkg.org/badges/version/epiworldRShiny)](https://CRAN.R-pro
 <!-- badges: end -->
 
 This R package provides a user-friendly application for
-<a href="https://github.com/UofUEpiBio/epiworldR"
-target="_blank">epiworldR</a>, a wrapper of the C++ library
-<a href="https://github.com/UofUEpiBio/epiworld"
-target="_blank">epiworld</a>. It provides a general framework for
-modeling disease transmission using <a
-href="https://en.wikipedia.org/w/index.php?title=Agent-based_model&amp;oldid=1153634802"
-target="_blank">agent-based models</a>. Some of the main features
-include:
+[epiworldR](https://github.com/UofUEpiBio/epiworldR), a wrapper of the
+C++ library [epiworld](https://github.com/UofUEpiBio/epiworld). It
+provides a general framework for modeling disease transmission using
+[agent-based
+models](https://en.wikipedia.org/w/index.php?title=Agent-based_model&oldid=1153634802).
+Some of the main features include:
 
-- Fast simulation with an average of 30 million agents/day per second.
-- 9 different epidemiological models to choose from.
-- Built-in capability for user-defined interventions.
-- Built-in capability to define population and disease parameters.
-- Informative visualizations and tables after running each simulation.
+  - Fast simulation with an average of 30 million agents/day per second.
+  - 9 different epidemiological models to choose from.
+  - Built-in capability for user-defined interventions.
+  - Built-in capability to define population and disease parameters.
+  - Informative visualizations and tables after running each simulation.
 
 You can find more examples on the package’s website:
-<https://uofuepibio.github.io/epiworldRShiny>
+<https://uofuepibio.github.io/epiworldRShiny/>
 
 ## Installation
 
@@ -63,17 +61,13 @@ number, a model summary, and a table of counts over time are displayed.
 This example features: - SEIR network model for COVID-19  
 The day of peak infections occurs on day 12, maxing at about 18,000
 infections.  
-- The disease spreads rapidly at the simulation’s beginning, drastically
-decreasing over the first ten days.  
-- Model summary  
-- State counts table
+\- The disease spreads rapidly at the simulation’s beginning,
+drastically decreasing over the first ten days.  
+\- Model summary  
+\- State counts table
 
-<figure>
-<img
-src="https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/f4e7d313-e3b6-4ebb-9c0a-ca4d53ef9cea"
-alt="example 1 GIF" />
-<figcaption aria-hidden="true">example 1 GIF</figcaption>
-</figure>
+![example 1
+GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/f4e7d313-e3b6-4ebb-9c0a-ca4d53ef9cea)
 
 ### Example \#2
 
@@ -82,18 +76,15 @@ closure interventions to curb disease spread. All model output can be
 interpreted using the same logic from example \#1.
 
 Key features: - SEIRD network model for COVID-19  
-- Vaccine prevalence = 70%  
-- School closure prevalence = 50%  
-- Day of school closure implementation = 7  
-- Significantly decreased number of infections and deaths.  
-- The majority of the population recovered or was susceptible by day 30.
+\- Vaccine prevalence = 70%  
+\- School closure prevalence = 50%  
+\- Day of school closure implementation = 7  
+\- Significantly decreased number of infections and deaths.  
+\- The majority of the population recovered or was susceptible by day
+30.
 
-<figure>
-<img
-src="https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/d5405162-f7fe-4a42-8a4c-e9a2ac31be73"
-alt="example 2 GIF" />
-<figcaption aria-hidden="true">example 2 GIF</figcaption>
-</figure>
+![example 2
+GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/d5405162-f7fe-4a42-8a4c-e9a2ac31be73)
 
 ### Example \#3
 
@@ -107,9 +98,5 @@ population, 70% non-hispanic - 52% female population - 30% of population
 younger than 20 years old - 30% of population between 20 and 60 years
 old - 40% of population older than 60.
 
-<figure>
-<img
-src="https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/20aeb62d-cb42-4882-8577-a3406f167bca"
-alt="example 3 GIF" />
-<figcaption aria-hidden="true">example 3 GIF</figcaption>
-</figure>
+![example 3
+GIF](https://github.com/UofUEpiBio/epiworldRShiny/assets/105825983/20aeb62d-cb42-4882-8577-a3406f167bca)

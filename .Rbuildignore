@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 Makefile
 README.Rmd
+README.html
 .github
 ^CODE_OF_CONDUCT\.md$
 ^app\.R$
@@ -13,3 +14,5 @@ Dockerfile
 
 # Adding the vignettes as these are heavy
 vignettes/
+LICENSE\.md
+\.vscode

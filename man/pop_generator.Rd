@@ -31,7 +31,7 @@ groups (0-19, 20-59, 60+), NotHispanic, and Female.
 This function generates a population matrix with specified characteristics.
 }
 \examples{
-pop_generator(n = 10000, prop_hispanic = .5, prop_female = .5,
+pop_generator(n = 1000, prop_hispanic = .5, prop_female = .5,
               prop_19_59_60plus = c(.3, .6))
 }
 \seealso{

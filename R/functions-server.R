@@ -14,7 +14,7 @@
 #' @return A matrix representing the generated population, with columns for age
 #' groups (0-19, 20-59, 60+), NotHispanic, and Female.
 #' @examples
-#' pop_generator(n = 10000, prop_hispanic = .5, prop_female = .5,
+#' pop_generator(n = 1000, prop_hispanic = .5, prop_female = .5,
 #'               prop_19_59_60plus = c(.3, .6))
 #' @export
 #' @family Server side functions
