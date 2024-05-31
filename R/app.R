@@ -14,7 +14,7 @@
 #' @importFrom stats aggregate as.formula reshape
 #' @importFrom utils write.csv packageVersion
 #'
-#' @return Loads and opens the RShiny app for the epiworldR package
+#' @return Loads and opens the R shiny app for the epiworldR package
 #' @param ... Currently ignored.
 #' @export
 #' @name epiworldRShiny

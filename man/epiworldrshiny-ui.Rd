@@ -72,7 +72,7 @@ build the UI for the epiworldRShiny app.
 }
 \examples{
 text_input_disease_name("SEIRD")
-# slider_prevalence("SEIRD")
+slider_prevalence("SEIRD")
 numeric_input_ndays("SEIRD")
 slider_input_rate("SEIRD", "transmission", value = 0.3, maxval = 1,
 input_label = NULL)

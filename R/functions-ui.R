@@ -22,7 +22,7 @@ text_input_disease_name <- function(model_name) {
 #' @rdname epiworldrshiny-ui
 #' @export
 #' @examples
-#' # slider_prevalence("SEIRD")
+#' slider_prevalence("SEIRD")
 slider_prevalence <- function(model_name) {
   shiny::sliderInput(
     paste0(model_name, "_prevalence"),

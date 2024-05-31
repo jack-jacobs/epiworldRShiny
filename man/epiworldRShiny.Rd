@@ -13,7 +13,7 @@ run_app(...)
 \item{...}{Currently ignored.}
 }
 \value{
-Loads and opens the RShiny app for the epiworldR package
+Loads and opens the R shiny app for the epiworldR package
 }
 \description{
 Fires up the R Shiny App. You can find more examples and documentation at

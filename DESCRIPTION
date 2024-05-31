@@ -1,8 +1,8 @@
 Package: epiworldRShiny
 Type: Package
-Title: An 'RShiny' Wrapper of the R Package 'epiworldR'
+Title: A 'shiny' Wrapper of the R Package 'epiworldR'
 Version: 0.1-0
-Date: 2024-05-14
+Date: 2024-05-31
 Authors@R: c(
   person("Derek", "Meyer", role=c("aut","cre"), 
   email="derekmeyer37@gmail.com", comment = c(ORCID = "0009-0005-1350-6988")),
@@ -17,7 +17,7 @@ Authors@R: c(
   person("Matthew", "Samore", role=c("ctb"), email="matthew.samore@hsc.utah.edu", comment = c(ORCID = "0000-0002-4862-9196")),
   person("Jay", "Love", role=c("ctb"), email="jay.love@utah.edu", comment = c(ORCID="0000-0002-9371-2466")),
   person("Kristina", "Stratford", role=c("ctb"), email="kristina.stratford@hsc.utah.edu"))
-Description: This 'RShiny' wrapper provides a user-friendly interface to the Agent-Based Modeling (ABM) R package 'epiworldR' (Meyer et al., 2023) <DOI:10.21105/joss.05781>. Some of the main features of the package include the Susceptible-Infected-Susceptible (SIS), Susceptible-Infected-Recovered (SIR), and the Susceptible-Exposed-Infected-Recovered (SEIR) models. 'epiworldRShiny' provides a web-based user interface for running various epidemiological ABMs, simulating interventions, and visualizing results interactively.
+Description: R 'shiny' web apps for epidemiological Agent-Based Models. It provides a user-friendly interface to the Agent-Based Modeling (ABM) R package 'epiworldR' (Meyer et al., 2023) <DOI:10.21105/joss.05781>. Some of the main features of the package include the Susceptible-Infected-Susceptible (SIS), Susceptible-Infected-Recovered (SIR), and Susceptible-Exposed-Infected-Recovered (SEIR) models. 'epiworldRShiny' provides a web-based user interface for running various epidemiological ABMs, simulating interventions, and visualizing results interactively.
 URL: https://github.com/UofUEpiBio/epiworldRShiny/,
     https://uofuepibio.github.io/epiworldRShiny/,
 BugReports: https://github.com/UofUEpiBio/epiworldRShiny/issues/

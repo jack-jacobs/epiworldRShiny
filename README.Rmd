@@ -1,5 +1,5 @@
 ---
-title: "epiworldRShiny: An RShiny Application for the epiworldR Package"
+title: "epiworldRShiny: A 'shiny' Wrapper of the R Package 'epiworldR'"
 output: github_document
 ---
 
