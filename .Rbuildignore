@@ -16,3 +16,4 @@ Dockerfile
 vignettes/
 LICENSE\.md
 \.vscode
+docs/
