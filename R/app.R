@@ -33,15 +33,22 @@ epiworldRenv <- function() {
 }
 
 #' @export
+#' @param custom_models_path Optional path to custom model files (see details).
+#' @details
+#' When `custom_models_path` is specified, the function will look for valid model files
+#' at the specified path. These will be added to the list of available models.
+#' The function expects R files named `shiny_<model_name>.R` which contain the model.
+#' The function will also look for optional Markdown files named `shiny_<model_name>.md`
+#' which contain the model description.
 #' @rdname epiworldRShiny
-epiworldRShiny <- function(...) {
+epiworldRShiny <- function(custom_models_path = NULL, ...) {
 
   # If the package is not loaded, load it
   if (!"epiworldRShiny" %in% search()) {
     library(epiworldRShiny)
   }
 
-  models_setup()
+  models_setup(custom_models_path)
 
   header <- shinydashboard::dashboardHeader(
     title = shiny::HTML(
@@ -49,6 +56,7 @@ epiworldRShiny <- function(...) {
       )
   )
 
+  # Sets CSS cursor style for headers
   cursor_header_pointer <-
     sprintf(
       "#npis_header_%1$s, #network_header_%1$s, #population_header_%1$s",
@@ -148,10 +156,16 @@ epiworldRShiny <- function(...) {
     output$model_description <- shiny::renderText({
 
       # Reading the model description from the package
+      # - First check the prebuilt models
       fn <- system.file(
         "models", paste0("shiny_", model_id(), ".md"),
         package = "epiworldRShiny"
       )
+
+      # If the model is not found in the prebuilt models, check the custom models
+      if (!file.exists(fn)) {
+        fn <- paste0(custom_models_path, paste0("/shiny_", model_id(), ".md"))
+      }
 
       contents <- if (file.exists(fn))
         readLines(fn, warn = FALSE)
