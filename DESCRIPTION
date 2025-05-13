@@ -36,8 +36,6 @@ Imports:
     epiworldR,
     plotly,
     bslib
-Remotes:
-    UofUEpiBio/epiworldR
 Depends:
     R (>= 4.1.0),
     shiny
