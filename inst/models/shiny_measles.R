@@ -53,7 +53,7 @@ tabulator <- function(no_quarantine_histories, quarantine_histories) {
   sizes <- c(2, 10, 25, 50, 80)
 
   outbreak_table <- data.frame(
-    "Outbreak Size" = sprintf("%1.0f", sizes),
+    "Outbreak Size" = sprintf("≥ %1.0f cases", sizes),
     "Probability WITHOUT Quarantine" = sapply(sizes, \(x) {
       prob <- sum(no_quarantine_counts$Total >= x)/nrow(no_quarantine_counts)
 
@@ -646,7 +646,7 @@ body_measles <- function(input, model_output, output) {
     bslib::card(
       bslib::card_header("Outbreak Size"),
       shiny::p(
-          "The table below shows the probability of different outbreak sizes with and without quarantine."
+          "The table below shows the probability of seeing outbreak sizes above a given threshold WITH and WITHOUT quarantine."
         ),
       shiny::tableOutput("summary_table")
     ),
