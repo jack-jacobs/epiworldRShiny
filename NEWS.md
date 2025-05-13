@@ -1,6 +1,6 @@
 # epiworldRShiny 0.2.3
 
-* Updated to epiworldR version 0.8.2.0: New version of the measles model with new parameter.
+* Updated to epiworldR version 0.8.2.0: New version of the measles model with new parameters.
 
 * Improved the UI for the measles model to make it more user-friendly.
 
